@@ -13,14 +13,14 @@ return (new Uint8Array(Buffer.from(s,"base64")));
 var bin = atob(s);
 var n = bin.length;
 var out = (new Uint8Array(n));
-var n__5762__auto___10278 = n;
-var i_10279 = (0);
+var n__5762__auto___10318 = n;
+var i_10319 = (0);
 while(true){
-if((i_10279 < n__5762__auto___10278)){
-(out[i_10279] = bin.charCodeAt(i_10279));
+if((i_10319 < n__5762__auto___10318)){
+(out[i_10319] = bin.charCodeAt(i_10319));
 
-var G__10280 = (i_10279 + (1));
-i_10279 = G__10280;
+var G__10320 = (i_10319 + (1));
+i_10319 = G__10320;
 continue;
 } else {
 }
@@ -34,8 +34,8 @@ kotobase.cacao.bytes__GT_base64url = (function kotobase$cacao$bytes__GT_base64ur
 return clojure.string.replace(clojure.string.replace(clojure.string.replace(kotobase.cacao.bytes__GT_base64(b),"+","-"),"/","_"),/=+$/,"");
 });
 kotobase.cacao.base64url__GT_bytes = (function kotobase$cacao$base64url__GT_bytes(s){
-var pad = (function (){var G__10269 = cljs.core.mod(((s).length),(4));
-switch (G__10269) {
+var pad = (function (){var G__10309 = cljs.core.mod(((s).length),(4));
+switch (G__10309) {
 case (2):
 return "==";
 
@@ -57,18 +57,18 @@ return clojure.string.replace(date.toISOString(),/\.\d{3}Z$/,"Z");
 /**
  * The signed SIWE/CAIP-122 message for a CACAO payload map `p`.
  */
-kotobase.cacao.cacao_siwe_message = (function kotobase$cacao$cacao_siwe_message(p__10271){
-var map__10272 = p__10271;
-var map__10272__$1 = cljs.core.__destructure_map(map__10272);
-var domain = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"domain","domain",1847214937));
-var version = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"version","version",425292698));
-var nonce = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"nonce","nonce",564330331));
-var resources = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"resources","resources",1632806811));
-var iat = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"iat","iat",-353315170));
-var statement = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"statement","statement",-32780863));
-var aud = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"aud","aud",357659490));
-var iss = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"iss","iss",1130086696));
-var exp = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10272__$1,new cljs.core.Keyword(null,"exp","exp",-261706262));
+kotobase.cacao.cacao_siwe_message = (function kotobase$cacao$cacao_siwe_message(p__10311){
+var map__10312 = p__10311;
+var map__10312__$1 = cljs.core.__destructure_map(map__10312);
+var domain = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"domain","domain",1847214937));
+var version = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"version","version",425292698));
+var nonce = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"nonce","nonce",564330331));
+var resources = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"resources","resources",1632806811));
+var iat = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"iat","iat",-353315170));
+var statement = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"statement","statement",-32780863));
+var aud = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"aud","aud",357659490));
+var iss = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"iss","iss",1130086696));
+var exp = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10312__$1,new cljs.core.Keyword(null,"exp","exp",-261706262));
 var parts = clojure.string.split.cljs$core$IFn$_invoke$arity$2(iss,/:/);
 var address = (function (){var or__5162__auto__ = cljs.core.last(parts);
 if(cljs.core.truth_(or__5162__auto__)){
@@ -84,24 +84,24 @@ return cljs.core.nth.cljs$core$IFn$_invoke$arity$2(parts,(n - (2)));
 return "1";
 }
 })());
-var lines = (function (){var G__10273 = new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var or__5162__auto__ = domain;
+var lines = (function (){var G__10313 = new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var or__5162__auto__ = domain;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
 } else {
 return "";
 }
 })())+" wants you to sign in with your Ethereum account:"),address,""], null);
-var G__10273__$1 = (cljs.core.truth_(statement)?cljs.core.conj.cljs$core$IFn$_invoke$arity$variadic(G__10273,statement,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([""], 0)):G__10273);
-var G__10273__$2 = cljs.core.conj.cljs$core$IFn$_invoke$arity$variadic(G__10273__$1,(""+"URI: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(aud)),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(""+"Version: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(version)),(""+"Chain ID: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(chain_id)),(""+"Nonce: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(nonce)),(""+"Issued At: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(iat))], 0))
+var G__10313__$1 = (cljs.core.truth_(statement)?cljs.core.conj.cljs$core$IFn$_invoke$arity$variadic(G__10313,statement,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([""], 0)):G__10313);
+var G__10313__$2 = cljs.core.conj.cljs$core$IFn$_invoke$arity$variadic(G__10313__$1,(""+"URI: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(aud)),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(""+"Version: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(version)),(""+"Chain ID: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(chain_id)),(""+"Nonce: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(nonce)),(""+"Issued At: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(iat))], 0))
 ;
-var G__10273__$3 = (cljs.core.truth_(exp)?cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10273__$2,(""+"Expiration Time: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(exp))):G__10273__$2);
+var G__10313__$3 = (cljs.core.truth_(exp)?cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10313__$2,(""+"Expiration Time: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(exp))):G__10313__$2);
 if(cljs.core.seq(resources)){
-var ls = G__10273__$3;
-return cljs.core.apply.cljs$core$IFn$_invoke$arity$4(cljs.core.conj,ls,"Resources:",cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__10270_SHARP_){
-return (""+"- "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__10270_SHARP_));
+var ls = G__10313__$3;
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$4(cljs.core.conj,ls,"Resources:",cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__10310_SHARP_){
+return (""+"- "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__10310_SHARP_));
 }),resources));
 } else {
-return G__10273__$3;
+return G__10313__$3;
 }
 })();
 return clojure.string.join.cljs$core$IFn$_invoke$arity$2("\n",lines);
@@ -136,20 +136,20 @@ return cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s,(0),cljs.core.min.cljs$cor
  *      :statement — the SIWE statement field, signed. nil (the default) is
  *      the previous behaviour.
  */
-kotobase.cacao.mint_cacao = (function kotobase$cacao$mint_cacao(p__10275){
-var map__10276 = p__10275;
-var map__10276__$1 = cljs.core.__destructure_map(map__10276);
-var nonce = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"nonce","nonce",564330331));
-var tenant = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"tenant","tenant",269491712));
-var statement = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"statement","statement",-32780863));
-var now_ms = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"now-ms","now-ms",-641991870));
-var aud = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"aud","aud",357659490));
-var sig_encoding = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10276__$1,new cljs.core.Keyword(null,"sig-encoding","sig-encoding",-1544096501),new cljs.core.Keyword(null,"base64url","base64url",-1345744970));
-var capability = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"capability","capability",-223324340));
-var secret_key = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"secret-key","secret-key",129235534));
-var extra_capabilities = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10276__$1,new cljs.core.Keyword(null,"extra-capabilities","extra-capabilities",1212829359),cljs.core.PersistentVector.EMPTY);
-var ttl_sec = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10276__$1,new cljs.core.Keyword(null,"ttl-sec","ttl-sec",539462801),(300));
-var graph = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10276__$1,new cljs.core.Keyword(null,"graph","graph",1558099509));
+kotobase.cacao.mint_cacao = (function kotobase$cacao$mint_cacao(p__10315){
+var map__10316 = p__10315;
+var map__10316__$1 = cljs.core.__destructure_map(map__10316);
+var nonce = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"nonce","nonce",564330331));
+var tenant = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"tenant","tenant",269491712));
+var statement = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"statement","statement",-32780863));
+var now_ms = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"now-ms","now-ms",-641991870));
+var aud = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"aud","aud",357659490));
+var sig_encoding = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10316__$1,new cljs.core.Keyword(null,"sig-encoding","sig-encoding",-1544096501),new cljs.core.Keyword(null,"base64url","base64url",-1345744970));
+var capability = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"capability","capability",-223324340));
+var secret_key = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"secret-key","secret-key",129235534));
+var extra_capabilities = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10316__$1,new cljs.core.Keyword(null,"extra-capabilities","extra-capabilities",1212829359),cljs.core.PersistentVector.EMPTY);
+var ttl_sec = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10316__$1,new cljs.core.Keyword(null,"ttl-sec","ttl-sec",539462801),(300));
+var graph = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10316__$1,new cljs.core.Keyword(null,"graph","graph",1558099509));
 var pub = shadow.js.shim.module$$noble$curves$ed25519.ed25519.getPublicKey(secret_key);
 var did = kotobase.cid.did_key_from_ed25519_pub(pub);
 var now = (((!((now_ms == null))))?(new Date(now_ms)):(new Date()));
@@ -162,13 +162,13 @@ return kotobase.cacao.random_nonce();
 })();
 var iat = kotobase.cacao.utc_seconds(now);
 var exp = kotobase.cacao.utc_seconds((new Date((now.getTime() + (ttl_sec * (1000))))));
-var resources = (function (){var G__10277 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p1__10274_SHARP_){
-return (""+"kotoba://can/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__10274_SHARP_));
+var resources = (function (){var G__10317 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p1__10314_SHARP_){
+return (""+"kotoba://can/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__10314_SHARP_));
 }),cljs.core.cons(capability,extra_capabilities)),(""+"kotoba://graph/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(graph)));
 if(cljs.core.truth_(tenant)){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10277,(""+"kotoba://tenant/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(tenant)));
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10317,(""+"kotoba://tenant/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(tenant)));
 } else {
-return G__10277;
+return G__10317;
 }
 })();
 var p = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"statement","statement",-32780863),new cljs.core.Keyword(null,"aud","aud",357659490),new cljs.core.Keyword(null,"iss","iss",1130086696),new cljs.core.Keyword(null,"exp","exp",-261706262),new cljs.core.Keyword(null,"domain","domain",1847214937),new cljs.core.Keyword(null,"version","version",425292698),new cljs.core.Keyword(null,"nonce","nonce",564330331),new cljs.core.Keyword(null,"resources","resources",1632806811),new cljs.core.Keyword(null,"iat","iat",-353315170)],[statement,aud,did,exp,"kotobase.net","1",nonce__$1,resources,iat]);

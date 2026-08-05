@@ -12,7 +12,7 @@ goog.provide('graphql.ports');
  */
 graphql.ports.IResolver = function(){};
 
-var graphql$ports$IResolver$resolve$dyn_7833 = (function (this$,type_name,field_name,parent,args,ctx){
+var graphql$ports$IResolver$resolve$dyn_12904 = (function (this$,type_name,field_name,parent,args,ctx){
 var x__5519__auto__ = (((this$ == null))?null:this$);
 var m__5520__auto__ = (graphql.ports.resolve[goog.typeOf(x__5519__auto__)]);
 if((!((m__5520__auto__ == null)))){
@@ -33,7 +33,7 @@ graphql.ports.resolve = (function graphql$ports$resolve(this$,type_name,field_na
 if((((!((this$ == null)))) && ((!((this$.graphql$ports$IResolver$resolve$arity$6 == null)))))){
 return this$.graphql$ports$IResolver$resolve$arity$6(this$,type_name,field_name,parent,args,ctx);
 } else {
-return graphql$ports$IResolver$resolve$dyn_7833(this$,type_name,field_name,parent,args,ctx);
+return graphql$ports$IResolver$resolve$dyn_12904(this$,type_name,field_name,parent,args,ctx);
 }
 });
 

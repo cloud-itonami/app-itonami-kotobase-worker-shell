@@ -13,10 +13,10 @@ while(true){
 if((i < n)){
 var h__$1 = (h ^ kotobase.protocols.hash.char_code(s,i));
 var h__$2 = (Math.imul(h__$1,(16777619)) >>> (0));
-var G__8240 = (i + (1));
-var G__8241 = cljs.core.long$(h__$2);
-i = G__8240;
-h = G__8241;
+var G__13354 = (i + (1));
+var G__13355 = cljs.core.long$(h__$2);
+i = G__13354;
+h = G__13355;
 continue;
 } else {
 return h;

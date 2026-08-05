@@ -15,11 +15,11 @@ return null;
 }
 });
 chain.core.encode_commit = (function chain$core$encode_commit(state,prev_cid,seq){
-return ipld.core.encode(new cljs.core.PersistentArrayMap(null, 3, ["state",state,"prev",(function (){var G__8704 = prev_cid;
-if((G__8704 == null)){
+return ipld.core.encode(new cljs.core.PersistentArrayMap(null, 3, ["state",state,"prev",(function (){var G__13818 = prev_cid;
+if((G__13818 == null)){
 return null;
 } else {
-return (ipld.core.link.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link.cljs$core$IFn$_invoke$arity$1(G__8704) : ipld.core.link.call(null,G__8704));
+return (ipld.core.link.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link.cljs$core$IFn$_invoke$arity$1(G__13818) : ipld.core.link.call(null,G__13818));
 }
 })(),"seq",seq], null));
 });
@@ -43,11 +43,11 @@ return cid;
 chain.core.commit_info = (function chain$core$commit_info(get_fn,cid){
 var m = ipld.core.decode(chain.core.verified_block(get_fn,cid));
 var prev = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,"prev");
-return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"cid","cid",-1940591320),cid,new cljs.core.Keyword(null,"state","state",-1988618099),cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,"state"),new cljs.core.Keyword(null,"prev","prev",-1597069226),(function (){var G__8705 = prev;
-if((G__8705 == null)){
+return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"cid","cid",-1940591320),cid,new cljs.core.Keyword(null,"state","state",-1988618099),cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,"state"),new cljs.core.Keyword(null,"prev","prev",-1597069226),(function (){var G__13819 = prev;
+if((G__13819 == null)){
 return null;
 } else {
-return (ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1(G__8705) : ipld.core.link_cid.call(null,G__8705));
+return (ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1(G__13819) : ipld.core.link_cid.call(null,G__13819));
 }
 })(),new cljs.core.Keyword(null,"seq","seq",-1817803783),cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,"seq")], null);
 });
@@ -62,15 +62,15 @@ while(true){
 if(cljs.core.not(cid__$1)){
 return acc;
 } else {
-var map__8707 = chain.core.commit_info(get_fn,cid__$1);
-var map__8707__$1 = cljs.core.__destructure_map(map__8707);
-var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8707__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
-var prev = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8707__$1,new cljs.core.Keyword(null,"prev","prev",-1597069226));
-var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8707__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783));
-var G__8711 = prev;
-var G__8712 = cljs.core.cons(new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"cid","cid",-1940591320),cid__$1,new cljs.core.Keyword(null,"state","state",-1988618099),state,new cljs.core.Keyword(null,"prev","prev",-1597069226),prev,new cljs.core.Keyword(null,"seq","seq",-1817803783),seq], null),acc);
-cid__$1 = G__8711;
-acc = G__8712;
+var map__13821 = chain.core.commit_info(get_fn,cid__$1);
+var map__13821__$1 = cljs.core.__destructure_map(map__13821);
+var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13821__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
+var prev = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13821__$1,new cljs.core.Keyword(null,"prev","prev",-1597069226));
+var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13821__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783));
+var G__13825 = prev;
+var G__13826 = cljs.core.cons(new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"cid","cid",-1940591320),cid__$1,new cljs.core.Keyword(null,"state","state",-1988618099),state,new cljs.core.Keyword(null,"prev","prev",-1597069226),prev,new cljs.core.Keyword(null,"seq","seq",-1817803783),seq], null),acc);
+cid__$1 = G__13825;
+acc = G__13826;
 continue;
 }
 break;
@@ -86,16 +86,16 @@ break;
  */
 chain.core.verify_chain = (function chain$core$verify_chain(get_fn,cid){
 try{var entries = chain.core.chain(get_fn,cid);
-return ((cljs.core.seq(entries)) && (((cljs.core.every_QMARK_((function (p__8709){
-var map__8710 = p__8709;
-var map__8710__$1 = cljs.core.__destructure_map(map__8710);
-var cid__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8710__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
-var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8710__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
-var prev = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8710__$1,new cljs.core.Keyword(null,"prev","prev",-1597069226));
-var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8710__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783));
+return ((cljs.core.seq(entries)) && (((cljs.core.every_QMARK_((function (p__13823){
+var map__13824 = p__13823;
+var map__13824__$1 = cljs.core.__destructure_map(map__13824);
+var cid__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13824__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
+var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13824__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
+var prev = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13824__$1,new cljs.core.Keyword(null,"prev","prev",-1597069226));
+var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13824__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783));
 return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cid__$1,ipld.core.cid(chain.core.encode_commit(state,prev,seq)));
 }),entries)) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.map.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"seq","seq",-1817803783),entries),cljs.core.range.cljs$core$IFn$_invoke$arity$1(cljs.core.count(entries)))))));
-}catch (e8708){var _ = e8708;
+}catch (e13822){var _ = e13822;
 return false;
 }});
 /**

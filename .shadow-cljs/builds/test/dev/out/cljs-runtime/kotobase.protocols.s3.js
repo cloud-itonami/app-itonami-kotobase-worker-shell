@@ -20,8 +20,8 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 } else {
 return null;
 }
-}),cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__8242_SHARP_){
-return clojure.string.starts_with_QMARK_(p1__8242_SHARP_,(function (){var or__5162__auto__ = prefix;
+}),cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__13356_SHARP_){
+return clojure.string.starts_with_QMARK_(p1__13356_SHARP_,(function (){var or__5162__auto__ = prefix;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
 } else {
@@ -35,27 +35,27 @@ return or__5162__auto__;
 } else {
 return "";
 }
-})()))+"</Prefix>"+"<KeyCount>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(entries))+"</KeyCount>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,(function (){var iter__5649__auto__ = (function kotobase$protocols$s3$list_objects_$_iter__8243(s__8244){
+})()))+"</Prefix>"+"<KeyCount>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(entries))+"</KeyCount>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,(function (){var iter__5649__auto__ = (function kotobase$protocols$s3$list_objects_$_iter__13357(s__13358){
 return (new cljs.core.LazySeq(null,(function (){
-var s__8244__$1 = s__8244;
+var s__13358__$1 = s__13358;
 while(true){
-var temp__5825__auto__ = cljs.core.seq(s__8244__$1);
+var temp__5825__auto__ = cljs.core.seq(s__13358__$1);
 if(temp__5825__auto__){
-var s__8244__$2 = temp__5825__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__8244__$2)){
-var c__5647__auto__ = cljs.core.chunk_first(s__8244__$2);
+var s__13358__$2 = temp__5825__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__13358__$2)){
+var c__5647__auto__ = cljs.core.chunk_first(s__13358__$2);
 var size__5648__auto__ = cljs.core.count(c__5647__auto__);
-var b__8246 = cljs.core.chunk_buffer(size__5648__auto__);
-if((function (){var i__8245 = (0);
+var b__13360 = cljs.core.chunk_buffer(size__5648__auto__);
+if((function (){var i__13359 = (0);
 while(true){
-if((i__8245 < size__5648__auto__)){
-var vec__8247 = cljs.core._nth(c__5647__auto__,i__8245);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__8247,(0),null);
-var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__8247,(1),null);
-cljs.core.chunk_append(b__8246,(""+"<Contents>"+"<Key>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.http.xml_escape(k))+"</Key>"+"<ETag>&quot;"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"&quot;</ETag>"+"<Size>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o)))+"</Size>"+"</Contents>"));
+if((i__13359 < size__5648__auto__)){
+var vec__13361 = cljs.core._nth(c__5647__auto__,i__13359);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13361,(0),null);
+var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13361,(1),null);
+cljs.core.chunk_append(b__13360,(""+"<Contents>"+"<Key>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.http.xml_escape(k))+"</Key>"+"<ETag>&quot;"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"&quot;</ETag>"+"<Size>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o)))+"</Size>"+"</Contents>"));
 
-var G__8260 = (i__8245 + (1));
-i__8245 = G__8260;
+var G__13374 = (i__13359 + (1));
+i__13359 = G__13374;
 continue;
 } else {
 return true;
@@ -63,15 +63,15 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__8246),kotobase$protocols$s3$list_objects_$_iter__8243(cljs.core.chunk_rest(s__8244__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__13360),kotobase$protocols$s3$list_objects_$_iter__13357(cljs.core.chunk_rest(s__13358__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__8246),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__13360),null);
 }
 } else {
-var vec__8250 = cljs.core.first(s__8244__$2);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__8250,(0),null);
-var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__8250,(1),null);
-return cljs.core.cons((""+"<Contents>"+"<Key>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.http.xml_escape(k))+"</Key>"+"<ETag>&quot;"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"&quot;</ETag>"+"<Size>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o)))+"</Size>"+"</Contents>"),kotobase$protocols$s3$list_objects_$_iter__8243(cljs.core.rest(s__8244__$2)));
+var vec__13364 = cljs.core.first(s__13358__$2);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13364,(0),null);
+var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13364,(1),null);
+return cljs.core.cons((""+"<Contents>"+"<Key>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.http.xml_escape(k))+"</Key>"+"<ETag>&quot;"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"&quot;</ETag>"+"<Size>"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o)))+"</Size>"+"</Contents>"),kotobase$protocols$s3$list_objects_$_iter__13357(cljs.core.rest(s__13358__$2)));
 }
 } else {
 return null;
@@ -84,27 +84,27 @@ return iter__5649__auto__(entries);
 })()))+"</ListBucketResult>"));
 });
 kotobase.protocols.s3.object_headers = (function kotobase$protocols$s3$object_headers(o){
-var G__8253 = new cljs.core.PersistentArrayMap(null, 3, ["content-type",new cljs.core.Keyword(null,"content-type","content-type",-508222634).cljs$core$IFn$_invoke$arity$1(o),"etag",(""+"\""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"\""),"content-length",(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o))))], null);
+var G__13367 = new cljs.core.PersistentArrayMap(null, 3, ["content-type",new cljs.core.Keyword(null,"content-type","content-type",-508222634).cljs$core$IFn$_invoke$arity$1(o),"etag",(""+"\""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"etag","etag",-329255476).cljs$core$IFn$_invoke$arity$1(o))+"\""),"content-length",(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.count(new cljs.core.Keyword(null,"bytes","bytes",1175866680).cljs$core$IFn$_invoke$arity$1(o))))], null);
 if(cljs.core.truth_(new cljs.core.Keyword(null,"last-modified","last-modified",1593411791).cljs$core$IFn$_invoke$arity$1(o))){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__8253,"last-modified",new cljs.core.Keyword(null,"last-modified","last-modified",1593411791).cljs$core$IFn$_invoke$arity$1(o));
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__13367,"last-modified",new cljs.core.Keyword(null,"last-modified","last-modified",1593411791).cljs$core$IFn$_invoke$arity$1(o));
 } else {
-return G__8253;
+return G__13367;
 }
 });
 /**
  * S3 surface handler. `ctx` is {:store IStore, :now optional ISO string}.
  */
-kotobase.protocols.s3.handle = (function kotobase$protocols$s3$handle(p__8254,req){
-var map__8255 = p__8254;
-var map__8255__$1 = cljs.core.__destructure_map(map__8255);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8255__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var now = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8255__$1,new cljs.core.Keyword(null,"now","now",-1650525531));
-var vec__8256 = kotobase.protocols.http.segments(new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req));
-var seq__8257 = cljs.core.seq(vec__8256);
-var first__8258 = cljs.core.first(seq__8257);
-var seq__8257__$1 = cljs.core.next(seq__8257);
-var bucket = first__8258;
-var ks = seq__8257__$1;
+kotobase.protocols.s3.handle = (function kotobase$protocols$s3$handle(p__13368,req){
+var map__13369 = p__13368;
+var map__13369__$1 = cljs.core.__destructure_map(map__13369);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13369__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var now = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13369__$1,new cljs.core.Keyword(null,"now","now",-1650525531));
+var vec__13370 = kotobase.protocols.http.segments(new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req));
+var seq__13371 = cljs.core.seq(vec__13370);
+var first__13372 = cljs.core.first(seq__13371);
+var seq__13371__$1 = cljs.core.next(seq__13371);
+var bucket = first__13372;
+var ks = seq__13371__$1;
 var k = ((cljs.core.seq(ks))?clojure.string.join.cljs$core$IFn$_invoke$arity$2("/",ks):null);
 if((bucket == null)){
 return kotobase.protocols.s3.error_xml((400),"InvalidRequest","bucket missing");
@@ -116,9 +116,9 @@ return kotobase.protocols.s3.list_objects(store,bucket,kotobase.protocols.http.q
 return kotobase.protocols.s3.error_xml((405),"MethodNotAllowed","unsupported bucket operation");
 }
 } else {
-var G__8259 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
-var G__8259__$1 = (((G__8259 instanceof cljs.core.Keyword))?G__8259.fqn:null);
-switch (G__8259__$1) {
+var G__13373 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
+var G__13373__$1 = (((G__13373 instanceof cljs.core.Keyword))?G__13373.fqn:null);
+switch (G__13373__$1) {
 case "put":
 var body = (function (){var or__5162__auto__ = new cljs.core.Keyword(null,"body","body",-2049205669).cljs$core$IFn$_invoke$arity$1(req);
 if(cljs.core.truth_(or__5162__auto__)){

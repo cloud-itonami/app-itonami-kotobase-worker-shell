@@ -11,6 +11,11 @@
   ;; test-only: snapshot-seed-round-trip drives the persistence model through
   ;; a real surface, and core carries no built-in surface table.
   "../kotobase-protocol-s3/src"
+  "../kotobase-protocol-ipfs/src"
+  "../kotobase-protocol-atproto/src"
+  "../kotobase-protocol-git/src"
+  "../kotobase-protocol-pinning/src"
+  "../kotobase-protocol-issues/src"
   "../kotobase-query/src"
   "../datom/src"
   "../datom-source/src"

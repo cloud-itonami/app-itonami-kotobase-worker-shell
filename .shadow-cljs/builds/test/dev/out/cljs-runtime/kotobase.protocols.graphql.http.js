@@ -18,8 +18,8 @@ kotobase.protocols.graphql.http.header = (function kotobase$protocols$graphql$ht
 return cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),clojure.string.lower_case(k));
 });
 kotobase.protocols.graphql.http.response = (function kotobase$protocols$graphql$http$response(var_args){
-var G__7876 = arguments.length;
-switch (G__7876) {
+var G__12947 = arguments.length;
+switch (G__12947) {
 case 3:
 return kotobase.protocols.graphql.http.response.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 
@@ -48,8 +48,8 @@ kotobase.protocols.graphql.http.text = (function kotobase$protocols$graphql$http
 return kotobase.protocols.graphql.http.response.cljs$core$IFn$_invoke$arity$3(status,new cljs.core.PersistentArrayMap(null, 1, ["content-type","text/plain; charset=utf-8"], null),body);
 });
 kotobase.protocols.graphql.http.not_found = (function kotobase$protocols$graphql$http$not_found(var_args){
-var G__7878 = arguments.length;
-switch (G__7878) {
+var G__12949 = arguments.length;
+switch (G__12949) {
 case 0:
 return kotobase.protocols.graphql.http.not_found.cljs$core$IFn$_invoke$arity$0();
 

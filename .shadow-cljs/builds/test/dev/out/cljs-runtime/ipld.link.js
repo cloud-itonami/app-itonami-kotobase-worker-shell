@@ -69,8 +69,8 @@ var body = multiformats.base32.decode(cljs.core.subs.cljs$core$IFn$_invoke$arity
 return (new Uint8Array(cljs.core.clj__GT_js(cljs.core.cons((0),cljs.core.seq(body)))));
 });
 ipld.link.tag_bytes__GT_link = (function ipld$link$tag_bytes__GT_link(bytes){
-var unsigned = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6212_SHARP_){
-return ((p1__6212_SHARP_ | 0) & (255));
+var unsigned = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11283_SHARP_){
+return ((p1__11283_SHARP_ | 0) & (255));
 }),cljs.core.seq(bytes));
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((0),cljs.core.first(unsigned))){
 } else {

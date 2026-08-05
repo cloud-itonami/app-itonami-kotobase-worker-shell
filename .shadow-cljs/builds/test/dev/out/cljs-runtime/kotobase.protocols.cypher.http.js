@@ -18,8 +18,8 @@ kotobase.protocols.cypher.http.header = (function kotobase$protocols$cypher$http
 return cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),clojure.string.lower_case(k));
 });
 kotobase.protocols.cypher.http.response = (function kotobase$protocols$cypher$http$response(var_args){
-var G__7349 = arguments.length;
-switch (G__7349) {
+var G__12420 = arguments.length;
+switch (G__12420) {
 case 3:
 return kotobase.protocols.cypher.http.response.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 
@@ -48,8 +48,8 @@ kotobase.protocols.cypher.http.text = (function kotobase$protocols$cypher$http$t
 return kotobase.protocols.cypher.http.response.cljs$core$IFn$_invoke$arity$3(status,new cljs.core.PersistentArrayMap(null, 1, ["content-type","text/plain; charset=utf-8"], null),body);
 });
 kotobase.protocols.cypher.http.not_found = (function kotobase$protocols$cypher$http$not_found(var_args){
-var G__7351 = arguments.length;
-switch (G__7351) {
+var G__12422 = arguments.length;
+switch (G__12422) {
 case 0:
 return kotobase.protocols.cypher.http.not_found.cljs$core$IFn$_invoke$arity$0();
 

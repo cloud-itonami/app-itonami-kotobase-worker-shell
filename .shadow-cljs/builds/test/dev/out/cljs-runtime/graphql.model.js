@@ -23,8 +23,8 @@ return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(schema,new cljs.core.Keywor
  * 型定義マップを構築する。kind は type-kinds の要素。
  */
 graphql.model.type_def = (function graphql$model$type_def(var_args){
-var G__10885 = arguments.length;
-switch (G__10885) {
+var G__10925 = arguments.length;
+switch (G__10925) {
 case 2:
 return graphql.model.type_def.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -53,8 +53,8 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("graphql
  * フィールド定義マップを構築する。opts: {:list? :non-null? :args}。
  */
 graphql.model.field_def = (function graphql$model$field_def(var_args){
-var G__10887 = arguments.length;
-switch (G__10887) {
+var G__10927 = arguments.length;
+switch (G__10927) {
 case 2:
 return graphql.model.field_def.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -74,11 +74,11 @@ return graphql.model.field_def.cljs$core$IFn$_invoke$arity$3(name,type_name,cljs
 }));
 
 (graphql.model.field_def.cljs$core$IFn$_invoke$arity$3 = (function (name,type_name,opts){
-var G__10888 = new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","type","graphql/type",1313045893),type_name,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),cljs.core.boolean$(new cljs.core.Keyword(null,"list?","list?",-1642026156).cljs$core$IFn$_invoke$arity$1(opts)),new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),cljs.core.boolean$(new cljs.core.Keyword(null,"non-null?","non-null?",670069040).cljs$core$IFn$_invoke$arity$1(opts))], null);
+var G__10928 = new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","type","graphql/type",1313045893),type_name,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),cljs.core.boolean$(new cljs.core.Keyword(null,"list?","list?",-1642026156).cljs$core$IFn$_invoke$arity$1(opts)),new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),cljs.core.boolean$(new cljs.core.Keyword(null,"non-null?","non-null?",670069040).cljs$core$IFn$_invoke$arity$1(opts))], null);
 if(cljs.core.truth_(new cljs.core.Keyword(null,"args","args",1315556576).cljs$core$IFn$_invoke$arity$1(opts))){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10888,new cljs.core.Keyword("graphql","args","graphql/args",523331817),new cljs.core.Keyword(null,"args","args",1315556576).cljs$core$IFn$_invoke$arity$1(opts));
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10928,new cljs.core.Keyword("graphql","args","graphql/args",523331817),new cljs.core.Keyword(null,"args","args",1315556576).cljs$core$IFn$_invoke$arity$1(opts));
 } else {
-return G__10888;
+return G__10928;
 }
 }));
 
@@ -88,8 +88,8 @@ return G__10888;
  * 引数定義マップを構築する。opts: {:list? :non-null?}。
  */
 graphql.model.arg_def = (function graphql$model$arg_def(var_args){
-var G__10890 = arguments.length;
-switch (G__10890) {
+var G__10930 = arguments.length;
+switch (G__10930) {
 case 2:
 return graphql.model.arg_def.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -109,11 +109,11 @@ return graphql.model.arg_def.cljs$core$IFn$_invoke$arity$3(name,type_name,cljs.c
 }));
 
 (graphql.model.arg_def.cljs$core$IFn$_invoke$arity$3 = (function (name,type_name,opts){
-var G__10891 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","type","graphql/type",1313045893),type_name,new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),cljs.core.boolean$(new cljs.core.Keyword(null,"non-null?","non-null?",670069040).cljs$core$IFn$_invoke$arity$1(opts))], null);
+var G__10931 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","type","graphql/type",1313045893),type_name,new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),cljs.core.boolean$(new cljs.core.Keyword(null,"non-null?","non-null?",670069040).cljs$core$IFn$_invoke$arity$1(opts))], null);
 if(cljs.core.truth_(new cljs.core.Keyword(null,"list?","list?",-1642026156).cljs$core$IFn$_invoke$arity$1(opts))){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10891,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),true);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10931,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),true);
 } else {
-return G__10891;
+return G__10931;
 }
 }));
 
@@ -135,8 +135,8 @@ return new cljs.core.Keyword("graphql","fields","graphql/fields",-1688646079).cl
  * 型定義からフィールド名でフィールドを検索する。
  */
 graphql.model.field_by_name = (function graphql$model$field_by_name(type_def,fname){
-return cljs.core.first(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10892_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(fname,new cljs.core.Keyword("graphql","name","graphql/name",-575568856).cljs$core$IFn$_invoke$arity$1(p1__10892_SHARP_));
+return cljs.core.first(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10932_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(fname,new cljs.core.Keyword("graphql","name","graphql/name",-575568856).cljs$core$IFn$_invoke$arity$1(p1__10932_SHARP_));
 }),new cljs.core.Keyword("graphql","fields","graphql/fields",-1688646079).cljs$core$IFn$_invoke$arity$1(type_def)));
 });
 

@@ -49,8 +49,8 @@ kotobase_protocols_worker.core.query_surfaces = new cljs.core.PersistentHashSet(
  *   POST to a read-only query surface is a read.
  */
 kotobase_protocols_worker.core.write_QMARK_ = (function kotobase_protocols_worker$core$write_QMARK_(var_args){
-var G__10875 = arguments.length;
-switch (G__10875) {
+var G__10915 = arguments.length;
+switch (G__10915) {
 case 1:
 return kotobase_protocols_worker.core.write_QMARK_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -213,8 +213,8 @@ return and__5160__auto__;
  *   reads and writes.
  */
 kotobase_protocols_worker.core.unauthorized_response = (function kotobase_protocols_worker$core$unauthorized_response(var_args){
-var G__10877 = arguments.length;
-switch (G__10877) {
+var G__10917 = arguments.length;
+switch (G__10917) {
 case 1:
 return kotobase_protocols_worker.core.unauthorized_response.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -244,10 +244,10 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"st
  * Lower-case header names once at the boundary.
  */
 kotobase_protocols_worker.core.normalize_headers = (function kotobase_protocols_worker$core$normalize_headers(pairs){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__10878){
-var vec__10879 = p__10878;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10879,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10879,(1),null);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__10918){
+var vec__10919 = p__10918;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10919,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10919,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [clojure.string.lower_case(k),v], null);
 })),pairs);
 });

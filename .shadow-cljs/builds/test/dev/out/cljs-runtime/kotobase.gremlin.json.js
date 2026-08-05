@@ -22,10 +22,10 @@ var code = kotobase.gremlin.json.char_code_at(s,i);
 var c = cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s,i,(i + (1)));
 var piece = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(c,"\""))?"\\\"":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(c,"\\"))?"\\\\":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(code,(10)))?"\\n":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(code,(13)))?"\\r":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(code,(9)))?"\\t":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(code,(8)))?"\\b":((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(code,(12)))?"\\f":(((code < (32)))?(""+"\\u"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(code.toString((16)).padStart((4),"0"))):c
 ))))))));
-var G__11003 = (i + (1));
-var G__11004 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(acc,piece);
-i = G__11003;
-acc = G__11004;
+var G__11043 = (i + (1));
+var G__11044 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(acc,piece);
+i = G__11043;
+acc = G__11044;
 continue;
 }
 break;
@@ -55,20 +55,20 @@ if((x instanceof cljs.core.Keyword)){
 return (""+"\""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.gremlin.json.escape_str(cljs.core.name(x)))+"\"");
 } else {
 if(cljs.core.map_QMARK_(x)){
-return (""+"{"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.cljs$core$IFn$_invoke$arity$2(",",cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__10967){
-var vec__10968 = p__10967;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10968,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10968,(1),null);
-return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var G__10971 = (((k instanceof cljs.core.Keyword))?cljs.core.name(k):(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(k)));
-return (kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1 ? kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1(G__10971) : kotobase.gremlin.json.encode.call(null,G__10971));
+return (""+"{"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.cljs$core$IFn$_invoke$arity$2(",",cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__11007){
+var vec__11008 = p__11007;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11008,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11008,(1),null);
+return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var G__11011 = (((k instanceof cljs.core.Keyword))?cljs.core.name(k):(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(k)));
+return (kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1 ? kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1(G__11011) : kotobase.gremlin.json.encode.call(null,G__11011));
 })())+":"+cljs.core.str.cljs$core$IFn$_invoke$arity$1((kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1 ? kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1(v) : kotobase.gremlin.json.encode.call(null,v))));
 }),x)))+"}");
 } else {
 if(cljs.core.sequential_QMARK_(x)){
 return (""+"["+cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.cljs$core$IFn$_invoke$arity$2(",",cljs.core.map.cljs$core$IFn$_invoke$arity$2(kotobase.gremlin.json.encode,x)))+"]");
 } else {
-var G__10972 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(x));
-return (kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1 ? kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1(G__10972) : kotobase.gremlin.json.encode.call(null,G__10972));
+var G__11012 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(x));
+return (kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1 ? kotobase.gremlin.json.encode.cljs$core$IFn$_invoke$arity$1(G__11012) : kotobase.gremlin.json.encode.call(null,G__11012));
 
 }
 }
@@ -89,8 +89,8 @@ kotobase.gremlin.json.skip_ws = (function kotobase$gremlin$json$skip_ws(s,i){
 var i__$1 = i;
 while(true){
 if((((i__$1 < cljs.core.count(s))) && (clojure.string.includes_QMARK_(" \t\n\r",kotobase.gremlin.json.ch(s,i__$1))))){
-var G__11005 = (i__$1 + (1));
-i__$1 = G__11005;
+var G__11045 = (i__$1 + (1));
+i__$1 = G__11045;
 continue;
 } else {
 return i__$1;
@@ -113,79 +113,79 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(c,"\\")){
 var e = kotobase.gremlin.json.ch(s,(i__$1 + (1)));
-var G__10973 = e;
-switch (G__10973) {
+var G__11013 = e;
+switch (G__11013) {
 case "\"":
-var G__11007 = (i__$1 + (2));
-var G__11008 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\"");
-i__$1 = G__11007;
-acc = G__11008;
+var G__11047 = (i__$1 + (2));
+var G__11048 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\"");
+i__$1 = G__11047;
+acc = G__11048;
 continue;
 
 break;
 case "\\":
-var G__11009 = (i__$1 + (2));
-var G__11010 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\\");
-i__$1 = G__11009;
-acc = G__11010;
+var G__11049 = (i__$1 + (2));
+var G__11050 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\\");
+i__$1 = G__11049;
+acc = G__11050;
 continue;
 
 break;
 case "/":
-var G__11011 = (i__$1 + (2));
-var G__11012 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"/");
-i__$1 = G__11011;
-acc = G__11012;
+var G__11051 = (i__$1 + (2));
+var G__11052 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"/");
+i__$1 = G__11051;
+acc = G__11052;
 continue;
 
 break;
 case "n":
-var G__11013 = (i__$1 + (2));
-var G__11014 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\n");
-i__$1 = G__11013;
-acc = G__11014;
+var G__11053 = (i__$1 + (2));
+var G__11054 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\n");
+i__$1 = G__11053;
+acc = G__11054;
 continue;
 
 break;
 case "r":
-var G__11015 = (i__$1 + (2));
-var G__11016 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\r");
-i__$1 = G__11015;
-acc = G__11016;
+var G__11055 = (i__$1 + (2));
+var G__11056 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\r");
+i__$1 = G__11055;
+acc = G__11056;
 continue;
 
 break;
 case "t":
-var G__11017 = (i__$1 + (2));
-var G__11018 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\t");
-i__$1 = G__11017;
-acc = G__11018;
+var G__11057 = (i__$1 + (2));
+var G__11058 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\t");
+i__$1 = G__11057;
+acc = G__11058;
 continue;
 
 break;
 case "b":
-var G__11019 = (i__$1 + (2));
-var G__11020 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\b");
-i__$1 = G__11019;
-acc = G__11020;
+var G__11059 = (i__$1 + (2));
+var G__11060 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\b");
+i__$1 = G__11059;
+acc = G__11060;
 continue;
 
 break;
 case "f":
-var G__11021 = (i__$1 + (2));
-var G__11022 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\f");
-i__$1 = G__11021;
-acc = G__11022;
+var G__11061 = (i__$1 + (2));
+var G__11062 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+"\f");
+i__$1 = G__11061;
+acc = G__11062;
 continue;
 
 break;
 case "u":
 var hexs = cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s,(i__$1 + (2)),(i__$1 + (6)));
 var code = parseInt(hexs,(16));
-var G__11023 = (i__$1 + (6));
-var G__11024 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(String.fromCharCode(code)));
-i__$1 = G__11023;
-acc = G__11024;
+var G__11063 = (i__$1 + (6));
+var G__11064 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(String.fromCharCode(code)));
+i__$1 = G__11063;
+acc = G__11064;
 continue;
 
 break;
@@ -194,10 +194,10 @@ return kotobase.gremlin.json.fail((""+"bad escape \\"+cljs.core.str.cljs$core$IF
 
 }
 } else {
-var G__11025 = (i__$1 + (1));
-var G__11026 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(c));
-i__$1 = G__11025;
-acc = G__11026;
+var G__11065 = (i__$1 + (1));
+var G__11066 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(acc)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(c));
+i__$1 = G__11065;
+acc = G__11066;
 continue;
 
 }
@@ -224,17 +224,17 @@ return kotobase.gremlin.json.fail("unterminated array",i__$1);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(kotobase.gremlin.json.ch(s,i__$1),"]")){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [acc,(i__$1 + (1))], null);
 } else {
-var vec__10978 = (kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2 ? kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2(s,i__$1) : kotobase.gremlin.json.parse_value.call(null,s,i__$1));
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10978,(0),null);
-var i__$2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10978,(1),null);
+var vec__11018 = (kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2 ? kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2(s,i__$1) : kotobase.gremlin.json.parse_value.call(null,s,i__$1));
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11018,(0),null);
+var i__$2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11018,(1),null);
 var i__$3 = kotobase.gremlin.json.skip_ws(s,i__$2);
-var G__10981 = kotobase.gremlin.json.ch(s,i__$3);
-switch (G__10981) {
+var G__11021 = kotobase.gremlin.json.ch(s,i__$3);
+switch (G__11021) {
 case ",":
-var G__11028 = kotobase.gremlin.json.skip_ws(s,(i__$3 + (1)));
-var G__11029 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,v);
-i__$1 = G__11028;
-acc = G__11029;
+var G__11068 = kotobase.gremlin.json.skip_ws(s,(i__$3 + (1)));
+var G__11069 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,v);
+i__$1 = G__11068;
+acc = G__11069;
 continue;
 
 break;
@@ -263,25 +263,25 @@ if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(kotobase.gremlin.json.ch(s,i__$1
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [acc,(i__$1 + (1))], null);
 } else {
 var _ = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(kotobase.gremlin.json.ch(s,i__$1),"\""))?null:kotobase.gremlin.json.fail("expected key string",i__$1));
-var vec__10991 = kotobase.gremlin.json.parse_string_STAR_(s,i__$1);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10991,(0),null);
-var i__$2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10991,(1),null);
+var vec__11031 = kotobase.gremlin.json.parse_string_STAR_(s,i__$1);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11031,(0),null);
+var i__$2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11031,(1),null);
 var i__$3 = kotobase.gremlin.json.skip_ws(s,i__$2);
 var ___$1 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(kotobase.gremlin.json.ch(s,i__$3),":"))?null:kotobase.gremlin.json.fail("expected :",i__$3));
-var vec__10994 = (function (){var G__10997 = s;
-var G__10998 = kotobase.gremlin.json.skip_ws(s,(i__$3 + (1)));
-return (kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2 ? kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2(G__10997,G__10998) : kotobase.gremlin.json.parse_value.call(null,G__10997,G__10998));
+var vec__11034 = (function (){var G__11037 = s;
+var G__11038 = kotobase.gremlin.json.skip_ws(s,(i__$3 + (1)));
+return (kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2 ? kotobase.gremlin.json.parse_value.cljs$core$IFn$_invoke$arity$2(G__11037,G__11038) : kotobase.gremlin.json.parse_value.call(null,G__11037,G__11038));
 })();
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10994,(0),null);
-var i__$4 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10994,(1),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11034,(0),null);
+var i__$4 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11034,(1),null);
 var i__$5 = kotobase.gremlin.json.skip_ws(s,i__$4);
-var G__10999 = kotobase.gremlin.json.ch(s,i__$5);
-switch (G__10999) {
+var G__11039 = kotobase.gremlin.json.ch(s,i__$5);
+switch (G__11039) {
 case ",":
-var G__11031 = kotobase.gremlin.json.skip_ws(s,(i__$5 + (1)));
-var G__11032 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(acc,k,v);
-i__$1 = G__11031;
-acc = G__11032;
+var G__11071 = kotobase.gremlin.json.skip_ws(s,(i__$5 + (1)));
+var G__11072 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(acc,k,v);
+i__$1 = G__11071;
+acc = G__11072;
 continue;
 
 break;
@@ -350,9 +350,9 @@ return kotobase.gremlin.json.parse_number_STAR_(s,i__$1);
  * JSON string -> EDN (map keys stay strings). Throws ex-info ::parse-error.
  */
 kotobase.gremlin.json.parse = (function kotobase$gremlin$json$parse(s){
-var vec__11000 = kotobase.gremlin.json.parse_value(s,(0));
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11000,(0),null);
-var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11000,(1),null);
+var vec__11040 = kotobase.gremlin.json.parse_value(s,(0));
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11040,(0),null);
+var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11040,(1),null);
 var i__$1 = kotobase.gremlin.json.skip_ws(s,i);
 if((i__$1 < cljs.core.count(s))){
 kotobase.gremlin.json.fail("trailing content",i__$1);

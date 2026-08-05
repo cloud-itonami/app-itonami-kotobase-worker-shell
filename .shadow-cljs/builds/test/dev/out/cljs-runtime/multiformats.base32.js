@@ -12,8 +12,8 @@ return multiformats.base32.alphabet.charAt(i);
 multiformats.base32.encode = (function multiformats$base32$encode(bytes){
 var bits = cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (byte$){
 var v = ((byte$ | 0) & (255));
-return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6008_SHARP_){
-return ((v >> p1__6008_SHARP_) & (1));
+return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11079_SHARP_){
+return ((v >> p1__11079_SHARP_) & (1));
 }),new cljs.core.PersistentVector(null, 8, 5, cljs.core.PersistentVector.EMPTY_NODE, [(7),(6),(5),(4),(3),(2),(1),(0)], null));
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.seq(bytes)], 0));
 return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (chunk){
@@ -46,24 +46,24 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("multiformats: invalid bas
 var buffer__$1 = ((buffer << (5)) | idx);
 var bit_count__$1 = (bit_count + (5));
 if((bit_count__$1 >= (8))){
-var G__6009 = cljs.core.rest(chars);
-var G__6010 = buffer__$1;
-var G__6011 = (bit_count__$1 - (8));
-var G__6012 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,((buffer__$1 >>> (bit_count__$1 - (8))) & (255)));
-chars = G__6009;
-buffer = G__6010;
-bit_count = G__6011;
-acc = G__6012;
+var G__11080 = cljs.core.rest(chars);
+var G__11081 = buffer__$1;
+var G__11082 = (bit_count__$1 - (8));
+var G__11083 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,((buffer__$1 >>> (bit_count__$1 - (8))) & (255)));
+chars = G__11080;
+buffer = G__11081;
+bit_count = G__11082;
+acc = G__11083;
 continue;
 } else {
-var G__6013 = cljs.core.rest(chars);
-var G__6014 = buffer__$1;
-var G__6015 = bit_count__$1;
-var G__6016 = acc;
-chars = G__6013;
-buffer = G__6014;
-bit_count = G__6015;
-acc = G__6016;
+var G__11084 = cljs.core.rest(chars);
+var G__11085 = buffer__$1;
+var G__11086 = bit_count__$1;
+var G__11087 = acc;
+chars = G__11084;
+buffer = G__11085;
+bit_count = G__11086;
+acc = G__11087;
 continue;
 }
 }

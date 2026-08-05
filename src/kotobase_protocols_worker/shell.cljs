@@ -1,0 +1,495 @@
+(ns kotobase-protocols-worker.shell
+  "Cloudflare Worker shell for kotoba-lang/kotobase-protocols
+  (ADR-2607174500, v0.2 ADR-2607176000, per-DID CACAO ADR-2607177000,
+  real datom-plane backend ADR-2607177500, per-DID graph isolation
+  ADR-2607178000). Owns transport + auth + persistence; all protocol
+  logic lives in the pure library.
+
+  Request flow:
+    1. read raw body (ArrayBuffer) once; decode text view for the router
+    2. kotobase-protocols-worker.graph/for-request picks WHICH R2 head/
+       chain this request targets: the
+       4 atproto repo.*Record NSIDs resolve to a per-repo-DID graph
+       (`atproto-repo/<did>`, derived from the `repo` query param on
+       reads / body field on writes — no auth needed to know WHERE to
+       read, same principle as kotobase-cljc-worker's own
+       canonical-graph derivation); every other request (s3/git/
+       pinning, and atproto's OWN sync.getBlob, which reads the shared
+       block space, not a repo's doc space) uses the single shared
+       admin graph
+    3. writes: authorize — Bearer WRITE_TOKEN (full admin), AWS SigV4
+       over the raw payload (S3_ACCESS_KEY_ID/S3_SECRET_ACCESS_KEY),
+       or a CACAO (kotobase-protocols-worker.cacao): on the atproto
+       surface a valid CACAO authorizes a write only when its issuer
+       DID equals the request's `repo` field (per-DID, structural — no
+       client-supplied target DID to disagree with, ADR-2607177000) —
+       combined with step 2, this means a write is authorized to reach
+       a per-DID graph ONLY when the verified signer IS that DID, the
+       same structural guarantee kotobase-cljc-worker's own
+       canonical-graph(issuer, db_name) makes; on every other surface a
+       valid CACAO is honored only when its issuer is in
+       CACAO_OPERATOR_DIDS (admin-equivalent, same allowlist shape
+       kotobase-cljc-worker's own `authorized?` uses)
+    4. kotobase-protocols-worker.kotobase-store/hydrate-run-persist!
+       does hydrate (real kotobase-peer content-addressed blocks in R2,
+       not one opaque EDN blob) → LocalStore → pure router (sync) →
+       diff → commit + head-CAS, all as ONE cycle (ADR-2607177500)
+       – POST /ipfs short-circuits: sha256(raw body) → CIDv1 (library
+         framing) → block stored base64 → {\"cid\": …}
+    5. a lost head-CAS (:persisted false) retries the WHOLE cycle from
+       a fresh head read, ≤3 attempts
+    6. responses flagged :body-encoding :base64 (seeded git objects /
+       ipfs blocks) are decoded back to raw bytes."
+  (:require [clojure.string :as str]
+            [kotobase-protocols-worker.cacao :as cacao]
+            [kotobase-protocols-worker.core :as core]
+            [kotobase-protocols-worker.graph :as graph]
+            [kotobase-protocols-worker.kotobase-store :as ks]
+            [kotobase-protocols-worker.query :as query]
+            [kotobase.protocols.blocks :as blocks]
+            [kotobase.protocols.cid :as cid]
+            [kotobase.protocols.json :as json]
+            [kotobase.protocols.router :as router]
+            [sigv4.crypto :as sigv4-crypto]
+            [sigv4.verify :as sigv4]))
+
+;; ---------------------------------------------------------------- bytes
+
+(def ^:private text-encoder (js/TextEncoder.))
+(def ^:private text-decoder (js/TextDecoder.))
+
+(defn- te [s] (.encode text-encoder s))
+
+(defn- ab->b64 [ab]
+  (let [u8 (js/Uint8Array. ab)
+        n (.-length u8)]
+    (loop [i 0 s ""]
+      (if (< i n)
+        (recur (+ i 0x8000)
+               (str s (.apply js/String.fromCharCode nil
+                              (.subarray u8 i (min n (+ i 0x8000))))))
+        (js/btoa s)))))
+
+(defn- b64->u8 [b64]
+  (let [bin (js/atob b64)]
+    (js/Uint8Array.from bin (fn [c] (.charCodeAt c 0)))))
+
+(defn- ab->hex [ab]
+  (let [u8 (js/Uint8Array. ab)]
+    (reduce (fn [s i] (str s (.padStart (.toString (aget u8 i) 16) 2 "0")))
+            "" (range (.-length u8)))))
+
+(defn- sha256 [data] (js/crypto.subtle.digest "SHA-256" data))
+
+;; ---------------------------------------------------------------- sigv4
+
+(def ^:private signer-crypto (sigv4-crypto/crypto))
+
+(defn sigv4-verify
+  "Promise<boolean>: recompute the request signature from the secrets and the
+  RAW payload, require the declared payload hash to match.
+
+  Canonicalization, the HMAC ladder and the comparison all come from
+  kotoba-lang/sigv4 — this worker used to carry its own, and the copy encoded
+  with charCodeAt, so any non-ASCII key or query value signed as UTF-16 and
+  disagreed with every S3 client. What is left here is this worker's own
+  policy: which access key is accepted, and that the declared payload hash
+  must match the body we actually received.
+
+  Public so `worker-test` can drive it with a request signed by the same shared
+  library a real S3 client would use — the one behaviour extracting the signer
+  could have broken, and which nothing here covered before."
+  [^js env req body-ab]
+  (let [p (sigv4/parse-authorization (get (:headers req) "authorization"))
+        akid (.-S3_ACCESS_KEY_ID env)
+        secret (.-S3_SECRET_ACCESS_KEY env)
+        declared (get (:headers req) "x-amz-content-sha256")]
+    (if-not (and p akid secret (= (:akid p) akid))
+      (js/Promise.resolve false)
+      (-> (.then (sha256 body-ab) ab->hex)
+          (.then
+           (fn [actual-hash]
+             (let [payload-hash (or declared actual-hash)]
+               (if (and declared
+                        (not= declared "UNSIGNED-PAYLOAD")
+                        (not= declared actual-hash))
+                 false
+                 (-> (sigv4/expected-signature
+                      signer-crypto
+                      {:secret-key secret
+                       :parsed p
+                       :amz-date (get (:headers req) "x-amz-date")
+                       :payload-hash payload-hash
+                       :request req})
+                     ;; constant-time: `=` on hex short-circuits at the first
+                     ;; differing character, and this endpoint will answer as
+                     ;; many times as an attacker asks.
+                     (.then #(sigv4/constant-time-eq? (:signature p) %)))))))))))
+
+(defn- cacao-authorized?
+  "Promise<boolean>. Parses the body only on this fallback path (Bearer
+  and SigV4 never need it) — a large S3/ipfs write body is never
+  JSON-parsed just to look for a CACAO that isn't there."
+  [^js env req]
+  (let [parsed (try (json/parse (or (:body req) "{}")) (catch :default _ {}))
+        token (cacao/from-request req parsed)
+        issuer (some-> token cacao/verify-cacao)]
+    (js/Promise.resolve
+     (boolean
+      (and issuer
+           (if (graph/atproto-surface? req)
+             (= issuer (get parsed "repo"))
+             (cacao/operator-allowed? issuer (.-CACAO_OPERATOR_DIDS env))))))))
+
+(defn- credential-ok?
+  "The one authorization ladder, used by reads and writes alike:
+  Bearer WRITE_TOKEN (full admin) → AWS SigV4 over the raw payload →
+  CACAO. Reads reuse it verbatim because every credential that may
+  write may obviously also read, and a second ladder would be a second
+  place to get it wrong."
+  [^js env req body-ab]
+  (cond
+    (core/authorized-write? req (.-WRITE_TOKEN env))
+    (js/Promise.resolve true)
+
+    (some-> (get (:headers req) "authorization")
+            (str/starts-with? "AWS4-HMAC-SHA256 "))
+    (sigv4-verify env req body-ab)
+
+    :else (cacao-authorized? env req)))
+
+;; ------------------------------------------------------------- requests
+
+(defn- entries->map [entries]
+  (into {} (map (fn [e] [(aget e 0) (aget e 1)])) (js/Array.from entries)))
+
+(defn- req->ring [^js request body]
+  (let [url (js/URL. (.-url request))]
+    {:method (keyword (str/lower-case (.-method request)))
+     :host (.-hostname url)
+     :path (.-pathname url)
+     :query (entries->map (.entries (.-searchParams url)))
+     :headers (core/normalize-headers (entries->map (.entries (.-headers request))))
+     :body (when (seq body) body)}))
+
+(defn- ring->response [{:keys [status headers body body-encoding]}]
+  (js/Response. (cond
+                  (nil? body) js/undefined
+                  (= :base64 body-encoding) (b64->u8 body)
+                  :else body)
+                (clj->js {:status status :headers (or headers {})})))
+
+(def ^:private security-response-headers
+  {"strict-transport-security" "max-age=31536000; includeSubDomains"
+   "x-content-type-options" "nosniff"
+   "x-frame-options" "DENY"
+   "referrer-policy" "no-referrer"
+   "permissions-policy" "camera=(), geolocation=(), microphone=()"})
+
+(defn- safe-request-id [^js request]
+  (let [candidate (.get (.-headers request) "x-request-id")]
+    (if (and candidate
+             (<= (count candidate) 128)
+             (re-matches #"[A-Za-z0-9._:-]+" candidate))
+      candidate
+      (str "kotobase-protocols-" (js/crypto.randomUUID)))))
+
+(defn- response-boundary
+  "Apply the same non-secret response boundary to every HTTP protocol surface.
+
+  Handlers remain free to choose protocol-specific content types and caching;
+  transport security and correlation cannot drift per adapter."
+  [^js request ^js response]
+  (let [headers (js/Headers. (.-headers response))]
+    (doseq [[k v] security-response-headers]
+      (.set headers k v))
+    (.set headers "x-kotobase-request-id" (safe-request-id request))
+    (js/Response. (.-body response)
+                  #js {:status (.-status response)
+                       :statusText (.-statusText response)
+                       :headers headers})))
+
+;; ---------------------------------------------------------- persistence
+
+(defn- ipfs-post-response [store {:keys [cid b64 content-type]}]
+  (blocks/put-block! store cid {:bytes b64 :encoding "base64"
+                                :content-type content-type})
+  {:status 201
+   :headers {"content-type" "application/json"
+             "location" (str "/ipfs/" cid)}
+   :body (json/encode {"cid" cid})})
+
+(defn- run-once
+  "`cfg` is {:surfaces {label handler} :path-surfaces {prefix label}} — what
+  THIS deployment carries. kotobase-protocol-core's router has no built-in
+  surface table (ADR-2608051000), so a shell that names nothing serves nothing.
+
+  extra may carry :ipfs-post {:cid :b64 :content-type} — a shell-level
+  write that bypasses the (read-only) ipfs HTTP surface. One full
+  hydrate→run→diff→commit cycle against the real chain — reads
+  naturally no-op (their after-state never differs from the hydrated
+  seed) via kotobase-store's own :docs/:streams diff, no separate
+  write?/state-changed? gate needed here anymore."
+  [cfg ^js env req extra]
+  (ks/hydrate-run-persist!
+   (.-STATE_BUCKET env) (or (.-KOTOBASE_R2_PREFIX env) "") (graph/for-request req)
+   (fn [seed chain]
+     (let [{:keys [store state]} (core/make-store seed)
+           apex (or (.-APEX env) "kotobase.net")
+           ;; The query surfaces are composed in here rather than in
+           ;; kotobase.protocols.router, which does not depend on them —
+           ;; see kotobase-protocols-worker.query. `seed` is the hydrated
+           ;; state, so :coll-keys/:vertex-colls describe what this graph
+           ;; actually holds, and query/memo-version derives the memo key
+           ;; from it — `chain` is deliberately NOT that key, see there.
+           ;; query/enrich contributes the four query dialects and the memo
+           ;; machinery they need; cfg contributes whatever else this shell
+           ;; carries (s3, atproto, pinning, ...). The result is then
+           ;; RESTRICTED to cfg's labels: a shell serves exactly what it
+           ;; declared, never what happened to be linked in.
+           enriched (query/enrich {:store store
+                                   :apex apex
+                                   :now (.toISOString (js/Date.))}
+                                  seed
+                                  (core/effective-surface req apex))
+           labels (keys (:surfaces cfg))
+           ctx (assoc enriched
+                      :surfaces (select-keys (merge (:surfaces enriched)
+                                                    (:surfaces cfg))
+                                             labels)
+                      :path-surfaces (select-keys (merge (:path-surfaces enriched)
+                                                         (:path-surfaces cfg))
+                                                  (keys (:path-surfaces cfg))))
+           resp (if-let [ip (:ipfs-post extra)]
+                  (ipfs-post-response store ip)
+                  (router/handle ctx req))]
+       {:after-state @state :response resp}))))
+
+(defn- with-retries [cfg ^js env req extra]
+  (letfn [(attempt [n]
+            (.then (run-once cfg env req extra)
+                   (fn [{:keys [response persisted]}]
+                     (cond
+                       persisted (ring->response response)
+                       (pos? n) (attempt (dec n))
+                       :else (ring->response
+                              {:status 503
+                               :headers {"content-type" "text/plain; charset=utf-8"
+                                         "retry-after" "1"}
+                               :body "state write conflict, retry"})))))]
+    (attempt 2)))
+
+(defn- ipfs-post? [req]
+  (and (= :post (:method req))
+       (or (= "/ipfs" (:path req))
+           (and (= "/" (:path req))
+                (= "ipfs" (router/surface-of (:host req) "kotobase.net"))))))
+
+(defn- diag-health? [req]
+  (and (= :get (:method req)) (= "/_diag/health" (:path req))))
+
+(defn- diag-query-memo? [req]
+  (and (= :get (:method req)) (= "/_diag/query-memo" (:path req))))
+
+(defn- capabilities? [req]
+  (and (= :get (:method req))
+       (contains? #{"/capabilities" "/.well-known/kotobase-capabilities"}
+                  (:path req))))
+
+(defn- capabilities-response [_env _req]
+  (ring->response
+   {:status 200
+    :headers {"content-type" "application/json; charset=utf-8"
+              "cache-control" "public, max-age=300"
+              "access-control-allow-origin" "*"}
+    :body (json/encode query/capabilities)}))
+
+(defn- diag-query-memo-response
+  "Counters for this ISOLATE's query memo (ADR-2607310900 L1).
+
+  Public and unauthenticated because it carries no tenant data — four integers
+  and a capacity — and because the thing it answers is whether the memo is
+  earning its memory, which is a question about the deployment rather than
+  about anyone's graph.
+
+  Per-isolate is the whole point and also the caveat: two requests to the same
+  hostname can be served by different isolates in different colos, so these
+  numbers describe ONE of them and successive reads may not be monotonic. A
+  hit rate is only meaningful over a window in which the isolate stayed alive,
+  which is why `:caveat` says so in the response rather than in a doc nobody
+  reads next to the number."
+  [_env _req]
+  (ring->response
+   {:status 200
+    :headers {"content-type" "application/json; charset=utf-8"
+              "cache-control" "no-store"
+              "access-control-allow-origin" "*"}
+    :body (json/encode
+           (merge (query/memo-stats)
+                  {"surfaces" ["sparql" "cypher" "gremlin" "graphql"]
+                   "keyed_on" "the :docs of the state this request hydrated (NOT the chain head)"
+                   "caveat" (str "per-isolate and per-colo. Two reads may hit "
+                                 "different isolates, so these counters are not "
+                                 "monotonic across requests and a hit rate is only "
+                                 "meaningful within one isolate's lifetime.")}))}))
+
+(defn- diag-health-response
+  "Read-only, public, out-of-band from kotobase.protocols.router
+  entirely — never touches LocalStore/the pure handlers, just the
+  engine's own novelty state for `graph` (default the shared graph;
+  `?graph=atproto-repo/<did>` inspects a tenant's own chain). Exists
+  because ADR-2607177500's unfolded-novelty incident had to be
+  diagnosed by manually timing a plain read and guessing at the cause
+  (ADR-2607178500) — this makes that observable directly."
+  [^js env req]
+  (let [g (or (get (:query req) "graph") graph/shared-graph)]
+    (-> (ks/diagnose! (.-STATE_BUCKET env) (or (.-KOTOBASE_R2_PREFIX env) "") g)
+        (.then (fn [{:keys [chain-present? novelty-size should-fold?]}]
+                 (ring->response
+                  {:status 200
+                   :headers {"content-type" "application/json"
+                             "cache-control" "no-store"}
+                   :body (json/encode
+                          {"graph" g
+                           "chain_present" chain-present?
+                           "novelty_size" novelty-size
+                           "should_fold" should-fold?})})))
+        (.catch (fn [e]
+                  (ring->response
+                   {:status 500
+                    :headers {"content-type" "application/json"}
+                    :body (json/encode {"error" "DiagnosticFailed" "message" (.-message e)})}))))))
+
+(defn- handle-request [cfg ^js env req body-ab]
+  (if (capabilities? req)
+    (capabilities-response env req)
+  (if (diag-query-memo? req)
+    (diag-query-memo-response env req)
+  (if (diag-health? req)
+    (diag-health-response env req)
+    (let [apex (or (.-APEX env) "kotobase.net")
+          ;; apex-aware: a POST to a read-only query surface is a read
+          ;; (core/query-surfaces).
+          write? (core/write? req apex)
+          ;; s3 is tenant object storage: its reads now carry the same
+          ;; credential requirement its writes do (ADR-2607263000 D2).
+          ;; ipfs/git/atproto reads stay open — see
+          ;; core/public-read-surfaces for why each is deliberate.
+          read-auth? (core/read-auth-required? req apex)]
+      (-> (if (or write? read-auth?)
+            (credential-ok? env req body-ab)
+            (js/Promise.resolve true))
+        (.then
+         (fn [ok?]
+           (cond
+             (not ok?)
+             (ring->response
+              (core/unauthorized-response (some? (.-WRITE_TOKEN env))
+                                          (if write? :write :read)))
+
+             (ipfs-post? req)
+             (-> (sha256 body-ab)
+                 (.then (fn [digest]
+                          (with-retries
+                            env req
+                            {:ipfs-post
+                             {:cid (cid/cidv1-raw-sha256
+                                    (vec (js/Array.from (js/Uint8Array. digest))))
+                              :b64 (ab->b64 body-ab)
+                              :content-type (or (get (:headers req) "content-type")
+                                                "application/octet-stream")}}))))
+
+             :else (with-retries cfg env req nil))))))))))
+
+;; ------------------------------------------------------- gremlin websocket
+;; Gremlin's transport is WebSocket, so it never reaches `handle-request` —
+;; a 101 is not a ring response. Cloudflare hands us decoded text frames via
+;; WebSocketPair, which is why the shell needs the ENVELOPE half of
+;; kotobase.gremlin.wire and not its RFC 6455 frame codec: that half moved to
+;; kotobase.gremlin.envelope (.cljc) for exactly this reason.
+
+(defn- gremlin-upgrade? [^js request req apex]
+  (and (= "websocket" (str/lower-case (or (.get (.-headers request) "upgrade") "")))
+       (or (= "gremlin" (router/surface-of (:host req) apex))
+           (str/starts-with? (or (:path req) "") "/gremlin"))))
+
+(defn- gremlin-socket-response
+  "Accept the upgrade and answer each text frame from a FRESHLY hydrated
+  store.
+
+  Hydrating per message rather than once per connection is deliberate: a
+  socket outlives the request that opened it, and a store captured at accept
+  time would keep answering from a snapshot that gets older the longer a
+  client stays connected — a query surface that silently serves stale data is
+  worse than one that costs a read per message. These are read-only
+  traversals, so `hydrate-run-persist!` finds no diff and commits nothing."
+  [^js env req]
+  (let [pair (js/WebSocketPair.)
+        client (aget pair "0")
+        server (aget pair "1")]
+    (.accept server)
+    (.addEventListener
+     server "message"
+     (fn [^js ev]
+       (let [text (.-data ev)]
+         (-> (ks/hydrate-run-persist!
+              (.-STATE_BUCKET env) (or (.-KOTOBASE_R2_PREFIX env) "")
+              (graph/for-request req)
+              (fn [seed _chain]
+                (let [{:keys [store state]} (core/make-store seed)
+                      ctx {:store store
+                           :apex (or (.-APEX env) "kotobase.net")
+                           :now (.toISOString (js/Date.))}]
+                  {:after-state @state
+                   :response (query/gremlin-message ctx seed text)})))
+             (.then (fn [{:keys [response]}] (.send server response)))
+             (.catch (fn [e]
+                       ;; A failure here is reported IN the envelope, with
+                       ;; Gremlin's own server-error code, rather than by
+                       ;; closing the socket — a client that gets a close
+                       ;; frame learns nothing about which query failed.
+                       (.send server
+                              (query/gremlin-error
+                               (str "server error: " (.-message e))))))))))
+    (js/Response. nil #js {:status 101 :webSocket client})))
+
+(defn make-handler
+  "Build a Worker `fetch` export for a deployment carrying exactly `cfg`.
+
+  cfg: {:surfaces {\"cypher\" h} :path-surfaces {\"/db/data/\" \"cypher\"}}
+
+  Each per-capability shell (net-kotobase-s3, -cypher, ...) calls this with
+  its one surface. The combined deployment calls it with all of them. There
+  is no default: ADR-2608051000 makes a shell state what it carries, so it
+  cannot serve a capability it did not ask for."
+  [cfg]
+  #js {:fetch (fn [^js request ^js env _ctx]
+                (let [req0 (req->ring request "")
+                      apex (or (.-APEX env) "kotobase.net")]
+                  (if (gremlin-upgrade? request req0 apex)
+                    ;; A WebSocket upgrade is still a query READ.  This branch
+                    ;; used to run before `handle-request`'s read-auth gate,
+                    ;; which made the HTTP Gremlin endpoint private while the
+                    ;; real WebSocket transport was anonymous.  Authenticate
+                    ;; the handshake with the exact same credential ladder as
+                    ;; every other operator-private query surface.  There is no
+                    ;; request body on an RFC 6455 GET, so CACAO-in-body is not
+                    ;; available here; Bearer and SigV4 headers remain usable.
+                    (-> (credential-ok? env req0 (js/ArrayBuffer. 0))
+                        (.then
+                         (fn [ok?]
+                           (if ok?
+                             (gremlin-socket-response env req0)
+                             (response-boundary
+                              request
+                              (ring->response
+                               (core/unauthorized-response
+                                (some? (.-WRITE_TOKEN env)) :read)))))))
+                    (-> (.arrayBuffer request)
+                        (.then (fn [ab]
+                                 (let [body (.decode text-decoder ab)]
+                                   (handle-request cfg env (req->ring request body) ab))))
+                        (.catch (fn [e]
+                                  (js/Response. (str "internal error: " (.-message e))
+                                                #js {:status 500})))
+                        (.then #(response-boundary request %))))))})

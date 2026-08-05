@@ -12,10 +12,10 @@ if(cbor.core.tagged_QMARK_(x)){
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("ipld: raw cbor tags are not IPLD data \u2014 construct links with ipld.core/link",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"tag","tag",-1290361223),cbor.core.tag_number(x)], null));
 } else {
 if(cljs.core.map_QMARK_(x)){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__6213){
-var vec__6214 = p__6213;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6214,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6214,(1),null);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__11284){
+var vec__11285 = p__11284;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11285,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11285,(1),null);
 if(((typeof k === 'string') || ((k instanceof cljs.core.Keyword)))){
 } else {
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("ipld: DAG-CBOR map keys must be strings",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),k], null));
@@ -43,10 +43,10 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("ipld: DAG-CBOR allows tag
 }
 } else {
 if(cljs.core.map_QMARK_(x)){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__6217){
-var vec__6218 = p__6217;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6218,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6218,(1),null);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__11288){
+var vec__11289 = p__11288;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11289,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11289,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [k,(ipld.core._LT__cbor_data.cljs$core$IFn$_invoke$arity$1 ? ipld.core._LT__cbor_data.cljs$core$IFn$_invoke$arity$1(v) : ipld.core._LT__cbor_data.call(null,v))], null);
 })),x);
 } else {
@@ -89,10 +89,10 @@ return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"ci
  *   same storage-port convention prolly-tree/quad-store/commit-dag use.
  */
 ipld.core.put_node_BANG_ = (function ipld$core$put_node_BANG_(put_BANG_,node){
-var map__6221 = ipld.core.node__GT_block(node);
-var map__6221__$1 = cljs.core.__destructure_map(map__6221);
-var cid = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6221__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
-var bytes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6221__$1,new cljs.core.Keyword(null,"bytes","bytes",1175866680));
+var map__11292 = ipld.core.node__GT_block(node);
+var map__11292__$1 = cljs.core.__destructure_map(map__11292);
+var cid = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11292__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
+var bytes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11292__$1,new cljs.core.Keyword(null,"bytes","bytes",1175866680));
 (put_BANG_.cljs$core$IFn$_invoke$arity$2 ? put_BANG_.cljs$core$IFn$_invoke$arity$2(cid,bytes) : put_BANG_.call(null,cid,bytes));
 
 return cid;

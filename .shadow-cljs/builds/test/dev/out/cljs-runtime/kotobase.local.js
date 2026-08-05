@@ -11,15 +11,15 @@ return ((typeof value === 'string') && (((cljs.core.seq(value)) && ((cljs.core.c
  * Reject malformed/oversized transaction data before entering swap!, so a
  * Byzantine request can never partially mutate the reference store.
  */
-kotobase.local.validate_transaction_BANG_ = (function kotobase$local$validate_transaction_BANG_(p__10819){
-var map__10820 = p__10819;
-var map__10820__$1 = cljs.core.__destructure_map(map__10820);
-var request = map__10820__$1;
-var tx_id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10820__$1,new cljs.core.Keyword(null,"tx-id","tx-id",638275288));
-var expected_revision = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10820__$1,new cljs.core.Keyword(null,"expected-revision","expected-revision",-640183121));
-var puts = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10820__$1,new cljs.core.Keyword(null,"puts","puts",770558715));
-var deletes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10820__$1,new cljs.core.Keyword(null,"deletes","deletes",2085953887));
-var appends = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10820__$1,new cljs.core.Keyword(null,"appends","appends",97325525));
+kotobase.local.validate_transaction_BANG_ = (function kotobase$local$validate_transaction_BANG_(p__10859){
+var map__10860 = p__10859;
+var map__10860__$1 = cljs.core.__destructure_map(map__10860);
+var request = map__10860__$1;
+var tx_id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10860__$1,new cljs.core.Keyword(null,"tx-id","tx-id",638275288));
+var expected_revision = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10860__$1,new cljs.core.Keyword(null,"expected-revision","expected-revision",-640183121));
+var puts = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10860__$1,new cljs.core.Keyword(null,"puts","puts",770558715));
+var deletes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10860__$1,new cljs.core.Keyword(null,"deletes","deletes",2085953887));
+var appends = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10860__$1,new cljs.core.Keyword(null,"appends","appends",97325525));
 var puts__$1 = (function (){var or__5162__auto__ = puts;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -74,8 +74,8 @@ this.state = state;
 (kotobase.local.LocalStore.prototype.kotobase$store$IStore$_put$arity$4 = (function (_,coll,k,v){
 var self__ = this;
 var ___$1 = this;
-cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(self__.state,(function (p1__10821_SHARP_){
-return cljs.core.update.cljs$core$IFn$_invoke$arity$3(cljs.core.assoc_in(p1__10821_SHARP_,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"docs","docs",-1974280502),coll,k], null),v),new cljs.core.Keyword(null,"revision","revision",-1350113114),cljs.core.inc);
+cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(self__.state,(function (p1__10861_SHARP_){
+return cljs.core.update.cljs$core$IFn$_invoke$arity$3(cljs.core.assoc_in(p1__10861_SHARP_,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"docs","docs",-1974280502),coll,k], null),v),new cljs.core.Keyword(null,"revision","revision",-1350113114),cljs.core.inc);
 }));
 
 return v;
@@ -118,34 +118,34 @@ return or__5162__auto__;
 return (0);
 }
 })();
-return cljs.core.vec(cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"seq","seq",-1817803783),cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10822_SHARP_){
-return (cljs.core.long$(new cljs.core.Keyword(null,"seq","seq",-1817803783).cljs$core$IFn$_invoke$arity$1(p1__10822_SHARP_)) > cljs.core.long$(since__$1));
+return cljs.core.vec(cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"seq","seq",-1817803783),cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10862_SHARP_){
+return (cljs.core.long$(new cljs.core.Keyword(null,"seq","seq",-1817803783).cljs$core$IFn$_invoke$arity$1(p1__10862_SHARP_)) > cljs.core.long$(since__$1));
 }),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(self__.state),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"streams","streams",1465783789),stream], null)))));
 }));
 
 (kotobase.local.LocalStore.prototype.kotobase$store$ITransactionalStore$ = cljs.core.PROTOCOL_SENTINEL);
 
-(kotobase.local.LocalStore.prototype.kotobase$store$ITransactionalStore$_snapshot$arity$2 = (function (_,p__10823){
+(kotobase.local.LocalStore.prototype.kotobase$store$ITransactionalStore$_snapshot$arity$2 = (function (_,p__10863){
 var self__ = this;
-var map__10824 = p__10823;
-var map__10824__$1 = cljs.core.__destructure_map(map__10824);
-var collections = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10824__$1,new cljs.core.Keyword(null,"collections","collections",-2114643505));
-var streams = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10824__$1,new cljs.core.Keyword(null,"streams","streams",1465783789));
+var map__10864 = p__10863;
+var map__10864__$1 = cljs.core.__destructure_map(map__10864);
+var collections = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10864__$1,new cljs.core.Keyword(null,"collections","collections",-2114643505));
+var streams = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10864__$1,new cljs.core.Keyword(null,"streams","streams",1465783789));
 var ___$1 = this;
 var current = cljs.core.deref(self__.state);
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"revision","revision",-1350113114),new cljs.core.Keyword(null,"revision","revision",-1350113114).cljs$core$IFn$_invoke$arity$1(current),new cljs.core.Keyword(null,"docs","docs",-1974280502),cljs.core.select_keys(new cljs.core.Keyword(null,"docs","docs",-1974280502).cljs$core$IFn$_invoke$arity$1(current),collections),new cljs.core.Keyword(null,"streams","streams",1465783789),cljs.core.select_keys(new cljs.core.Keyword(null,"streams","streams",1465783789).cljs$core$IFn$_invoke$arity$1(current),streams)], null);
 }));
 
-(kotobase.local.LocalStore.prototype.kotobase$store$ITransactionalStore$_transact$arity$2 = (function (_,p__10825){
+(kotobase.local.LocalStore.prototype.kotobase$store$ITransactionalStore$_transact$arity$2 = (function (_,p__10865){
 var self__ = this;
-var map__10826 = p__10825;
-var map__10826__$1 = cljs.core.__destructure_map(map__10826);
-var request = map__10826__$1;
-var tx_id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10826__$1,new cljs.core.Keyword(null,"tx-id","tx-id",638275288));
-var expected_revision = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10826__$1,new cljs.core.Keyword(null,"expected-revision","expected-revision",-640183121));
-var puts = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10826__$1,new cljs.core.Keyword(null,"puts","puts",770558715));
-var deletes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10826__$1,new cljs.core.Keyword(null,"deletes","deletes",2085953887));
-var appends = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10826__$1,new cljs.core.Keyword(null,"appends","appends",97325525));
+var map__10866 = p__10865;
+var map__10866__$1 = cljs.core.__destructure_map(map__10866);
+var request = map__10866__$1;
+var tx_id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10866__$1,new cljs.core.Keyword(null,"tx-id","tx-id",638275288));
+var expected_revision = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10866__$1,new cljs.core.Keyword(null,"expected-revision","expected-revision",-640183121));
+var puts = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10866__$1,new cljs.core.Keyword(null,"puts","puts",770558715));
+var deletes = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10866__$1,new cljs.core.Keyword(null,"deletes","deletes",2085953887));
+var appends = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10866__$1,new cljs.core.Keyword(null,"appends","appends",97325525));
 var ___$1 = this;
 kotobase.local.validate_transaction_BANG_(request);
 
@@ -153,10 +153,10 @@ var result = cljs.core.volatile_BANG_(null);
 cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(self__.state,(function (current){
 var temp__5823__auto__ = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(current,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"tx-receipts","tx-receipts",562380438),tx_id], null));
 if(cljs.core.truth_(temp__5823__auto__)){
-var map__10827 = temp__5823__auto__;
-var map__10827__$1 = cljs.core.__destructure_map(map__10827);
-var prior_request = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10827__$1,new cljs.core.Keyword(null,"request","request",1772954723));
-var receipt = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10827__$1,new cljs.core.Keyword(null,"receipt","receipt",1871350913));
+var map__10867 = temp__5823__auto__;
+var map__10867__$1 = cljs.core.__destructure_map(map__10867);
+var prior_request = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10867__$1,new cljs.core.Keyword(null,"request","request",1772954723));
+var receipt = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10867__$1,new cljs.core.Keyword(null,"receipt","receipt",1871350913));
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(prior_request,request)){
 } else {
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("IStore tx-id reused with different request",new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword("kotobase.store","transaction-id-conflict","kotobase.store/transaction-id-conflict",1101035392),new cljs.core.Keyword(null,"tx-id","tx-id",638275288),tx_id], null));
@@ -171,30 +171,30 @@ if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(expected_revision,new cljs.core.
 throw kotobase.local.revision_conflict(expected_revision,new cljs.core.Keyword(null,"revision","revision",-1350113114).cljs$core$IFn$_invoke$arity$1(current));
 }
 
-var vec__10828 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__10831,p__10832){
-var vec__10833 = p__10831;
-var acc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10833,(0),null);
-var events = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10833,(1),null);
-var vec__10836 = p__10832;
-var stream = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10836,(0),null);
-var event = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10836,(1),null);
+var vec__10868 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__10871,p__10872){
+var vec__10873 = p__10871;
+var acc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10873,(0),null);
+var events = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10873,(1),null);
+var vec__10876 = p__10872;
+var stream = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10876,(0),null);
+var event = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10876,(1),null);
 var seq_SINGLEQUOTE_ = (new cljs.core.Keyword(null,"seq","seq",-1817803783).cljs$core$IFn$_invoke$arity$1(acc) + (1));
 var event_SINGLEQUOTE_ = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(event,new cljs.core.Keyword(null,"seq","seq",-1817803783),seq_SINGLEQUOTE_);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.update_in.cljs$core$IFn$_invoke$arity$4(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(acc,new cljs.core.Keyword(null,"seq","seq",-1817803783),seq_SINGLEQUOTE_),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"streams","streams",1465783789),stream], null),cljs.core.fnil.cljs$core$IFn$_invoke$arity$2(cljs.core.conj,cljs.core.PersistentVector.EMPTY),event_SINGLEQUOTE_),cljs.core.conj.cljs$core$IFn$_invoke$arity$2(events,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [stream,event_SINGLEQUOTE_], null))], null);
-}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__10839){
-var vec__10840 = p__10839;
-var coll = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10840,(0),null);
-var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10840,(1),null);
+}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__10879){
+var vec__10880 = p__10879;
+var coll = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10880,(0),null);
+var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10880,(1),null);
 return cljs.core.update_in.cljs$core$IFn$_invoke$arity$4(acc,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"docs","docs",-1974280502),coll], null),cljs.core.dissoc,key);
-}),cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__10843){
-var vec__10844 = p__10843;
-var coll = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10844,(0),null);
-var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10844,(1),null);
-var value = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10844,(2),null);
+}),cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__10883){
+var vec__10884 = p__10883;
+var coll = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10884,(0),null);
+var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10884,(1),null);
+var value = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10884,(2),null);
 return cljs.core.assoc_in(acc,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"docs","docs",-1974280502),coll,key], null),value);
 }),current,puts),deletes),cljs.core.PersistentVector.EMPTY], null),appends);
-var next_state = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10828,(0),null);
-var stamped = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10828,(1),null);
+var next_state = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10868,(0),null);
+var stamped = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10868,(1),null);
 var revision_SINGLEQUOTE_ = (new cljs.core.Keyword(null,"revision","revision",-1350113114).cljs$core$IFn$_invoke$arity$1(current) + (1));
 var receipt = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"tx-id","tx-id",638275288),tx_id,new cljs.core.Keyword(null,"revision","revision",-1350113114),revision_SINGLEQUOTE_,new cljs.core.Keyword(null,"appends","appends",97325525),stamped], null);
 var committed = cljs.core.assoc_in(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(next_state,new cljs.core.Keyword(null,"revision","revision",-1350113114),revision_SINGLEQUOTE_),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"tx-receipts","tx-receipts",562380438),tx_id], null),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"request","request",1772954723),request,new cljs.core.Keyword(null,"receipt","receipt",1871350913),receipt], null));
@@ -230,8 +230,8 @@ return (new kotobase.local.LocalStore(state));
  * A fresh in-process store. Pass `:seed` to preload `{:docs … :streams … :seq …}`.
  */
 kotobase.local.local_store = (function kotobase$local$local_store(var_args){
-var G__10848 = arguments.length;
-switch (G__10848) {
+var G__10888 = arguments.length;
+switch (G__10888) {
 case 0:
 return kotobase.local.local_store.cljs$core$IFn$_invoke$arity$0();
 
@@ -250,14 +250,14 @@ throw (new Error(["Invalid arity: ",arguments.length].join("")));
 return kotobase.local.local_store.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentArrayMap.EMPTY);
 }));
 
-(kotobase.local.local_store.cljs$core$IFn$_invoke$arity$1 = (function (p__10849){
-var map__10850 = p__10849;
-var map__10850__$1 = cljs.core.__destructure_map(map__10850);
-var docs = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10850__$1,new cljs.core.Keyword(null,"docs","docs",-1974280502),cljs.core.PersistentArrayMap.EMPTY);
-var streams = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10850__$1,new cljs.core.Keyword(null,"streams","streams",1465783789),cljs.core.PersistentArrayMap.EMPTY);
-var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10850__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783),(0));
-var revision = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10850__$1,new cljs.core.Keyword(null,"revision","revision",-1350113114),(0));
-var tx_receipts = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10850__$1,new cljs.core.Keyword(null,"tx-receipts","tx-receipts",562380438),cljs.core.PersistentArrayMap.EMPTY);
+(kotobase.local.local_store.cljs$core$IFn$_invoke$arity$1 = (function (p__10889){
+var map__10890 = p__10889;
+var map__10890__$1 = cljs.core.__destructure_map(map__10890);
+var docs = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10890__$1,new cljs.core.Keyword(null,"docs","docs",-1974280502),cljs.core.PersistentArrayMap.EMPTY);
+var streams = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10890__$1,new cljs.core.Keyword(null,"streams","streams",1465783789),cljs.core.PersistentArrayMap.EMPTY);
+var seq = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10890__$1,new cljs.core.Keyword(null,"seq","seq",-1817803783),(0));
+var revision = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10890__$1,new cljs.core.Keyword(null,"revision","revision",-1350113114),(0));
+var tx_receipts = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10890__$1,new cljs.core.Keyword(null,"tx-receipts","tx-receipts",562380438),cljs.core.PersistentArrayMap.EMPTY);
 return kotobase.local.__GT_LocalStore(cljs.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"docs","docs",-1974280502),docs,new cljs.core.Keyword(null,"streams","streams",1465783789),streams,new cljs.core.Keyword(null,"seq","seq",-1817803783),seq,new cljs.core.Keyword(null,"revision","revision",-1350113114),revision,new cljs.core.Keyword(null,"tx-receipts","tx-receipts",562380438),tx_receipts], null)));
 }));
 

@@ -44,18 +44,18 @@ return (""+"\""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.s
  *   whoever has to read the output twice.
  */
 kotobase.protocols.sparql.ntriples.graph__GT_ntriples = (function kotobase$protocols$sparql$ntriples$graph__GT_ntriples(graph){
-return (function (p1__8038_SHARP_){
-if(clojure.string.blank_QMARK_(p1__8038_SHARP_)){
+return (function (p1__13109_SHARP_){
+if(clojure.string.blank_QMARK_(p1__13109_SHARP_)){
 return "";
 } else {
-return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__8038_SHARP_)+"\n");
+return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__13109_SHARP_)+"\n");
 }
-})(clojure.string.join.cljs$core$IFn$_invoke$arity$2("\n",cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__8039){
-var map__8040 = p__8039;
-var map__8040__$1 = cljs.core.__destructure_map(map__8040);
-var subject = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8040__$1,new cljs.core.Keyword(null,"subject","subject",-1411880451));
-var predicate = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8040__$1,new cljs.core.Keyword(null,"predicate","predicate",-1742501860));
-var object = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__8040__$1,new cljs.core.Keyword(null,"object","object",1474613949));
+})(clojure.string.join.cljs$core$IFn$_invoke$arity$2("\n",cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__13110){
+var map__13111 = p__13110;
+var map__13111__$1 = cljs.core.__destructure_map(map__13111);
+var subject = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13111__$1,new cljs.core.Keyword(null,"subject","subject",-1411880451));
+var predicate = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13111__$1,new cljs.core.Keyword(null,"predicate","predicate",-1742501860));
+var object = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13111__$1,new cljs.core.Keyword(null,"object","object",1474613949));
 return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.ntriples.term__GT_nt(subject))+" "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.ntriples.term__GT_nt(predicate))+" "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.ntriples.term__GT_nt(object))+" .");
 }),graph))));
 });

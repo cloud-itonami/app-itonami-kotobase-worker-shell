@@ -6,27 +6,27 @@ goog.provide('kotobase.protocols.graphql');
  * @implements {cljs.core.IMeta}
  * @implements {cljs.core.IWithMeta}
 */
-kotobase.protocols.graphql.t_kotobase$protocols$graphql7947 = (function (resolver_map,meta7948){
+kotobase.protocols.graphql.t_kotobase$protocols$graphql13018 = (function (resolver_map,meta13019){
 this.resolver_map = resolver_map;
-this.meta7948 = meta7948;
+this.meta13019 = meta13019;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 });
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_7949,meta7948__$1){
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_13020,meta13019__$1){
 var self__ = this;
-var _7949__$1 = this;
-return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql7947(self__.resolver_map,meta7948__$1));
+var _13020__$1 = this;
+return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql13018(self__.resolver_map,meta13019__$1));
 }));
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_7949){
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_13020){
 var self__ = this;
-var _7949__$1 = this;
-return self__.meta7948;
+var _13020__$1 = this;
+return self__.meta13019;
 }));
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.prototype.graphql$ports$IResolver$ = cljs.core.PROTOCOL_SENTINEL);
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.prototype.graphql$ports$IResolver$ = cljs.core.PROTOCOL_SENTINEL);
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.prototype.graphql$ports$IResolver$resolve$arity$6 = (function (_,type_name,field_name,parent,args,ctx){
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.prototype.graphql$ports$IResolver$resolve$arity$6 = (function (_,type_name,field_name,parent,args,ctx){
 var self__ = this;
 var ___$1 = this;
 var temp__5823__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(self__.resolver_map,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [type_name,field_name], null));
@@ -43,23 +43,23 @@ return cljs.core.get.cljs$core$IFn$_invoke$arity$2(parent,field_name);
 }
 }));
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.getBasis = (function (){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"resolver-map","resolver-map",648998235,null),new cljs.core.Symbol(null,"meta7948","meta7948",-365769444,null)], null);
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.getBasis = (function (){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"resolver-map","resolver-map",648998235,null),new cljs.core.Symbol(null,"meta13019","meta13019",-1148274092,null)], null);
 }));
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.cljs$lang$type = true);
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.cljs$lang$type = true);
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.cljs$lang$ctorStr = "kotobase.protocols.graphql/t_kotobase$protocols$graphql7947");
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.cljs$lang$ctorStr = "kotobase.protocols.graphql/t_kotobase$protocols$graphql13018");
 
-(kotobase.protocols.graphql.t_kotobase$protocols$graphql7947.cljs$lang$ctorPrWriter = (function (this__5455__auto__,writer__5456__auto__,opt__5457__auto__){
-return cljs.core._write(writer__5456__auto__,"kotobase.protocols.graphql/t_kotobase$protocols$graphql7947");
+(kotobase.protocols.graphql.t_kotobase$protocols$graphql13018.cljs$lang$ctorPrWriter = (function (this__5455__auto__,writer__5456__auto__,opt__5457__auto__){
+return cljs.core._write(writer__5456__auto__,"kotobase.protocols.graphql/t_kotobase$protocols$graphql13018");
 }));
 
 /**
- * Positional factory function for kotobase.protocols.graphql/t_kotobase$protocols$graphql7947.
+ * Positional factory function for kotobase.protocols.graphql/t_kotobase$protocols$graphql13018.
  */
-kotobase.protocols.graphql.__GT_t_kotobase$protocols$graphql7947 = (function kotobase$protocols$graphql$__GT_t_kotobase$protocols$graphql7947(resolver_map,meta7948){
-return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql7947(resolver_map,meta7948));
+kotobase.protocols.graphql.__GT_t_kotobase$protocols$graphql13018 = (function kotobase$protocols$graphql$__GT_t_kotobase$protocols$graphql13018(resolver_map,meta13019){
+return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql13018(resolver_map,meta13019));
 });
 
 
@@ -78,11 +78,11 @@ return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql7947(resolver
  *   `kotobase.query.bridge` do.
  */
 kotobase.protocols.graphql.resolver = (function kotobase$protocols$graphql$resolver(resolver_map){
-return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql7947(resolver_map,cljs.core.PersistentArrayMap.EMPTY));
+return (new kotobase.protocols.graphql.t_kotobase$protocols$graphql13018(resolver_map,cljs.core.PersistentArrayMap.EMPTY));
 });
 kotobase.protocols.graphql.gql_error = (function kotobase$protocols$graphql$gql_error(var_args){
-var G__7951 = arguments.length;
-switch (G__7951) {
+var G__13022 = arguments.length;
+switch (G__13022) {
 case 1:
 return kotobase.protocols.graphql.gql_error.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -172,10 +172,10 @@ if(((cljs.core.seq(new cljs.core.Keyword("graphql","selections","graphql/selecti
 return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(errs,kotobase.protocols.graphql.gql_error.cljs$core$IFn$_invoke$arity$1((""+"Field \""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(fname)+"\" must not have a selection"+" since type \""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword("graphql","type","graphql/type",1313045893).cljs$core$IFn$_invoke$arity$1(field))+"\" has no subfields.")));
 } else {
 if(cljs.core.seq(new cljs.core.Keyword("graphql","selections","graphql/selections",-1556956402).cljs$core$IFn$_invoke$arity$1(sel))){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(errs,(function (){var G__7952 = schema;
-var G__7953 = new cljs.core.Keyword("graphql","type","graphql/type",1313045893).cljs$core$IFn$_invoke$arity$1(field);
-var G__7954 = new cljs.core.Keyword("graphql","selections","graphql/selections",-1556956402).cljs$core$IFn$_invoke$arity$1(sel);
-return (kotobase.protocols.graphql.validate_selections.cljs$core$IFn$_invoke$arity$3 ? kotobase.protocols.graphql.validate_selections.cljs$core$IFn$_invoke$arity$3(G__7952,G__7953,G__7954) : kotobase.protocols.graphql.validate_selections.call(null,G__7952,G__7953,G__7954));
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(errs,(function (){var G__13023 = schema;
+var G__13024 = new cljs.core.Keyword("graphql","type","graphql/type",1313045893).cljs$core$IFn$_invoke$arity$1(field);
+var G__13025 = new cljs.core.Keyword("graphql","selections","graphql/selections",-1556956402).cljs$core$IFn$_invoke$arity$1(sel);
+return (kotobase.protocols.graphql.validate_selections.cljs$core$IFn$_invoke$arity$3 ? kotobase.protocols.graphql.validate_selections.cljs$core$IFn$_invoke$arity$3(G__13023,G__13024,G__13025) : kotobase.protocols.graphql.validate_selections.call(null,G__13023,G__13024,G__13025));
 })());
 } else {
 return errs;
@@ -196,14 +196,14 @@ return kotobase.store._append(store,new cljs.core.Keyword("kotobase.protocols","
  *   pipeline is caught here, per the ns docstring's request-error/
  *   execution-error split).
  */
-kotobase.protocols.graphql.run_request = (function kotobase$protocols$graphql$run_request(p__7955,body){
-var map__7956 = p__7955;
-var map__7956__$1 = cljs.core.__destructure_map(map__7956);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7956__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7956__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
-var schema = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7956__$1,new cljs.core.Keyword(null,"schema","schema",-1582001791));
-var resolvers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7956__$1,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130));
-var now = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7956__$1,new cljs.core.Keyword(null,"now","now",-1650525531));
+kotobase.protocols.graphql.run_request = (function kotobase$protocols$graphql$run_request(p__13026,body){
+var map__13027 = p__13026;
+var map__13027__$1 = cljs.core.__destructure_map(map__13027);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13027__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13027__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
+var schema = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13027__$1,new cljs.core.Keyword(null,"schema","schema",-1582001791));
+var resolvers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13027__$1,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130));
+var now = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13027__$1,new cljs.core.Keyword(null,"now","now",-1650525531));
 var query_text = cljs.core.get.cljs$core$IFn$_invoke$arity$2(body,"query");
 if((!(typeof query_text === 'string'))){
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"ok","ok",967785236),false,new cljs.core.Keyword(null,"status","status",-1997798413),(400),new cljs.core.Keyword(null,"errors","errors",-908790718),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [kotobase.protocols.graphql.gql_error.cljs$core$IFn$_invoke$arity$1("must provide a \"query\" string")], null)], null);
@@ -231,7 +231,7 @@ var data = graphql.execute.execute_query(ports,schema,ast,null,new cljs.core.Per
 kotobase.protocols.graphql.audit_BANG_(store,new cljs.core.Keyword(null,"query","query",-1288509510),query_text,now,cljs.core.PersistentArrayMap.EMPTY);
 
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"ok","ok",967785236),true,new cljs.core.Keyword(null,"status","status",-1997798413),(200),new cljs.core.Keyword(null,"data","data",-232669377),data], null);
-}catch (e7957){var e = e7957;
+}catch (e13028){var e = e13028;
 var msg = (function (){var or__5162__auto__ = e.message;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -265,14 +265,14 @@ return kotobase.protocols.graphql.http.response.cljs$core$IFn$_invoke$arity$3(st
  *   not a wire error) if either is missing; no permissive default
  *   (ADR-2607050500).
  */
-kotobase.protocols.graphql.handle = (function kotobase$protocols$graphql$handle(p__7958,req){
-var map__7959 = p__7958;
-var map__7959__$1 = cljs.core.__destructure_map(map__7959);
-var ctx = map__7959__$1;
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7959__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7959__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
-var schema = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7959__$1,new cljs.core.Keyword(null,"schema","schema",-1582001791));
-var resolvers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7959__$1,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130));
+kotobase.protocols.graphql.handle = (function kotobase$protocols$graphql$handle(p__13029,req){
+var map__13030 = p__13029;
+var map__13030__$1 = cljs.core.__destructure_map(map__13030);
+var ctx = map__13030__$1;
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13030__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13030__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
+var schema = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13030__$1,new cljs.core.Keyword(null,"schema","schema",-1582001791));
+var resolvers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13030__$1,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130));
 if(cljs.core.fn_QMARK_(visible_QMARK_)){
 } else {
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"kotobase.protocols.graphql/handle requires ctx :visible? -- a REQUIRED"+" predicate fn over materialized datoms, no permissive default"+" (ADR-2607050500). Pass (constantly true) to see everything."),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword("graphql","ctx-error","graphql/ctx-error",-724004219),true], null));
@@ -296,30 +296,30 @@ return or__5162__auto__;
 return "{}";
 }
 })());
-}catch (e7960){var _ = e7960;
+}catch (e13031){var _ = e13031;
 return new cljs.core.Keyword("kotobase.protocols.graphql","malformed","kotobase.protocols.graphql/malformed",-1693322599);
 }})();
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(parsed,new cljs.core.Keyword("kotobase.protocols.graphql","malformed","kotobase.protocols.graphql/malformed",-1693322599))){
 return kotobase.protocols.graphql.json_response((400),new cljs.core.PersistentArrayMap(null, 1, ["errors",new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [kotobase.protocols.graphql.gql_error.cljs$core$IFn$_invoke$arity$1("malformed JSON body")], null)], null));
 } else {
-var map__7961 = kotobase.protocols.graphql.run_request(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(ctx,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130),(function (){var or__5162__auto__ = resolvers;
+var map__13032 = kotobase.protocols.graphql.run_request(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(ctx,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130),(function (){var or__5162__auto__ = resolvers;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
 } else {
 return cljs.core.PersistentArrayMap.EMPTY;
 }
 })()),parsed);
-var map__7961__$1 = cljs.core.__destructure_map(map__7961);
-var ok = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7961__$1,new cljs.core.Keyword(null,"ok","ok",967785236));
-var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7961__$1,new cljs.core.Keyword(null,"status","status",-1997798413));
-var data = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7961__$1,new cljs.core.Keyword(null,"data","data",-232669377));
-var errors = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__7961__$1,new cljs.core.Keyword(null,"errors","errors",-908790718));
+var map__13032__$1 = cljs.core.__destructure_map(map__13032);
+var ok = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13032__$1,new cljs.core.Keyword(null,"ok","ok",967785236));
+var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13032__$1,new cljs.core.Keyword(null,"status","status",-1997798413));
+var data = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13032__$1,new cljs.core.Keyword(null,"data","data",-232669377));
+var errors = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13032__$1,new cljs.core.Keyword(null,"errors","errors",-908790718));
 if(cljs.core.truth_(ok)){
-return kotobase.protocols.graphql.json_response(status,(function (){var G__7962 = new cljs.core.PersistentArrayMap(null, 1, ["data",data], null);
+return kotobase.protocols.graphql.json_response(status,(function (){var G__13033 = new cljs.core.PersistentArrayMap(null, 1, ["data",data], null);
 if(cljs.core.seq(errors)){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__7962,"errors",errors);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__13033,"errors",errors);
 } else {
-return G__7962;
+return G__13033;
 }
 })());
 } else {

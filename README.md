@@ -15,6 +15,7 @@ can be its own repository without copying any of this.
 | `kotobase-store` | per-request in-memory materialization hydrated from and diffed back to R2 (ADR-2607177500) |
 | `kotobase-r2` | the R2 adapter |
 | `query` | SPARQL 1.1 / openCypher / Gremlin / GraphQL composed onto a shell, as a `surfaces` + `path-surfaces` registry |
+| `shell` | the Worker `fetch` entry itself — request/ring bridging, the security response boundary, read-auth, SigV4/CACAO/Bearer write auth, the hydrate→run→persist retry loop, and the Gremlin WebSocket upgrade |
 
 `core` and `graph` are host-free `.cljc` on purpose: the decisions that matter
 are testable without a workerd runtime.
@@ -26,10 +27,19 @@ it is what allowed the protocol surfaces to become separate repositories. The
 consequence lands here: a shell states which surfaces it carries.
 
 ```clojure
-(router/handle {:store store :apex "kotobase.net"
-                :surfaces {"s3" s3/handle}}
-               req)
+(ns net-kotobase-cypher.worker
+  (:require [kotobase-protocols-worker.query :as query]
+            [kotobase-protocols-worker.shell :as shell]))
+
+(def handler
+  (shell/make-handler
+   {:surfaces      (select-keys query/surfaces ["cypher"])
+    :path-surfaces {"/db/data/" "cypher"}}))
 ```
+
+`shell/make-handler` is the whole entry point: a per-capability deploy shell is
+its `wrangler.jsonc` plus about ten lines naming one surface. The combined
+deployment calls the same function with all of them.
 
 A surface not in `:surfaces` is not served, including its `/health`. That is
 the point — a shell cannot accidentally serve a capability it did not ask for.
@@ -51,7 +61,8 @@ npm install
 npm test          # shadow-cljs compile test && node out/node-tests.js
 ```
 
-32 tests / 139 assertions at the 2026-08-05 split.
+44 tests / 163 assertions at the 2026-08-05 split, including the SigV4
+write-auth path driven end to end through `make-handler`.
 
 **Not nbb.** nbb/SCI cannot resolve `IEquiv` for some transitive deps here, and
 `kotobase.local/snapshot`'s deftype field access has the same problem — the same

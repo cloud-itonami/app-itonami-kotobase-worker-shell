@@ -35,23 +35,23 @@ return m;
  *   docstring): it decides whether `:o` is additionally indexed in `:ocp` for
  *   reverse-reference lookup via `refs-to`. Pure -- returns a new db.
  */
-datalog.index.assert_quad = (function datalog$index$assert_quad(db,p__11033,ref_QMARK_){
-var map__11034 = p__11033;
-var map__11034__$1 = cljs.core.__destructure_map(map__11034);
-var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11034__$1,new cljs.core.Keyword(null,"s","s",1705939918));
-var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11034__$1,new cljs.core.Keyword(null,"p","p",151049309));
-var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11034__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
-var G__11035 = db;
-var G__11035__$1 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11035,new cljs.core.Keyword(null,"spo","spo",734923469),datalog.index.upd,s,p,o)
+datalog.index.assert_quad = (function datalog$index$assert_quad(db,p__11073,ref_QMARK_){
+var map__11074 = p__11073;
+var map__11074__$1 = cljs.core.__destructure_map(map__11074);
+var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11074__$1,new cljs.core.Keyword(null,"s","s",1705939918));
+var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11074__$1,new cljs.core.Keyword(null,"p","p",151049309));
+var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11074__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
+var G__11075 = db;
+var G__11075__$1 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11075,new cljs.core.Keyword(null,"spo","spo",734923469),datalog.index.upd,s,p,o)
 ;
-var G__11035__$2 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11035__$1,new cljs.core.Keyword(null,"pso","pso",1415685955),datalog.index.upd,p,s,o)
+var G__11075__$2 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11075__$1,new cljs.core.Keyword(null,"pso","pso",1415685955),datalog.index.upd,p,s,o)
 ;
-var G__11035__$3 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11035__$2,new cljs.core.Keyword(null,"pos","pos",-864607220),datalog.index.upd,p,o,s)
+var G__11075__$3 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11075__$2,new cljs.core.Keyword(null,"pos","pos",-864607220),datalog.index.upd,p,o,s)
 ;
 if(cljs.core.truth_((ref_QMARK_.cljs$core$IFn$_invoke$arity$1 ? ref_QMARK_.cljs$core$IFn$_invoke$arity$1(o) : ref_QMARK_.call(null,o)))){
-return cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11035__$3,new cljs.core.Keyword(null,"ocp","ocp",448959679),datalog.index.upd,o,p,s);
+return cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11075__$3,new cljs.core.Keyword(null,"ocp","ocp",448959679),datalog.index.upd,o,p,s);
 } else {
-return G__11035__$3;
+return G__11075__$3;
 }
 });
 /**
@@ -59,23 +59,23 @@ return G__11035__$3;
  *   agree with the one used to assert the same quad -- otherwise the `:ocp`
  *   entry is left behind. Pure -- returns a new db.
  */
-datalog.index.retract_quad = (function datalog$index$retract_quad(db,p__11036,ref_QMARK_){
-var map__11037 = p__11036;
-var map__11037__$1 = cljs.core.__destructure_map(map__11037);
-var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11037__$1,new cljs.core.Keyword(null,"s","s",1705939918));
-var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11037__$1,new cljs.core.Keyword(null,"p","p",151049309));
-var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11037__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
-var G__11038 = db;
-var G__11038__$1 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11038,new cljs.core.Keyword(null,"spo","spo",734923469),datalog.index.rm,s,p,o)
+datalog.index.retract_quad = (function datalog$index$retract_quad(db,p__11076,ref_QMARK_){
+var map__11077 = p__11076;
+var map__11077__$1 = cljs.core.__destructure_map(map__11077);
+var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11077__$1,new cljs.core.Keyword(null,"s","s",1705939918));
+var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11077__$1,new cljs.core.Keyword(null,"p","p",151049309));
+var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11077__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
+var G__11078 = db;
+var G__11078__$1 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11078,new cljs.core.Keyword(null,"spo","spo",734923469),datalog.index.rm,s,p,o)
 ;
-var G__11038__$2 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11038__$1,new cljs.core.Keyword(null,"pso","pso",1415685955),datalog.index.rm,p,s,o)
+var G__11078__$2 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11078__$1,new cljs.core.Keyword(null,"pso","pso",1415685955),datalog.index.rm,p,s,o)
 ;
-var G__11038__$3 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11038__$2,new cljs.core.Keyword(null,"pos","pos",-864607220),datalog.index.rm,p,o,s)
+var G__11078__$3 = cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11078__$2,new cljs.core.Keyword(null,"pos","pos",-864607220),datalog.index.rm,p,o,s)
 ;
 if(cljs.core.truth_((ref_QMARK_.cljs$core$IFn$_invoke$arity$1 ? ref_QMARK_.cljs$core$IFn$_invoke$arity$1(o) : ref_QMARK_.call(null,o)))){
-return cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11038__$3,new cljs.core.Keyword(null,"ocp","ocp",448959679),datalog.index.rm,o,p,s);
+return cljs.core.update.cljs$core$IFn$_invoke$arity$6(G__11078__$3,new cljs.core.Keyword(null,"ocp","ocp",448959679),datalog.index.rm,o,p,s);
 } else {
-return G__11038__$3;
+return G__11078__$3;
 }
 });
 /**

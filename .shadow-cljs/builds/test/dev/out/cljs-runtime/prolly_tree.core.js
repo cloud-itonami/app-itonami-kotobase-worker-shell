@@ -47,20 +47,20 @@ return out;
 var item = cljs.core.first(remaining);
 var chunk_SINGLEQUOTE_ = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(chunk,item);
 if(cljs.core.truth_((boundary_fn.cljs$core$IFn$_invoke$arity$1 ? boundary_fn.cljs$core$IFn$_invoke$arity$1(item) : boundary_fn.call(null,item)))){
-var G__6343 = cljs.core.rest(remaining);
-var G__6344 = cljs.core.PersistentVector.EMPTY;
-var G__6345 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(out,chunk_SINGLEQUOTE_);
-remaining = G__6343;
-chunk = G__6344;
-out = G__6345;
+var G__11414 = cljs.core.rest(remaining);
+var G__11415 = cljs.core.PersistentVector.EMPTY;
+var G__11416 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(out,chunk_SINGLEQUOTE_);
+remaining = G__11414;
+chunk = G__11415;
+out = G__11416;
 continue;
 } else {
-var G__6346 = cljs.core.rest(remaining);
-var G__6347 = chunk_SINGLEQUOTE_;
-var G__6348 = out;
-remaining = G__6346;
-chunk = G__6347;
-out = G__6348;
+var G__11417 = cljs.core.rest(remaining);
+var G__11418 = chunk_SINGLEQUOTE_;
+var G__11419 = out;
+remaining = G__11417;
+chunk = G__11418;
+out = G__11419;
 continue;
 }
 }
@@ -78,10 +78,10 @@ var node = new cljs.core.PersistentArrayMap(null, 2, ["kind","leaf","entries",cl
 var cid = prolly_tree.core.put_node_BANG_(put_BANG_,node);
 var max_key = cljs.core.first(cljs.core.last(chunk));
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [max_key,cid], null);
-}),prolly_tree.core.chunk_by((function (p__6222){
-var vec__6223 = p__6222;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6223,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6223,(1),null);
+}),prolly_tree.core.chunk_by((function (p__11293){
+var vec__11294 = p__11293;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11294,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11294,(1),null);
 return prolly_tree.core.boundary_QMARK_(k);
 }),sorted_entries));
 });
@@ -94,19 +94,19 @@ return prolly_tree.core.boundary_QMARK_(k);
  */
 prolly_tree.core.build_internal_level = (function prolly_tree$core$build_internal_level(put_BANG_,child_summaries){
 return cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (chunk){
-var node = new cljs.core.PersistentArrayMap(null, 2, ["kind","internal","children",cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__6226){
-var vec__6227 = p__6226;
-var max_key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6227,(0),null);
-var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6227,(1),null);
+var node = new cljs.core.PersistentArrayMap(null, 2, ["kind","internal","children",cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__11297){
+var vec__11298 = p__11297;
+var max_key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11298,(0),null);
+var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11298,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [max_key,(ipld.core.link.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link.cljs$core$IFn$_invoke$arity$1(cid) : ipld.core.link.call(null,cid))], null);
 }),chunk)], null);
 var cid = prolly_tree.core.put_node_BANG_(put_BANG_,node);
 var max_key = cljs.core.first(cljs.core.last(chunk));
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [max_key,cid], null);
-}),prolly_tree.core.chunk_by((function (p__6230){
-var vec__6231 = p__6230;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6231,(0),null);
-var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6231,(1),null);
+}),prolly_tree.core.chunk_by((function (p__11301){
+var vec__11302 = p__11301;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11302,(0),null);
+var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11302,(1),null);
 return prolly_tree.core.boundary_QMARK_(cid);
 }),child_summaries));
 });
@@ -122,8 +122,8 @@ while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),cljs.core.count(level))){
 return cljs.core.second(cljs.core.first(level));
 } else {
-var G__6349 = prolly_tree.core.build_internal_level(put_BANG_,level);
-level = G__6349;
+var G__11420 = prolly_tree.core.build_internal_level(put_BANG_,level);
+level = G__11420;
 continue;
 }
 break;
@@ -148,10 +148,10 @@ return prolly_tree.core.verified_node(cid,(get_fn.cljs$core$IFn$_invoke$arity$1 
  * A decoded internal-node child entry is `[max-key <tag-42 link>]`; return
  *   the link's CID string.
  */
-prolly_tree.core.child_cid = (function prolly_tree$core$child_cid(p__6234){
-var vec__6235 = p__6234;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6235,(0),null);
-var link = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6235,(1),null);
+prolly_tree.core.child_cid = (function prolly_tree$core$child_cid(p__11305){
+var vec__11306 = p__11305;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11306,(0),null);
+var link = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11306,(1),null);
 return (ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1 ? ipld.core.link_cid.cljs$core$IFn$_invoke$arity$1(link) : ipld.core.link_cid.call(null,link));
 });
 /**
@@ -164,33 +164,33 @@ if(cljs.core.truth_(root_cid)){
 var cid = root_cid;
 while(true){
 var node = prolly_tree.core.get_node(get_fn,cid);
-var G__6238 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
-switch (G__6238) {
+var G__11309 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
+switch (G__11309) {
 case "leaf":
-return cljs.core.some(((function (cid,G__6238,node){
-return (function (p__6239){
-var vec__6240 = p__6239;
-var ek = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6240,(0),null);
-var ev = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6240,(1),null);
+return cljs.core.some(((function (cid,G__11309,node){
+return (function (p__11310){
+var vec__11311 = p__11310;
+var ek = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11311,(0),null);
+var ev = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11311,(1),null);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(ek,k)){
 return ev;
 } else {
 return null;
 }
-});})(cid,G__6238,node))
+});})(cid,G__11309,node))
 ,cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"entries"));
 
 break;
 case "internal":
 var children = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"children");
-var target = (function (){var or__5162__auto__ = cljs.core.some(((function (cid,children,G__6238,node){
+var target = (function (){var or__5162__auto__ = cljs.core.some(((function (cid,children,G__11309,node){
 return (function (entry){
 if((cljs.core.compare(k,cljs.core.first(entry)) <= (0))){
 return prolly_tree.core.child_cid(entry);
 } else {
 return null;
 }
-});})(cid,children,G__6238,node))
+});})(cid,children,G__11309,node))
 ,children);
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -198,13 +198,13 @@ return or__5162__auto__;
 return prolly_tree.core.child_cid(cljs.core.last(children));
 }
 })();
-var G__6351 = target;
-cid = G__6351;
+var G__11422 = target;
+cid = G__11422;
 continue;
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__6238))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__11309))));
 
 }
 break;
@@ -230,13 +230,13 @@ return (((cljs.core.compare(k,prefix) > (0))) && ((!(clojure.string.starts_with_
 });
 var walk = (function prolly_tree$core$scan_prefix_$_walk(cid){
 var node = prolly_tree.core.get_node(get_fn,cid);
-var G__6248 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
-switch (G__6248) {
+var G__11319 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
+switch (G__11319) {
 case "leaf":
-return cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__6249){
-var vec__6250 = p__6249;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6250,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6250,(1),null);
+return cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__11320){
+var vec__11321 = p__11320;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11321,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11321,(1),null);
 return clojure.string.starts_with_QMARK_(k,prefix);
 }),cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"entries"));
 
@@ -261,20 +261,20 @@ return and__5160__auto__;
 return cljs.core.persistent_BANG_(out);
 } else {
 if((cljs.core.compare(mk,prefix) < (0))){
-var G__6353 = cljs.core.rest(children);
-var G__6354 = mk;
-var G__6355 = out;
-children = G__6353;
-prev_max = G__6354;
-out = G__6355;
+var G__11424 = cljs.core.rest(children);
+var G__11425 = mk;
+var G__11426 = out;
+children = G__11424;
+prev_max = G__11425;
+out = G__11426;
 continue;
 } else {
-var G__6356 = cljs.core.rest(children);
-var G__6357 = mk;
-var G__6358 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(cljs.core.conj_BANG_,out,prolly_tree$core$scan_prefix_$_walk(prolly_tree.core.child_cid(entry)));
-children = G__6356;
-prev_max = G__6357;
-out = G__6358;
+var G__11427 = cljs.core.rest(children);
+var G__11428 = mk;
+var G__11429 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(cljs.core.conj_BANG_,out,prolly_tree$core$scan_prefix_$_walk(prolly_tree.core.child_cid(entry)));
+children = G__11427;
+prev_max = G__11428;
+out = G__11429;
 continue;
 
 }
@@ -285,7 +285,7 @@ break;
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__6248))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__11319))));
 
 }
 });
@@ -376,20 +376,20 @@ return and__5160__auto__;
 return acc;
 } else {
 if((cljs.core.compare(mk,prefix) < (0))){
-var G__6359 = cljs.core.rest(children);
-var G__6360 = mk;
-var G__6361 = acc;
-children = G__6359;
-prev_max = G__6360;
-acc = G__6361;
+var G__11430 = cljs.core.rest(children);
+var G__11431 = mk;
+var G__11432 = acc;
+children = G__11430;
+prev_max = G__11431;
+acc = G__11432;
 continue;
 } else {
-var G__6362 = cljs.core.rest(children);
-var G__6363 = mk;
-var G__6364 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,entry);
-children = G__6362;
-prev_max = G__6363;
-acc = G__6364;
+var G__11433 = cljs.core.rest(children);
+var G__11434 = mk;
+var G__11435 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,entry);
+children = G__11433;
+prev_max = G__11434;
+acc = G__11435;
 continue;
 
 }
@@ -399,16 +399,16 @@ break;
 }
 });
 var walk = (function prolly_tree$core$scan_prefix_async_$_walk(cid){
-return (get_fn.cljs$core$IFn$_invoke$arity$1 ? get_fn.cljs$core$IFn$_invoke$arity$1(cid) : get_fn.call(null,cid)).then((function (p1__6253_SHARP_){
-return prolly_tree.core.verified_node(cid,p1__6253_SHARP_);
+return (get_fn.cljs$core$IFn$_invoke$arity$1 ? get_fn.cljs$core$IFn$_invoke$arity$1(cid) : get_fn.call(null,cid)).then((function (p1__11324_SHARP_){
+return prolly_tree.core.verified_node(cid,p1__11324_SHARP_);
 })).then((function (node){
-var G__6259 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
-switch (G__6259) {
+var G__11330 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"kind");
+switch (G__11330) {
 case "leaf":
-return Promise.resolve(cljs.core.filterv((function (p__6260){
-var vec__6261 = p__6260;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6261,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6261,(1),null);
+return Promise.resolve(cljs.core.filterv((function (p__11331){
+var vec__11332 = p__11331;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11332,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11332,(1),null);
 return clojure.string.starts_with_QMARK_(k,prefix);
 }),cljs.core.get.cljs$core$IFn$_invoke$arity$2(node,"entries")));
 
@@ -422,7 +422,7 @@ return cljs.core.vec(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.con
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__6259))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__11330))));
 
 }
 }));
@@ -453,8 +453,8 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
  * Insert or replace [k v] in a sorted vector of entries, keeping key order.
  */
 prolly_tree.core.upsert_sorted = (function prolly_tree$core$upsert_sorted(entries,k,v){
-var i = cljs.core.count(cljs.core.take_while.cljs$core$IFn$_invoke$arity$2((function (p1__6264_SHARP_){
-return (cljs.core.compare(cljs.core.first(p1__6264_SHARP_),k) < (0));
+var i = cljs.core.count(cljs.core.take_while.cljs$core$IFn$_invoke$arity$2((function (p1__11335_SHARP_){
+return (cljs.core.compare(cljs.core.first(p1__11335_SHARP_),k) < (0));
 }),entries));
 var hit_QMARK_ = (((i < cljs.core.count(entries))) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(k,cljs.core.first(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(entries,i)))));
 if(hit_QMARK_){
@@ -468,10 +468,10 @@ return cljs.core.vec(cljs.core.concat.cljs$core$IFn$_invoke$arity$variadic(cljs.
  *   last. Same rule `lookup` descends by, kept in one place.
  */
 prolly_tree.core.child_index = (function prolly_tree$core$child_index(children,k){
-var or__5162__auto__ = cljs.core.first(cljs.core.keep_indexed.cljs$core$IFn$_invoke$arity$2((function (i,p__6265){
-var vec__6266 = p__6265;
-var max_key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6266,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6266,(1),null);
+var or__5162__auto__ = cljs.core.first(cljs.core.keep_indexed.cljs$core$IFn$_invoke$arity$2((function (i,p__11336){
+var vec__11337 = p__11336;
+var max_key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11337,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11337,(1),null);
 if((cljs.core.compare(k,max_key) <= (0))){
 return i;
 } else {
@@ -514,10 +514,10 @@ var node = prolly_tree.core.get_node(get_fn,cid);
 if(prolly_tree.core.leaf_node_QMARK_(node)){
 return height;
 } else {
-var G__6366 = cljs.core.second(cljs.core.first(prolly_tree.core.node_children(node)));
-var G__6367 = (height + (1));
-cid = G__6366;
-height = G__6367;
+var G__11437 = cljs.core.second(cljs.core.first(prolly_tree.core.node_children(node)));
+var G__11438 = (height + (1));
+cid = G__11437;
+height = G__11438;
 continue;
 }
 break;
@@ -531,14 +531,14 @@ return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMP
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),height)){
 return prolly_tree.core.node_children(node);
 } else {
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.mapcat.cljs$core$IFn$_invoke$arity$1((function (p__6269){
-var vec__6270 = p__6269;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6270,(0),null);
-var child = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6270,(1),null);
-var G__6273 = get_fn;
-var G__6274 = child;
-var G__6275 = (height - (1));
-return (prolly_tree.core.leaf_summaries_at_height.cljs$core$IFn$_invoke$arity$3 ? prolly_tree.core.leaf_summaries_at_height.cljs$core$IFn$_invoke$arity$3(G__6273,G__6274,G__6275) : prolly_tree.core.leaf_summaries_at_height.call(null,G__6273,G__6274,G__6275));
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.mapcat.cljs$core$IFn$_invoke$arity$1((function (p__11340){
+var vec__11341 = p__11340;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11341,(0),null);
+var child = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11341,(1),null);
+var G__11344 = get_fn;
+var G__11345 = child;
+var G__11346 = (height - (1));
+return (prolly_tree.core.leaf_summaries_at_height.cljs$core$IFn$_invoke$arity$3 ? prolly_tree.core.leaf_summaries_at_height.cljs$core$IFn$_invoke$arity$3(G__11344,G__11345,G__11346) : prolly_tree.core.leaf_summaries_at_height.call(null,G__11344,G__11345,G__11346));
 })),prolly_tree.core.node_children(node));
 
 }
@@ -557,21 +557,21 @@ return prolly_tree.core.leaf_summaries_at_height(get_fn,root_cid,prolly_tree.cor
 });
 prolly_tree.core.mutation_plan = (function prolly_tree$core$mutation_plan(leaves,additions,removals){
 var last_index = (cljs.core.count(leaves) - (1));
-var addition_indexed = cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__6278){
-var vec__6279 = p__6278;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6279,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6279,(1),null);
-var pair = vec__6279;
+var addition_indexed = cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__11349){
+var vec__11350 = p__11349;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11350,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11350,(1),null);
+var pair = vec__11350;
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [prolly_tree.core.child_index(leaves,k),pair], null);
 }),additions);
-var removal_indices = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6276_SHARP_){
-return prolly_tree.core.child_index(leaves,p1__6276_SHARP_);
+var removal_indices = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11347_SHARP_){
+return prolly_tree.core.child_index(leaves,p1__11347_SHARP_);
 }),removals);
-var affected = cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.set(cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.first,addition_indexed)),cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p1__6277_SHARP_){
-if((p1__6277_SHARP_ < last_index)){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__6277_SHARP_,(p1__6277_SHARP_ + (1))], null);
+var affected = cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.set(cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.first,addition_indexed)),cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p1__11348_SHARP_){
+if((p1__11348_SHARP_ < last_index)){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__11348_SHARP_,(p1__11348_SHARP_ + (1))], null);
 } else {
-return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__6277_SHARP_], null);
+return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__11348_SHARP_], null);
 }
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([removal_indices], 0))));
 var windows = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (ranges,i){
@@ -620,8 +620,8 @@ while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),cljs.core.count(level__$1))){
 return cljs.core.second(cljs.core.first(level__$1));
 } else {
-var G__6368 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
-level__$1 = G__6368;
+var G__11439 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
+level__$1 = G__11439;
 continue;
 }
 break;
@@ -652,30 +652,30 @@ if(cljs.core.empty_QMARK_(pairs__$1)){
 return root_cid;
 } else {
 if((root_cid == null)){
-return prolly_tree.core.build_tree(put_BANG_,cljs.core.vec(cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2(cljs.core.first,cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (m,p__6282){
-var vec__6283 = p__6282;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6283,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6283,(1),null);
+return prolly_tree.core.build_tree(put_BANG_,cljs.core.vec(cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2(cljs.core.first,cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (m,p__11353){
+var vec__11354 = p__11353;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11354,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11354,(1),null);
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,v);
 }),cljs.core.PersistentArrayMap.EMPTY,pairs__$1))));
 } else {
 var leaves = prolly_tree.core.leaf_summaries(get_fn,root_cid);
-var by_leaf = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__6286){
-var vec__6287 = p__6286;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6287,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6287,(1),null);
+var by_leaf = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,p__11357){
+var vec__11358 = p__11357;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11358,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11358,(1),null);
 return cljs.core.update.cljs$core$IFn$_invoke$arity$4(acc,prolly_tree.core.child_index(leaves,k),cljs.core.fnil.cljs$core$IFn$_invoke$arity$2(cljs.core.conj,cljs.core.PersistentVector.EMPTY),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [k,v], null));
 }),cljs.core.PersistentArrayMap.EMPTY,pairs__$1);
-var level = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (level,p__6290){
-var vec__6291 = p__6290;
-var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6291,(0),null);
-var additions = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6291,(1),null);
+var level = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (level,p__11361){
+var vec__11362 = p__11361;
+var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11362,(0),null);
+var additions = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11362,(1),null);
 var at = i;
 var leaf = prolly_tree.core.get_node(get_fn,cljs.core.second(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(level,at)));
-var entries = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (es,p__6294){
-var vec__6295 = p__6294;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6295,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6295,(1),null);
+var entries = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (es,p__11365){
+var vec__11366 = p__11365;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11366,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11366,(1),null);
 return prolly_tree.core.upsert_sorted(es,k,v);
 }),prolly_tree.core.node_entries(leaf),additions);
 return prolly_tree.core.splice(level,at,(1),prolly_tree.core.rechunk_leaves(put_BANG_,entries));
@@ -685,8 +685,8 @@ while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),cljs.core.count(level__$1))){
 return cljs.core.second(cljs.core.first(level__$1));
 } else {
-var G__6369 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
-level__$1 = G__6369;
+var G__11440 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
+level__$1 = G__11440;
 continue;
 }
 break;
@@ -713,40 +713,40 @@ if(((cljs.core.empty_QMARK_(additions__$1)) && (cljs.core.empty_QMARK_(removals_
 return root_cid;
 } else {
 var leaves = prolly_tree.core.leaf_summaries(get_fn,root_cid);
-var map__6298 = prolly_tree.core.mutation_plan(leaves,additions__$1,removals__$1);
-var map__6298__$1 = cljs.core.__destructure_map(map__6298);
-var addition_indexed = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6298__$1,new cljs.core.Keyword(null,"addition-indexed","addition-indexed",1201466297));
-var windows = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6298__$1,new cljs.core.Keyword(null,"windows","windows",2068861701));
-var removal_set = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6298__$1,new cljs.core.Keyword(null,"removal-set","removal-set",1587895159));
-var level = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (level,p__6299){
-var vec__6300 = p__6299;
-var start = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6300,(0),null);
-var end = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6300,(1),null);
-var retained = cljs.core.vec(cljs.core.remove.cljs$core$IFn$_invoke$arity$2((function (p__6303){
-var vec__6304 = p__6303;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6304,(0),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6304,(1),null);
+var map__11369 = prolly_tree.core.mutation_plan(leaves,additions__$1,removals__$1);
+var map__11369__$1 = cljs.core.__destructure_map(map__11369);
+var addition_indexed = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11369__$1,new cljs.core.Keyword(null,"addition-indexed","addition-indexed",1201466297));
+var windows = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11369__$1,new cljs.core.Keyword(null,"windows","windows",2068861701));
+var removal_set = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11369__$1,new cljs.core.Keyword(null,"removal-set","removal-set",1587895159));
+var level = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (level,p__11370){
+var vec__11371 = p__11370;
+var start = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11371,(0),null);
+var end = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11371,(1),null);
+var retained = cljs.core.vec(cljs.core.remove.cljs$core$IFn$_invoke$arity$2((function (p__11374){
+var vec__11375 = p__11374;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11375,(0),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11375,(1),null);
 return cljs.core.contains_QMARK_(removal_set,k);
-}),cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p__6307){
-var vec__6308 = p__6307;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6308,(0),null);
-var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6308,(1),null);
+}),cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p__11378){
+var vec__11379 = p__11378;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11379,(0),null);
+var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11379,(1),null);
 return prolly_tree.core.node_entries(prolly_tree.core.get_node(get_fn,cid));
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.subvec.cljs$core$IFn$_invoke$arity$3(level,start,(end + (1)))], 0))));
-var window_additions = cljs.core.keep.cljs$core$IFn$_invoke$arity$2((function (p__6311){
-var vec__6312 = p__6311;
-var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6312,(0),null);
-var pair = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6312,(1),null);
+var window_additions = cljs.core.keep.cljs$core$IFn$_invoke$arity$2((function (p__11382){
+var vec__11383 = p__11382;
+var i = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11383,(0),null);
+var pair = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11383,(1),null);
 if((((start <= i)) && ((i <= end)))){
 return pair;
 } else {
 return null;
 }
 }),addition_indexed);
-var entries = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (es,p__6315){
-var vec__6316 = p__6315;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6316,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6316,(1),null);
+var entries = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (es,p__11386){
+var vec__11387 = p__11386;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11387,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11387,(1),null);
 return prolly_tree.core.upsert_sorted(es,k,v);
 }),retained,window_additions);
 return prolly_tree.core.splice(level,start,((end - start) + (1)),prolly_tree.core.rechunk_leaves(put_BANG_,entries));
@@ -759,8 +759,8 @@ return null;
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),cljs.core.count(level__$1))){
 return cljs.core.second(cljs.core.first(level__$1));
 } else {
-var G__6370 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
-level__$1 = G__6370;
+var G__11441 = prolly_tree.core.rechunk_internal(put_BANG_,level__$1);
+level__$1 = G__11441;
 continue;
 
 }
@@ -815,15 +815,15 @@ return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMP
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),height)){
 return prolly_tree.core.node_children(node);
 } else {
-return prolly_tree.core.pmap_async((function (p__6319){
-var vec__6320 = p__6319;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6320,(0),null);
-var child = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6320,(1),null);
-var G__6323 = get_fn;
-var G__6324 = cache;
-var G__6325 = child;
-var G__6326 = (height - (1));
-return (prolly_tree.core.warm_leaf_summaries_BANG_.cljs$core$IFn$_invoke$arity$4 ? prolly_tree.core.warm_leaf_summaries_BANG_.cljs$core$IFn$_invoke$arity$4(G__6323,G__6324,G__6325,G__6326) : prolly_tree.core.warm_leaf_summaries_BANG_.call(null,G__6323,G__6324,G__6325,G__6326));
+return prolly_tree.core.pmap_async((function (p__11390){
+var vec__11391 = p__11390;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11391,(0),null);
+var child = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11391,(1),null);
+var G__11394 = get_fn;
+var G__11395 = cache;
+var G__11396 = child;
+var G__11397 = (height - (1));
+return (prolly_tree.core.warm_leaf_summaries_BANG_.cljs$core$IFn$_invoke$arity$4 ? prolly_tree.core.warm_leaf_summaries_BANG_.cljs$core$IFn$_invoke$arity$4(G__11394,G__11395,G__11396,G__11397) : prolly_tree.core.warm_leaf_summaries_BANG_.call(null,G__11394,G__11395,G__11396,G__11397));
 }),prolly_tree.core.node_children(node)).then((function (levels){
 return cljs.core.vec(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.concat,levels));
 }));
@@ -842,17 +842,17 @@ return cljs.core.vec(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.con
 prolly_tree.core.warm_mutation_BANG_ = (function prolly_tree$core$warm_mutation_BANG_(get_fn,cache,root_cid,additions,removals){
 return prolly_tree.core.warm_height_BANG_(get_fn,cache,root_cid).then((function (height){
 return prolly_tree.core.warm_leaf_summaries_BANG_(get_fn,cache,root_cid,height).then((function (leaves){
-var map__6328 = prolly_tree.core.mutation_plan(leaves,additions,removals);
-var map__6328__$1 = cljs.core.__destructure_map(map__6328);
-var windows = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__6328__$1,new cljs.core.Keyword(null,"windows","windows",2068861701));
-var leaf_cids = cljs.core.distinct.cljs$core$IFn$_invoke$arity$1(cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p__6329){
-var vec__6330 = p__6329;
-var start = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6330,(0),null);
-var end = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6330,(1),null);
+var map__11399 = prolly_tree.core.mutation_plan(leaves,additions,removals);
+var map__11399__$1 = cljs.core.__destructure_map(map__11399);
+var windows = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__11399__$1,new cljs.core.Keyword(null,"windows","windows",2068861701));
+var leaf_cids = cljs.core.distinct.cljs$core$IFn$_invoke$arity$1(cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (p__11400){
+var vec__11401 = p__11400;
+var start = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11401,(0),null);
+var end = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11401,(1),null);
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.second,cljs.core.subvec.cljs$core$IFn$_invoke$arity$3(leaves,start,(end + (1))));
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([windows], 0)));
-return prolly_tree.core.pmap_async((function (p1__6327_SHARP_){
-return prolly_tree.core.fetch_node_BANG_(get_fn,cache,p1__6327_SHARP_);
+return prolly_tree.core.pmap_async((function (p1__11398_SHARP_){
+return prolly_tree.core.fetch_node_BANG_(get_fn,cache,p1__11398_SHARP_);
 }),leaf_cids);
 }));
 }));
@@ -878,14 +878,14 @@ cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$3(writes,cljs.core.conj,new clj
 return cid;
 });
 return (((root_cid == null))?Promise.resolve(null):prolly_tree.core.warm_mutation_BANG_(get_fn,cache,root_cid,pairs__$1,cljs.core.PersistentVector.EMPTY)).then((function (_){
-return prolly_tree.core.insert_many(buffered_put_BANG_,(function (p1__6333_SHARP_){
-return cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(cache),p1__6333_SHARP_);
+return prolly_tree.core.insert_many(buffered_put_BANG_,(function (p1__11404_SHARP_){
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(cache),p1__11404_SHARP_);
 }),root_cid,pairs__$1);
 })).then((function (new_root){
-return prolly_tree.core.pmap_async((function (p__6334){
-var vec__6335 = p__6334;
-var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6335,(0),null);
-var bytes = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6335,(1),null);
+return prolly_tree.core.pmap_async((function (p__11405){
+var vec__11406 = p__11405;
+var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11406,(0),null);
+var bytes = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11406,(1),null);
 return Promise.resolve((put_BANG_.cljs$core$IFn$_invoke$arity$2 ? put_BANG_.cljs$core$IFn$_invoke$arity$2(cid,bytes) : put_BANG_.call(null,cid,bytes)));
 }),cljs.core.deref(writes)).then((function (_){
 return new_root;
@@ -911,14 +911,14 @@ cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$3(writes,cljs.core.conj,new clj
 return cid;
 });
 return (cljs.core.truth_(root_cid)?prolly_tree.core.warm_mutation_BANG_(get_fn,cache,root_cid,additions__$1,removals__$1):Promise.resolve(null)).then((function (_){
-return prolly_tree.core.mutate_many(buffered_put_BANG_,(function (p1__6338_SHARP_){
-return cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(cache),p1__6338_SHARP_);
+return prolly_tree.core.mutate_many(buffered_put_BANG_,(function (p1__11409_SHARP_){
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(cache),p1__11409_SHARP_);
 }),root_cid,additions__$1,removals__$1);
 })).then((function (new_root){
-return prolly_tree.core.pmap_async((function (p__6339){
-var vec__6340 = p__6339;
-var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6340,(0),null);
-var bytes = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6340,(1),null);
+return prolly_tree.core.pmap_async((function (p__11410){
+var vec__11411 = p__11410;
+var cid = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11411,(0),null);
+var bytes = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11411,(1),null);
 return Promise.resolve((put_BANG_.cljs$core$IFn$_invoke$arity$2 ? put_BANG_.cljs$core$IFn$_invoke$arity$2(cid,bytes) : put_BANG_.call(null,cid,bytes)));
 }),cljs.core.deref(writes)).then((function (_){
 return new_root;

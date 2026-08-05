@@ -42,7 +42,7 @@ return iss;
 } else {
 return null;
 }
-}catch (e10282){var _ = e10282;
+}catch (e10322){var _ = e10322;
 return null;
 }});
 /**
@@ -50,20 +50,20 @@ return null;
  *   kotobase-cljc-worker's own client contract) or an
  *   `authorization: CACAO <b64>` header, body field taking precedence.
  */
-kotobase_protocols_worker.cacao.from_request = (function kotobase_protocols_worker$cacao$from_request(p__10283,parsed_body){
-var map__10284 = p__10283;
-var map__10284__$1 = cljs.core.__destructure_map(map__10284);
-var req = map__10284__$1;
-var headers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10284__$1,new cljs.core.Keyword(null,"headers","headers",-835030129));
+kotobase_protocols_worker.cacao.from_request = (function kotobase_protocols_worker$cacao$from_request(p__10323,parsed_body){
+var map__10324 = p__10323;
+var map__10324__$1 = cljs.core.__destructure_map(map__10324);
+var req = map__10324__$1;
+var headers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10324__$1,new cljs.core.Keyword(null,"headers","headers",-835030129));
 var or__5162__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(parsed_body,"cacao_b64");
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
 } else {
-var G__10285 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(headers,"authorization");
-if((G__10285 == null)){
+var G__10325 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(headers,"authorization");
+if((G__10325 == null)){
 return null;
 } else {
-var a = G__10285;
+var a = G__10325;
 if(clojure.string.starts_with_QMARK_(a,"CACAO ")){
 return cljs.core.subs.cljs$core$IFn$_invoke$arity$2(a,(6));
 } else {

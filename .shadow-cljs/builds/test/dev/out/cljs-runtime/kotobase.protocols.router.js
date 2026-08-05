@@ -62,10 +62,10 @@ return or__5162__auto__;
 return "";
 }
 })();
-return cljs.core.some((function (p__10858){
-var vec__10859 = p__10858;
-var prefix = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10859,(0),null);
-var label = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10859,(1),null);
+return cljs.core.some((function (p__10898){
+var vec__10899 = p__10898;
+var prefix = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10899,(0),null);
+var label = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10899,(1),null);
 if(clojure.string.starts_with_QMARK_(path,prefix)){
 var temp__5825__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(all,label);
 if(cljs.core.truth_(temp__5825__auto__)){
@@ -84,11 +84,11 @@ return null;
  *   :apex "kotobase.net" :surfaces {label handler} :path-surfaces
  *   {prefix label}}.
  */
-kotobase.protocols.router.handle = (function kotobase$protocols$router$handle(p__10862,req){
-var map__10863 = p__10862;
-var map__10863__$1 = cljs.core.__destructure_map(map__10863);
-var ctx = map__10863__$1;
-var apex = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10863__$1,new cljs.core.Keyword(null,"apex","apex",328192413),"kotobase.net");
+kotobase.protocols.router.handle = (function kotobase$protocols$router$handle(p__10902,req){
+var map__10903 = p__10902;
+var map__10903__$1 = cljs.core.__destructure_map(map__10903);
+var ctx = map__10903__$1;
+var apex = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__10903__$1,new cljs.core.Keyword(null,"apex","apex",328192413),"kotobase.net");
 var path = (function (){var or__5162__auto__ = new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req);
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -110,11 +110,11 @@ var or__5162__auto__ = kotobase.protocols.router.mounted(ctx,req);
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
 } else {
-var temp__5823__auto____$1 = cljs.core.first(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__10864){
-var vec__10865 = p__10864;
-var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10865,(0),null);
-var l = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10865,(1),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10865,(2),null);
+var temp__5823__auto____$1 = cljs.core.first(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__10904){
+var vec__10905 = p__10904;
+var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10905,(0),null);
+var l = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10905,(1),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10905,(2),null);
 var and__5160__auto__ = clojure.string.starts_with_QMARK_(path,p);
 if(and__5160__auto__){
 return cljs.core.get.cljs$core$IFn$_invoke$arity$2(all,l);
@@ -123,14 +123,14 @@ return and__5160__auto__;
 }
 }),kotobase.protocols.router.default_prefixes));
 if(cljs.core.truth_(temp__5823__auto____$1)){
-var vec__10868 = temp__5823__auto____$1;
-var prefix = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10868,(0),null);
-var label = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10868,(1),null);
-var strip_QMARK_ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10868,(2),null);
-var G__10872 = ctx;
-var G__10873 = (cljs.core.truth_(strip_QMARK_)?kotobase.protocols.router.strip_prefix(req,cljs.core.subs.cljs$core$IFn$_invoke$arity$3(prefix,(0),(cljs.core.count(prefix) - (1)))):req);
-var fexpr__10871 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(all,label);
-return (fexpr__10871.cljs$core$IFn$_invoke$arity$2 ? fexpr__10871.cljs$core$IFn$_invoke$arity$2(G__10872,G__10873) : fexpr__10871.call(null,G__10872,G__10873));
+var vec__10908 = temp__5823__auto____$1;
+var prefix = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10908,(0),null);
+var label = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10908,(1),null);
+var strip_QMARK_ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10908,(2),null);
+var G__10912 = ctx;
+var G__10913 = (cljs.core.truth_(strip_QMARK_)?kotobase.protocols.router.strip_prefix(req,cljs.core.subs.cljs$core$IFn$_invoke$arity$3(prefix,(0),(cljs.core.count(prefix) - (1)))):req);
+var fexpr__10911 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(all,label);
+return (fexpr__10911.cljs$core$IFn$_invoke$arity$2 ? fexpr__10911.cljs$core$IFn$_invoke$arity$2(G__10912,G__10913) : fexpr__10911.call(null,G__10912,G__10913));
 } else {
 return kotobase.protocols.http.not_found.cljs$core$IFn$_invoke$arity$1("no protocol surface for this host/path");
 }
