@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$$ipld$dag_cbor.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,sCAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,6CAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,qBAAf,GAAuCH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,gBAAzB,CAAvC,GAAoFC,OAAA,CAAQ,gBAAR,CAApF;AACAC,2CAA4CC,CAAAA,OAA5C,GAAsDP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,qBAArE;;",
+"sources":["shadow.js.shim.module$$ipld$dag_cbor.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$$ipld$dag_cbor\");\ngoog.provide(\"module$shadow_js_shim_module$$ipld$dag_cbor\");\nshadow.js.shim.module$$ipld$dag_cbor = shadow.js.nativeProvides[\"@ipld/dag-cbor\"] = require(\"@ipld/dag-cbor\");\nmodule$shadow_js_shim_module$$ipld$dag_cbor.default = shadow.js.shim.module$$ipld$dag_cbor;\n"],
+"names":["goog","provide","shadow","js","shim","module$$ipld$dag_cbor","nativeProvides","require","module$shadow_js_shim_module$$ipld$dag_cbor","default"]
+}

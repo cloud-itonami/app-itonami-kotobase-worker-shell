@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$$noble$curves$ed25519.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,6CAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,oDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,4BAAf,GAA8CH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,0BAAzB,CAA9C,GAAqGC,OAAA,CAAQ,0BAAR,CAArG;AACAC,kDAAmDC,CAAAA,OAAnD,GAA6DP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,4BAA5E;;",
+"sources":["shadow.js.shim.module$$noble$curves$ed25519.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$$noble$curves$ed25519\");\ngoog.provide(\"module$shadow_js_shim_module$$noble$curves$ed25519\");\nshadow.js.shim.module$$noble$curves$ed25519 = shadow.js.nativeProvides[\"@noble/curves/ed25519.js\"] = require(\"@noble/curves/ed25519.js\");\nmodule$shadow_js_shim_module$$noble$curves$ed25519.default = shadow.js.shim.module$$noble$curves$ed25519;\n"],
+"names":["goog","provide","shadow","js","shim","module$$noble$curves$ed25519","nativeProvides","require","module$shadow_js_shim_module$$noble$curves$ed25519","default"]
+}

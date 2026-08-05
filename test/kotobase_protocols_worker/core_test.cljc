@@ -1,0 +1,227 @@
+(ns kotobase-protocols-worker.core-test
+  (:require [clojure.test :refer [deftest is testing]]
+            #?(:cljs [cljs.reader])
+            [kotobase-protocols-worker.core :as core]
+            [kotobase-protocols-worker.query :as query]
+            [kotobase.query.bridge :as bridge]
+            [kotobase.local :as local]
+            [kotobase.store :as st]
+            [kotobase.protocols.router :as router]
+            [kotobase.protocols.s3 :as s3]))
+
+(deftest write-detection
+  (is (core/write? {:method :put}))
+  (is (core/write? {:method :post}))
+  (is (core/write? {:method :delete}))
+  (is (not (core/write? {:method :get})))
+  (is (not (core/write? {:method :head}))))
+
+(deftest write-authorization
+  (let [req #(hash-map :method :put :headers {"authorization" %})]
+    (is (core/authorized-write? (req "Bearer t0k3n") "t0k3n"))
+    (is (not (core/authorized-write? (req "Bearer wrong") "t0k3n")))
+    (is (not (core/authorized-write? {:method :put :headers {}} "t0k3n")))
+    (testing "fail closed when no token configured"
+      (is (not (core/authorized-write? (req "Bearer anything") nil)))
+      (is (not (core/authorized-write? (req "Bearer ") "")))
+      (is (= 401 (:status (core/unauthorized-response false)))))))
+
+(deftest s3-reads-are-private-other-surfaces-are-not
+  ;; ADR-2607263000 D2. Measured 2026-07-26 before this change:
+  ;; GET https://s3.kotobase.net/<any-bucket>?list-type=2 answered 200
+  ;; to an anonymous caller. Harmless only because the surface was
+  ;; empty; a Drive on top of it would have been world-listable.
+  (let [get- (fn [host path] {:method :get :host host :path path})]
+    (testing "s3 is tenant object storage — closed"
+      (is (core/read-auth-required? (get- "s3.kotobase.net" "/bkt/k") "kotobase.net"))
+      (is (core/read-auth-required? (get- "s3.kotobase.net" "/bkt") "kotobase.net"))
+      (is (core/read-auth-required? {:method :head :host "s3.kotobase.net" :path "/bkt/k"}
+                                    "kotobase.net")))
+    (testing "the CID/journal/record surfaces stay open on purpose"
+      (is (not (core/read-auth-required? (get- "ipfs.kotobase.net" "/ipfs/bafy") "kotobase.net")))
+      (is (not (core/read-auth-required? (get- "git.kotobase.net" "/repo/info/refs") "kotobase.net")))
+      (is (not (core/read-auth-required? (get- "atproto.kotobase.net" "/xrpc/com.atproto.repo.getRecord")
+                                         "kotobase.net"))))
+    (testing "pinning is per-user by spec and issues is internal-only — both closed"
+      (is (core/read-auth-required? (get- "pinning.kotobase.net" "/pins") "kotobase.net"))
+      (is (core/read-auth-required? (get- "issues.kotobase.net" "/issues") "kotobase.net")))
+    (testing "/health stays reachable without a credential — a monitor holds no CACAO"
+      (is (not (core/read-auth-required? (get- "s3.kotobase.net" "/health") "kotobase.net"))))
+    (testing "writes are not this predicate's business (the write ladder already covers them)"
+      (is (not (core/read-auth-required? {:method :put :host "s3.kotobase.net" :path "/bkt/k"}
+                                         "kotobase.net"))))
+    (testing "an unrecognized host is not a surface, so the router 404s it rather than 401"
+      (is (not (core/read-auth-required? (get- "kotobase.net" "/") "kotobase.net"))))))
+
+(deftest single-origin-fallback-is-authorized-as-the-surface-that-answers
+  ;; The router's path-prefix fallback means `/s3/*` on the apex lands
+  ;; on the s3 handler. Deciding auth from the hostname alone would let
+  ;; exactly that request read tenant objects unauthenticated.
+  (let [apex "kotobase.net"]
+    (is (= "s3" (core/effective-surface {:method :get :host apex :path "/s3/bkt/k"} apex)))
+    (is (= "ipfs" (core/effective-surface {:method :get :host apex :path "/ipfs/bafy"} apex)))
+    (is (= "atproto" (core/effective-surface {:method :get :host apex :path "/xrpc/x"} apex)))
+    (is (= "git" (core/effective-surface {:method :get :host apex :path "/git/r/info/refs"} apex)))
+    (is (= "pinning" (core/effective-surface {:method :get :host apex :path "/pins"} apex)))
+    (is (= "issues" (core/effective-surface {:method :get :host apex :path "/issues/1"} apex)))
+    (is (nil? (core/effective-surface {:method :get :host apex :path "/"} apex)))
+    (is (core/read-auth-required? {:method :get :host apex :path "/s3/bkt/k"} apex))
+    (is (not (core/read-auth-required? {:method :get :host apex :path "/ipfs/bafy"} apex)))))
+
+(deftest read-401-says-which-credentials-work
+  (let [r (core/unauthorized-response true :read)]
+    (is (= 401 (:status r)))
+    (is (re-find #"SigV4" (:body r)))
+    (is (re-find #"CACAO" (:body r))))
+  (testing "the write message is unchanged"
+    (is (= (core/unauthorized-response true)
+           (core/unauthorized-response true :write)))))
+
+(deftest snapshot-seed-round-trip
+  ;; the shell's whole persistence model: state → pr-str → read →
+  ;; seed a fresh store → same responses
+  ;;
+  ;; `:surfaces` is explicit because kotobase-protocol-core's router has no
+  ;; built-in table (ADR-2608051000): removing it is what let the surfaces
+  ;; become separate repositories, and the cost is that every caller now
+  ;; states which surfaces it carries. That cost is the point — a shell
+  ;; cannot accidentally serve a capability it did not ask for.
+  (let [{:keys [store state]} (core/make-store nil)
+        surfaces {"s3" s3/handle}
+        ctx {:store store :apex "kotobase.net" :surfaces surfaces}]
+    (router/handle ctx {:method :put :host "s3.kotobase.net"
+                        :path "/bkt/k" :body "hello"})
+    (let [snap @state
+          store2 (:store (core/make-store
+                          #?(:clj  (read-string (pr-str snap))
+                             :cljs (cljs.reader/read-string (pr-str snap)))))
+          resp (router/handle {:store store2 :apex "kotobase.net" :surfaces surfaces}
+                              {:method :get :host "s3.kotobase.net" :path "/bkt/k"})]
+      (is (= 200 (:status resp)))
+      (is (= "hello" (:body resp))))))
+
+(deftest header-normalization
+  (is (= {"content-type" "a" "authorization" "b"}
+         (core/normalize-headers [["Content-Type" "a"] ["AUTHORIZATION" "b"]]))))
+
+
+;; --- query surfaces: a POST that is a read ---------------------------------
+
+(deftest a-query-post-is-a-read-not-a-write
+  (testing "SPARQL 1.1 Protocol sends queries by POST, and Neo4j's Cypher
+            endpoint is POST /db/data/transaction/commit — classifying those
+            as writes by method alone makes all three surfaces answer 401 to
+            every legitimate query"
+    (doseq [[path surface] [["/sparql" "sparql"]
+                            ["/db/data/transaction/commit" "cypher"]
+                            ["/gremlin" "gremlin"]
+                            ["/graphql" "graphql"]]]
+      (let [req {:method :post :path path :host "shell.workers.dev" :headers {}}]
+        (is (= surface (core/effective-surface req "kotobase.net")))
+        (is (false? (core/write? req "kotobase.net"))
+            (str path " POST must classify as a read"))
+        (is (true? (core/write? req)) "and the method-only arity still says write")))))
+
+(deftest a-real-write-is-still-a-write
+  (testing "the exemption is scoped to the query surfaces and nothing else"
+    (doseq [path ["/s3/bucket/key" "/pins" "/xrpc/com.atproto.repo.putRecord"]]
+      (is (true? (core/write? {:method :post :path path :host "shell.workers.dev" :headers {}}
+                              "kotobase.net"))
+          (str path " POST must still be a write")))))
+
+(deftest query-surfaces-are-private-by-default
+  (testing "public-read-surfaces is an allowlist (ADR-2607263000 D2) — these
+            serve tenant graph data and were NOT added to it"
+    (doseq [s ["sparql" "cypher" "gremlin" "graphql"]]
+      (is (not (contains? core/public-read-surfaces s)))
+      (is (true? (core/read-auth-required?
+                  {:method :post :path (str "/" s) :host (str s ".kotobase.net") :headers {}}
+                  "kotobase.net"))
+          (str s " reads must require a credential")))))
+
+(deftest the-exemption-set-and-the-router-mounts-agree
+  (testing "effective-surface mirrors the router; a surface exempted from the
+            write check that the router sends somewhere else would be an
+            authorization decision made against the wrong handler"
+    (is (= core/query-surfaces (set (vals query/path-surfaces))))
+    (is (= core/query-surfaces (set (keys query/surfaces))))))
+
+;; --- query memo wiring (ADR-2607310900 L1) ---------------------------------
+
+(deftest the-memo-is-only-offered-to-read-only-surfaces
+  (testing "the version is the :docs value the query materializes, so it is
+            supplied only where nothing caller-directed can write; that set is
+            the same one core/write? exempts"
+    (doseq [s ["sparql" "cypher" "gremlin" "graphql"]]
+      (is (true? (query/queryable? s)) s))
+    (doseq [s ["s3" "git" "atproto" "pinning" "issues" nil]]
+      (is (false? (query/queryable? s)) (pr-str s)))
+    (is (= core/query-surfaces (set (filter query/queryable? ["sparql" "cypher" "gremlin" "graphql"
+                                                             "s3" "git" "atproto"]))))))
+
+(deftest graphql-document-contract-is-query-only-and-store-backed
+  (let [{:keys [store state]} (core/make-store nil)
+        _ (st/-put store "users" "u1" {:name "Alice"})
+        ctx (query/enrich {:store store} @state "graphql")
+        post #(router/handle ctx {:method :post :host "graphql.kotobase.net"
+                                  :path "/graphql"
+                                  :body %})]
+    (let [response (post "{\"query\":\"{ document(collection: \\\"users\\\", key: \\\"u1\\\") { collection key json } }\"}")]
+      (is (= 200 (:status response)))
+      (is (re-find #"Alice" (:body response))))
+    (let [response (post "{\"query\":\"mutation { document(collection: \\\"users\\\", key: \\\"u1\\\") { key } }\"}")]
+      (is (= 400 (:status response)))
+      (is (re-find #"query-only" (:body response))))))
+
+(deftest enrich-supplies-both-halves-or-neither
+  (let [state {:docs {"users" {"u1" {}}}}]
+    (testing "a query surface gets a memo and the exact docs value it reads"
+      (let [c (query/enrich {} state "cypher")]
+        (is (some? (:query-memo c)))
+        (is (= (:docs state) (:query-version c)))))
+    (testing "a write-capable surface never gets either half"
+      (let [c (query/enrich {} state "s3")]
+        (is (nil? (:query-memo c)))
+        (is (nil? (:query-version c)))))
+    (testing "an empty graph is still a cacheable docs value"
+      (let [c (query/enrich {} {:docs {}} "cypher")]
+        (is (some? (:query-memo c)))
+        (is (= {} (:query-version c)))))
+    (testing "the 2-arity keeps behaving as it did"
+      (let [c (query/enrich {} state)]
+        (is (nil? (:query-memo c)))
+        (is (= ["users"] (:coll-keys c)))))))
+
+(deftest the-memo-actually-memoises-through-enrich
+  (testing "end to end through the seam the handlers use: equal docs hit and
+            different docs miss"
+    (let [store (local/local-store)
+          _ (st/-put store "users" "u1" {:name "Alice"})
+          state-a {:docs {"users" {"u1" {:name "Alice"}}}}
+          state-b {:docs {"users" {"u1" {:name "Bob"}}}}
+          ctx1 (query/enrich {:store store} state-a "cypher")
+          a (bridge/db-for ctx1 store ["users"])
+          b (bridge/db-for ctx1 store ["users"])
+          ctx2 (query/enrich {:store store} state-b "cypher")
+          c (bridge/db-for ctx2 store ["users"])]
+      (is (identical? a b) "equal docs, same materialized db")
+      (is (not (identical? a c)) "different docs are a different key"))))
+
+(deftest an-audit-append-does-not-invalidate-the-docs-memo
+  (testing "Cypher appends an audit event, but materialization reads only :docs;
+            changing :streams must therefore leave the memo version unchanged"
+    (let [store (local/local-store)
+          state {:docs {"users" {"u1" {:name "Alice"}}} :streams {}}
+          before (query/memo-version state)]
+      (st/-append store :kotobase.protocols/audit {:surface :cypher :op :query})
+      (is (some? (st/-read store :kotobase.protocols/audit nil))
+          "the receipt is still recorded")
+      (is (= before (query/memo-version
+                     (assoc state :streams {:kotobase.protocols/audit [{:op :query}]})))
+          "audit-only state cannot evict a docs-derived query index"))))
+
+(deftest memo-stats-is-shaped-for-a-json-endpoint
+  (let [s (query/memo-stats)]
+    (is (every? #(contains? s %) ["size" "capacity" "hits" "misses" "hit_rate"]))
+    (is (or (nil? (get s "hit_rate")) (number? (get s "hit_rate")))
+        "nil before any traffic rather than a fabricated 0 or 1")))

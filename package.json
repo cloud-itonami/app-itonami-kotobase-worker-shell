@@ -1,0 +1,14 @@
+{
+  "name": "kotobase-worker-shell",
+  "private": true,
+  "description": "Shared Cloudflare Worker shell machinery for kotobase protocol surfaces",
+  "devDependencies": {
+    "@ipld/dag-cbor": "^10.0.2",
+    "@noble/curves": "^2.2.0",
+    "@noble/hashes": "^2.2.0",
+    "shadow-cljs": "^3.4.11"
+  },
+  "scripts": {
+    "test": "shadow-cljs compile test && node out/node-tests.js"
+  }
+}

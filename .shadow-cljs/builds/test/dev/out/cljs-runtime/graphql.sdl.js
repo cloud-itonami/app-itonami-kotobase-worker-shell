@@ -1,0 +1,356 @@
+goog.provide('graphql.sdl');
+/**
+ * 文字列リテラル・識別子・SDL 区切り記号にマッチするトークン正規表現。
+ */
+graphql.sdl.tok_re = /\"(?:[^\"\\]|\\.)*\"|[A-Za-z_][A-Za-z0-9_]*|[!:{}\[\]()|=@]/;
+/**
+ * # コメントを除去してトークン列(文字列 vector)を返す。
+ */
+graphql.sdl.tokenize = (function graphql$sdl$tokenize(s){
+var no_comments = clojure.string.replace(s,/#[^\n]*/,"");
+return cljs.core.vec(cljs.core.re_seq(graphql.sdl.tok_re,no_comments));
+});
+graphql.sdl.at = (function graphql$sdl$at(tokens,i){
+return cljs.core.nth.cljs$core$IFn$_invoke$arity$3(tokens,i,null);
+});
+/**
+ * tokens[i] が expected であることを検証し i+1 を返す。
+ */
+graphql.sdl.expect = (function graphql$sdl$expect(tokens,i,expected){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(expected,graphql.sdl.at(tokens,i))){
+return (i + (1));
+} else {
+throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"SDL parse error: expected '"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(expected)+"' but got '"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(graphql.sdl.at(tokens,i))+"' at position "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(i)),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"pos","pos",-864607220),i,new cljs.core.Keyword(null,"got","got",-1674745710),graphql.sdl.at(tokens,i),new cljs.core.Keyword(null,"expected","expected",1583670997),expected], null));
+}
+});
+/**
+ * 型参照をパースし [{:graphql/type T :graphql/list? B :graphql/non-null? B} next-i] を返す。
+ *   List 型は最外殻の nullability と要素型のみ保持する(ネスト list 非対応)。
+ */
+graphql.sdl.parse_type_ref = (function graphql$sdl$parse_type_ref(tokens,i){
+var tok = graphql.sdl.at(tokens,i);
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("[",tok)){
+var vec__10896 = (function (){var G__10899 = tokens;
+var G__10900 = (i + (1));
+return (graphql.sdl.parse_type_ref.cljs$core$IFn$_invoke$arity$2 ? graphql.sdl.parse_type_ref.cljs$core$IFn$_invoke$arity$2(G__10899,G__10900) : graphql.sdl.parse_type_ref.call(null,G__10899,G__10900));
+})();
+var inner = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10896,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10896,(1),null);
+var i3 = graphql.sdl.expect(tokens,i2,"]");
+var non_null_QMARK_ = cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("!",graphql.sdl.at(tokens,i3));
+var i4 = ((non_null_QMARK_)?(i3 + (1)):i3);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(inner,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),true,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),non_null_QMARK_], 0)),i4], null);
+} else {
+if(cljs.core.truth_((function (){var and__5160__auto__ = tok;
+if(cljs.core.truth_(and__5160__auto__)){
+return cljs.core.re_matches(/[A-Za-z_][A-Za-z0-9_]*/,tok);
+} else {
+return and__5160__auto__;
+}
+})())){
+var i2 = (i + (1));
+var non_null_QMARK_ = cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("!",graphql.sdl.at(tokens,i2));
+var i3 = ((non_null_QMARK_)?(i2 + (1)):i2);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("graphql","type","graphql/type",1313045893),tok,new cljs.core.Keyword("graphql","list?","graphql/list?",778008377),false,new cljs.core.Keyword("graphql","non-null?","graphql/non-null?",959218937),non_null_QMARK_], null),i3], null);
+} else {
+throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"SDL parse error: expected type name or '[' at position "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(i)),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"pos","pos",-864607220),i,new cljs.core.Keyword(null,"tok","tok",2091731382),tok], null));
+
+}
+}
+});
+/**
+ * 引数定義 name: TypeRef (= default)? をパースし [arg-map next-i] を返す。
+ */
+graphql.sdl.parse_arg_def = (function graphql$sdl$parse_arg_def(tokens,i){
+var name = graphql.sdl.at(tokens,i);
+var i2 = graphql.sdl.expect(tokens,(i + (1)),":");
+var vec__10901 = graphql.sdl.parse_type_ref(tokens,i2);
+var type_info = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10901,(0),null);
+var i3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10901,(1),null);
+var i4 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("=",graphql.sdl.at(tokens,i3)))?(i3 + (2)):i3);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name], null),type_info], 0)),i4], null);
+});
+/**
+ * 引数リスト '(' arg-def* ')' をパースし [args next-i] を返す。i は '(' の位置。
+ */
+graphql.sdl.parse_arg_defs = (function graphql$sdl$parse_arg_defs(tokens,i){
+var i__$1 = (i + (1));
+var args = cljs.core.PersistentVector.EMPTY;
+while(true){
+var tok = graphql.sdl.at(tokens,i__$1);
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(")",tok)) || ((tok == null)))){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [args,((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(")",tok))?(i__$1 + (1)):i__$1)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("@",tok)){
+var G__10948 = (i__$1 + (2));
+var G__10949 = args;
+i__$1 = G__10948;
+args = G__10949;
+continue;
+} else {
+var vec__10907 = graphql.sdl.parse_arg_def(tokens,i__$1);
+var arg = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10907,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10907,(1),null);
+var G__10950 = i2;
+var G__10951 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(args,arg);
+i__$1 = G__10950;
+args = G__10951;
+continue;
+
+}
+}
+break;
+}
+});
+/**
+ * フィールド定義 name args? ':' TypeRef をパースし [field-map next-i] を返す。
+ */
+graphql.sdl.parse_field_def = (function graphql$sdl$parse_field_def(tokens,i){
+var name = graphql.sdl.at(tokens,i);
+var i2 = (i + (1));
+var vec__10910 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("(",graphql.sdl.at(tokens,i2)))?graphql.sdl.parse_arg_defs(tokens,i2):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.PersistentVector.EMPTY,i2], null));
+var args = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10910,(0),null);
+var i3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10910,(1),null);
+var i4 = graphql.sdl.expect(tokens,i3,":");
+var vec__10913 = graphql.sdl.parse_type_ref(tokens,i4);
+var type_info = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10913,(0),null);
+var i5 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10913,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(function (){var G__10916 = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name], null),type_info], 0));
+if(cljs.core.seq(args)){
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10916,new cljs.core.Keyword("graphql","args","graphql/args",523331817),args);
+} else {
+return G__10916;
+}
+})(),i5], null);
+});
+/**
+ * 型本体 '{' field-def* '}' をパースし [fields next-i] を返す。i は '{' の位置。
+ */
+graphql.sdl.parse_fields = (function graphql$sdl$parse_fields(tokens,i){
+var i__$1 = graphql.sdl.expect(tokens,i,"{");
+var i__$2 = i__$1;
+var fields = cljs.core.PersistentVector.EMPTY;
+while(true){
+var tok = graphql.sdl.at(tokens,i__$2);
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok)) || ((tok == null)))){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [fields,((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok))?(i__$2 + (1)):i__$2)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("@",tok)){
+var G__10952 = (i__$2 + (2));
+var G__10953 = fields;
+i__$2 = G__10952;
+fields = G__10953;
+continue;
+} else {
+var vec__10920 = graphql.sdl.parse_field_def(tokens,i__$2);
+var field = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10920,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10920,(1),null);
+var G__10954 = i2;
+var G__10955 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(fields,field);
+i__$2 = G__10954;
+fields = G__10955;
+continue;
+
+}
+}
+break;
+}
+});
+/**
+ * enum 本体 '{' NAME* '}' をパースし [values next-i] を返す。i は '{' の位置。
+ */
+graphql.sdl.parse_enum_values = (function graphql$sdl$parse_enum_values(tokens,i){
+var i__$1 = graphql.sdl.expect(tokens,i,"{");
+var i__$2 = i__$1;
+var vals = cljs.core.PersistentVector.EMPTY;
+while(true){
+var tok = graphql.sdl.at(tokens,i__$2);
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok)) || ((tok == null)))){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [vals,((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok))?(i__$2 + (1)):i__$2)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("@",tok)){
+var G__10956 = (i__$2 + (2));
+var G__10957 = vals;
+i__$2 = G__10956;
+vals = G__10957;
+continue;
+} else {
+var G__10958 = (i__$2 + (1));
+var G__10959 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vals,tok);
+i__$2 = G__10958;
+vals = G__10959;
+continue;
+
+}
+}
+break;
+}
+});
+/**
+ * union メンバー '=' Name ('|' Name)* をパースし [members next-i] を返す。i は '=' の位置。
+ */
+graphql.sdl.parse_union_members = (function graphql$sdl$parse_union_members(tokens,i){
+var i__$1 = graphql.sdl.expect(tokens,i,"=");
+var n0 = graphql.sdl.at(tokens,i__$1);
+var i__$2 = (i__$1 + (1));
+var members = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [n0], null);
+while(true){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("|",graphql.sdl.at(tokens,i__$2))){
+var n = graphql.sdl.at(tokens,(i__$2 + (1)));
+var G__10960 = (i__$2 + (2));
+var G__10961 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(members,n);
+i__$2 = G__10960;
+members = G__10961;
+continue;
+} else {
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [members,i__$2], null);
+}
+break;
+}
+});
+/**
+ * schema ブロック '{' ... '}' をパースし [roots-map next-i] を返す。i は '{' の位置。
+ */
+graphql.sdl.parse_schema_block = (function graphql$sdl$parse_schema_block(tokens,i){
+var i__$1 = graphql.sdl.expect(tokens,i,"{");
+var i__$2 = i__$1;
+var roots = cljs.core.PersistentArrayMap.EMPTY;
+while(true){
+var tok = graphql.sdl.at(tokens,i__$2);
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok)) || ((tok == null)))){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [roots,((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("}",tok))?(i__$2 + (1)):i__$2)], null);
+} else {
+var role = tok;
+var i2 = graphql.sdl.expect(tokens,(i__$2 + (1)),":");
+var tname = graphql.sdl.at(tokens,i2);
+var G__10962 = (i2 + (1));
+var G__10963 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(roots,role,tname);
+i__$2 = G__10962;
+roots = G__10963;
+continue;
+
+}
+break;
+}
+});
+/**
+ * implements キーワードに続くインタフェース名列を '{' まで読み飛ばす。
+ */
+graphql.sdl.skip_implements = (function graphql$sdl$skip_implements(tokens,i){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("implements",graphql.sdl.at(tokens,i))){
+var j = (i + (1));
+while(true){
+var t = graphql.sdl.at(tokens,j);
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("{",t)) || ((t == null)))){
+return j;
+} else {
+var G__10964 = (j + (1));
+j = G__10964;
+continue;
+}
+break;
+}
+} else {
+return i;
+}
+});
+/**
+ * 一つのトップレベル定義をパースし [next-i updated-schema] を返す。
+ */
+graphql.sdl.parse_definition = (function graphql$sdl$parse_definition(tokens,i,schema){
+var kw = graphql.sdl.at(tokens,i);
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("type",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+var i2 = graphql.sdl.skip_implements(tokens,(i + (2)));
+var vec__10923 = graphql.sdl.parse_fields(tokens,i2);
+var fields = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10923,(0),null);
+var i3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10923,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i3,graphql.model.add_type(schema,graphql.model.type_def.cljs$core$IFn$_invoke$arity$3(name,new cljs.core.Keyword(null,"object","object",1474613949),fields))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("input",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+var vec__10926 = graphql.sdl.parse_fields(tokens,(i + (2)));
+var fields = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10926,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10926,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i2,graphql.model.add_type(schema,graphql.model.type_def.cljs$core$IFn$_invoke$arity$3(name,new cljs.core.Keyword(null,"input","input",556931961),fields))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("interface",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+var i2 = graphql.sdl.skip_implements(tokens,(i + (2)));
+var vec__10929 = graphql.sdl.parse_fields(tokens,i2);
+var fields = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10929,(0),null);
+var i3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10929,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i3,graphql.model.add_type(schema,graphql.model.type_def.cljs$core$IFn$_invoke$arity$3(name,new cljs.core.Keyword(null,"interface","interface",394869923),fields))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("enum",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+var vec__10932 = graphql.sdl.parse_enum_values(tokens,(i + (2)));
+var vals = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10932,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10932,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i2,graphql.model.add_type(schema,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","kind","graphql/kind",-1534877602),new cljs.core.Keyword(null,"enum","enum",1679018432),new cljs.core.Keyword("graphql","values","graphql/values",88099451),vals,new cljs.core.Keyword("graphql","fields","graphql/fields",-1688646079),cljs.core.PersistentVector.EMPTY], null))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("union",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+var vec__10935 = graphql.sdl.parse_union_members(tokens,(i + (2)));
+var members = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10935,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10935,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i2,graphql.model.add_type(schema,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","kind","graphql/kind",-1534877602),new cljs.core.Keyword(null,"union","union",2142937499),new cljs.core.Keyword("graphql","members","graphql/members",435174967),members,new cljs.core.Keyword("graphql","fields","graphql/fields",-1688646079),cljs.core.PersistentVector.EMPTY], null))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("scalar",kw)){
+var name = graphql.sdl.at(tokens,(i + (1)));
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(i + (2)),graphql.model.add_type(schema,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("graphql","name","graphql/name",-575568856),name,new cljs.core.Keyword("graphql","kind","graphql/kind",-1534877602),new cljs.core.Keyword(null,"scalar","scalar",1611359571),new cljs.core.Keyword("graphql","fields","graphql/fields",-1688646079),cljs.core.PersistentVector.EMPTY], null))], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("schema",kw)){
+var vec__10938 = graphql.sdl.parse_schema_block(tokens,(i + (1)));
+var roots = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10938,(0),null);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10938,(1),null);
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [i2,(function (){var G__10941 = schema;
+if(cljs.core.truth_(cljs.core.get.cljs$core$IFn$_invoke$arity$2(roots,"query"))){
+return graphql.model.set_query_root(G__10941,cljs.core.get.cljs$core$IFn$_invoke$arity$2(roots,"query"));
+} else {
+return G__10941;
+}
+})()], null);
+} else {
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(i + (1)),schema], null);
+
+}
+}
+}
+}
+}
+}
+}
+});
+/**
+ * GraphQL SDL 文字列を graphql.model スキーママップにパースする。
+ * 
+ *   schema ブロックが存在しない場合、GraphQL 仕様のデフォルトとして
+ *   'Query' 型が存在すればそれをクエリルートに設定する。
+ */
+graphql.sdl.parse_schema = (function graphql$sdl$parse_schema(sdl){
+var tokens = graphql.sdl.tokenize(sdl);
+var i = (0);
+var schema = graphql.model.schema();
+while(true){
+if((i >= cljs.core.count(tokens))){
+if((((new cljs.core.Keyword("graphql","query-root","graphql/query-root",-483655131).cljs$core$IFn$_invoke$arity$1(schema) == null)) && (cljs.core.contains_QMARK_(new cljs.core.Keyword("graphql","types","graphql/types",971068154).cljs$core$IFn$_invoke$arity$1(schema),"Query")))){
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(schema,new cljs.core.Keyword("graphql","query-root","graphql/query-root",-483655131),"Query");
+} else {
+return schema;
+}
+} else {
+var vec__10945 = graphql.sdl.parse_definition(tokens,i,schema);
+var i2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10945,(0),null);
+var schema2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10945,(1),null);
+var G__10965 = i2;
+var G__10966 = schema2;
+i = G__10965;
+schema = G__10966;
+continue;
+}
+break;
+}
+});
+
+//# sourceMappingURL=graphql.sdl.js.map

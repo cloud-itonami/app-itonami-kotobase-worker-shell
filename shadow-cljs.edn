@@ -1,0 +1,38 @@
+{:source-paths
+ ["src"
+  "test"
+  ;; Sibling checkouts in the west layout (orgs/kotoba-lang/<repo>). The same
+  ;; wiring protocols-worker used, minus its own src — this library IS the
+  ;; part that was shared.
+  "../kotobase/src"
+  "../kotobase-peer/src"
+  "../kotobase-client/src"
+  "../kotobase-protocol-core/src"
+  ;; test-only: snapshot-seed-round-trip drives the persistence model through
+  ;; a real surface, and core carries no built-in surface table.
+  "../kotobase-protocol-s3/src"
+  "../kotobase-query/src"
+  "../datom/src"
+  "../datom-source/src"
+  "../datalog/src"
+  "../arrangement/src"
+  "../prolly-tree/src"
+  "../chain/src"
+  "../sigv4/src"
+  "../io-ipld/src"
+  "../io-multiformats/src"
+  "../org-ietf-cbor/src"
+  "../graphql/src"
+  "../sparql/src"
+  "../org-w3-sparql-protocol/src"
+  "../org-opencypher-cypher/src"
+  "../org-apache-tinkerpop-gremlin/src"
+  "../org-graphql-http/src"]
+
+ :dependencies []
+
+ :builds
+ {:test {:target :node-test
+         :output-to "out/node-tests.js"
+         :ns-regexp "-test$"
+         :compiler-options {:parallel-build false}}}}
