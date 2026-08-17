@@ -75,6 +75,54 @@
                                              (v4/authorization-header
                                               akid scope signed-headers signature))}))))))))
 
+(deftest health-answers-without-a-store-and-only-for-what-this-shell-mounts
+  (testing "the router answers /health from four constants and reads no store,
+            but the hydrate is unconditional and sits ABOVE the router, so
+            every request rebuilt the graph and then called a branch that
+            reads none of it. Measured 2026-08-17 after the same fix landed in
+            the combined worker: its hosts answered /health in 60-180 ms while
+            cypher.kotobase.net -- this shell -- still took 8.9 s"
+    (let [cfg {:surfaces (select-keys query/surfaces ["cypher"])
+               :path-surfaces {"/db/data/" "cypher"}}
+          env #js {:APEX "kotobase.net"}
+          resp (worker/static-health cfg env {:method :get :path "/health"
+                                              :host "cypher.kotobase.net"})]
+      (is (some? resp) "the surface this shell mounts answers")
+      (is (= 200 (.-status resp)))))
+
+  (testing "and it declines for a surface this shell does NOT mount --
+            ADR-2608051000: a shell cannot serve a capability it did not ask
+            for, so taking the surfaces from a constant instead of from cfg
+            would make a single-capability deploy answer for all of them"
+    (let [cfg {:surfaces (select-keys query/surfaces ["cypher"])
+               :path-surfaces {"/db/data/" "cypher"}}
+          env #js {:APEX "kotobase.net"}]
+      (is (nil? (worker/static-health cfg env {:method :get :path "/health"
+                                               :host "nosuchsurface.kotobase.net"}))
+          "a surface nobody defines must fall through, not answer")
+      ;; The discriminating case, and the reason the one above is not enough:
+      ;; a host nobody defines declines whether the surfaces come from cfg or
+      ;; from the global query table, so that assertion passes with the bug
+      ;; applied -- measured, the first version of this test did exactly that.
+      ;; What separates them is a surface that EXISTS globally and is NOT in
+      ;; this cfg. `kotobase.protocols.router/surfaces-for` here is
+      ;; `(or (:surfaces ctx) {})` -- protocol-core deliberately keeps an EMPTY
+      ;; built-in table so cfg is the whole registry, and its docstring already
+      ;; says a surface absent from :surfaces is not served "including its
+      ;; /health". Sourcing them from a constant would make a cypher-only
+      ;; deploy answer for sparql: a capability it explicitly did not ask for.
+      (is (nil? (worker/static-health cfg env {:method :get :path "/health"
+                                               :host "sparql.kotobase.net"}))
+          "a surface this shell did NOT mount must fall through")))
+
+  (testing "and it claims only GET /health"
+    (let [cfg {:surfaces (select-keys query/surfaces ["cypher"])}
+          env #js {:APEX "kotobase.net"}]
+      (is (nil? (worker/static-health cfg env {:method :post :path "/health"
+                                               :host "cypher.kotobase.net"})))
+      (is (nil? (worker/static-health cfg env {:method :get :path "/healthz"
+                                               :host "cypher.kotobase.net"}))))))
+
 (deftest a-correctly-signed-write-is-accepted
   (async done
     (let [body (body-bytes "hello kotobase")]

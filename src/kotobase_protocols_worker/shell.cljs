@@ -291,6 +291,33 @@
 (defn- diag-query-memo? [req]
   (and (= :get (:method req)) (= "/_diag/query-memo" (:path req))))
 
+(defn static-health
+  "GET /health, answered WITHOUT hydrating. Public for tests.
+
+  `kotobase.protocols.router/handle` answers /health from four constants and
+  touches no store, but the hydrate in `run-once` is unconditional and sits
+  ABOVE the router: every request rebuilt the whole graph and then called a
+  branch that reads none of it.
+
+  Measured 2026-08-17 on the combined deployment before the same fix landed
+  there: ~1,364 CPU-ms, 85 R2 GETs and 11.4 MB per call, to return a constant,
+  on the most polled route a service has. After that fix every host served by
+  the combined worker answered /health in 60-180 ms while cypher.kotobase.net
+  -- this shell -- still took 8.9 s. That is what a fix applied to a copy
+  rather than to the shared code looks like from outside.
+
+  Takes the surfaces from `cfg` rather than from a constant, so a shell that
+  mounts a subset (ADR-2608051000: a shell cannot serve a capability it did
+  not ask for) declines /health for a host it does not carry, exactly as the
+  router would. Returns nil in that case so the fall-through keeps the old
+  path."
+  [cfg ^js env req]
+  (when (and (= :get (:method req)) (= "/health" (:path req)))
+    (let [apex (or (.-APEX env) "kotobase.net")
+          ctx (assoc (select-keys cfg [:surfaces :path-surfaces]) :apex apex)]
+      (when (contains? (router/surfaces-for ctx) (router/surface-of (:host req) apex))
+        (ring->response (router/handle ctx req))))))
+
 (defn- capabilities? [req]
   (and (= :get (:method req))
        (contains? #{"/capabilities" "/.well-known/kotobase-capabilities"}
@@ -361,6 +388,8 @@
                     :body (json/encode {"error" "DiagnosticFailed" "message" (.-message e)})}))))))
 
 (defn- handle-request [cfg ^js env req body-ab]
+  (if-let [health (static-health cfg env req)]
+    health
   (if (capabilities? req)
     (capabilities-response env req)
   (if (diag-query-memo? req)
@@ -399,7 +428,7 @@
                               :content-type (or (get (:headers req) "content-type")
                                                 "application/octet-stream")}}))))
 
-             :else (with-retries cfg env req nil))))))))))
+             :else (with-retries cfg env req nil)))))))))))
 
 ;; ------------------------------------------------------- gremlin websocket
 ;; Gremlin's transport is WebSocket, so it never reaches `handle-request` —
