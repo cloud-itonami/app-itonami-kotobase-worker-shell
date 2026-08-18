@@ -6,6 +6,9 @@
   ;; part that was shared.
   "../kotobase/src"
   "../kotobase-peer/src"
+  "../kotobase-block-codec/src"
+  "../org-ietf-deflate/src"
+  "../kotobase-projection/src"
   "../kotobase-client/src"
   "../kotobase-protocol-core/src"
   ;; test-only: snapshot-seed-round-trip drives the persistence model through

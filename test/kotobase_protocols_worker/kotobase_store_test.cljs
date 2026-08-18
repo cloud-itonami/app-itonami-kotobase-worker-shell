@@ -9,6 +9,8 @@
   needs real @noble/hashes/@ipld/dag-cbor, same reason cacao-test avoids
   nbb (ADR-2607177500)."
   (:require [cljs.test :refer-macros [deftest testing async]]
+            [clojure.edn :as edn]
+            [cljs.test :refer [is]]
             [cljs.test :as t]
             [kotobase-peer.core :as eng]
             [kotobase.local :as local]
@@ -217,3 +219,46 @@
                   (done)))
          (.catch (fn [e] (t/is false (str (.-message e) "\n" (.-stack e))) (done)))))))
 
+
+;; ── the fast outer layer of decode2 ──────────────────────────────────────────
+;; `read-string-literal` replaces the EDN reader with JSON.parse for the OUTER
+;; layer of a stored value, which is always a string literal. The two grammars
+;; differ over exactly one thing this domain can produce -- raw control
+;; characters, which pr-str emits unescaped and JSON forbids -- so these tests
+;; pin both halves: the fast path must agree, and the case only the slow path
+;; can read must still be read.
+
+(deftest read-string-literal-agrees-with-the-edn-reader
+  (doseq [s ["hello world"
+             "he said \"hi\""
+             "a\\b"
+             "line1\nline2"
+             "a\tb"
+             "{:a 1 :b \"two\" :c #{1 2}}"
+             "a/b"
+             ""]]
+    (let [wire (pr-str s)]
+      (is (= s (ks/read-string-literal wire))
+          (str "fast path must round-trip " (pr-str s)))
+      (is (= (edn/read-string wire) (ks/read-string-literal wire))
+          (str "fast and slow paths must agree on " (pr-str s))))))
+
+(deftest read-string-literal-falls-back-on-raw-control-characters
+  ;; This is the case that separates the two readers. JSON.parse THROWS here; if
+  ;; the fallback were dropped the value would come back nil and the document
+  ;; would silently lose its contents.
+  (doseq [code [0 1 27 31]]
+    (let [s (str "a" (js/String.fromCharCode code) "b")
+          wire (pr-str s)]
+      (is (nil? (try (js/JSON.parse wire) (catch :default _ nil)))
+          (str "precondition: JSON.parse cannot read control char " code))
+      (is (= s (ks/read-string-literal wire))
+          (str "fallback must recover control char " code)))))
+
+(deftest read-string-literal-refuses-non-strings
+  ;; JSON.parse would return a NUMBER for "123" and nil for "null" where the EDN
+  ;; reader returns 123 and the symbol null. The guard sends anything that is
+  ;; not a string to the authoritative reader rather than diverging silently.
+  (is (= 123 (ks/read-string-literal "123")))
+  (is (= 'null (ks/read-string-literal "null")))
+  (is (= [1 2] (ks/read-string-literal "[1 2]"))))
