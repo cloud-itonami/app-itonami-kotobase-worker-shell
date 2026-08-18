@@ -57,6 +57,32 @@
   [rows]
   (some #(when (= "doc/val" (:a %)) (:v_edn %)) rows))
 
+(defn read-string-literal
+  "The OUTER layer of `decode2` is always a string LITERAL — `v_edn` is
+  (pr-str stored-o) and `stored-o` is itself a string — so JSON.parse decodes
+  it natively, ~70x faster than the EDN reader on the same bytes (measured
+  2026-08-18: 140 ms -> 2 ms on a 1.9 MB literal). The INNER layer is real EDN
+  (keywords, sets, maps) and stays with the EDN reader.
+
+  Safe because the input domain is exactly what `pr-str` emits. Over 20,000
+  random strings — raw control characters, lone surrogates, astral planes —
+  JSON.parse NEVER silently disagreed with edn/read-string: it either returned
+  the identical string or threw, and edn/read-string recovered 100% of the
+  throws. It throws on raw control characters, which pr-str emits unescaped and
+  JSON forbids.
+
+  The `string?` guard is not decoration. JSON.parse returns a NUMBER for `123`
+  and nil for `null` where the EDN reader returns 123 and the symbol `null` — a
+  silent divergence rather than a throw — so anything but a string goes to the
+  authoritative reader.
+
+  Measured on the protocols-worker deployment this file was extracted from
+  (net-kotobase/control-plane 2d706d8): -28% of the hydrate's fold phase, and
+  production cpuTime median 2397 -> 2058 ms."
+  [v_edn]
+  (let [v (try (js/JSON.parse v_edn) (catch :default _ nil))]
+    (if (string? v) v (edn/read-string v_edn))))
+
 (defn- decode2
   "hot-datoms' :v_edn is (pr-str stored-o); every attr here stores
   stored-o as (pr-str original-value) (see the ns docstring's entity
@@ -66,7 +92,7 @@
   string — to build a matching [:db/retract] quad, so it stays a
   single edn/read-string; only decode-for-callers goes through here.)"
   [v_edn]
-  (edn/read-string (edn/read-string v_edn)))
+  (edn/read-string (read-string-literal v_edn)))
 
 ;; ---------------------------------------------------------------- read
 
