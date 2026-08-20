@@ -34,15 +34,15 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"co
 kotobase_protocols_worker.query.graphql_resolvers = (function kotobase_protocols_worker$query$graphql_resolvers(colls){
 return cljs.core.PersistentArrayMap.createAsIfByAssoc([new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Query","collections"], null),(function (_,___$1,___$2){
 return colls;
-}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Query","document"], null),(function (_,args,p__13345){
-var map__13346 = p__13345;
-var map__13346__$1 = cljs.core.__destructure_map(map__13346);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13346__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Query","document"], null),(function (_,args,p__10468){
+var map__10469 = p__10468;
+var map__10469__$1 = cljs.core.__destructure_map(map__10469);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10469__$1,new cljs.core.Keyword(null,"store","store",1512230022));
 return kotobase_protocols_worker.query.document(store,(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(args,"collection"))),(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(args,"key"))));
-}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Query","documents"], null),(function (_,args,p__13347){
-var map__13348 = p__13347;
-var map__13348__$1 = cljs.core.__destructure_map(map__13348);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13348__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+}),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Query","documents"], null),(function (_,args,p__10470){
+var map__10471 = p__10470;
+var map__10471__$1 = cljs.core.__destructure_map(map__10471);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10471__$1,new cljs.core.Keyword(null,"store","store",1512230022));
 var coll = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(args,"collection")));
 var limit = cljs.core.min.cljs$core$IFn$_invoke$arity$2((1000),cljs.core.max.cljs$core$IFn$_invoke$arity$2((0),(function (){var or__5162__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(args,"limit");
 if(cljs.core.truth_(or__5162__auto__)){
@@ -51,8 +51,8 @@ return or__5162__auto__;
 return (100);
 }
 })()));
-return cljs.core.vec(cljs.core.keep.cljs$core$IFn$_invoke$arity$2((function (p1__13344_SHARP_){
-return kotobase_protocols_worker.query.document(store,coll,p1__13344_SHARP_);
+return cljs.core.vec(cljs.core.keep.cljs$core$IFn$_invoke$arity$2((function (p1__10467_SHARP_){
+return kotobase_protocols_worker.query.document(store,coll,p1__10467_SHARP_);
 }),cljs.core.take.cljs$core$IFn$_invoke$arity$2(limit,cljs.core.sort.cljs$core$IFn$_invoke$arity$1(kotobase.store._list(store,coll)))));
 })]);
 });
@@ -96,12 +96,12 @@ kotobase_protocols_worker.query.isolate_memo = kotobase.query.bridge.memo.cljs$c
  *   `bridge/memo-stats` so the shell does not have to know the memo's shape.
  */
 kotobase_protocols_worker.query.memo_stats = (function kotobase_protocols_worker$query$memo_stats(){
-var map__13349 = kotobase.query.bridge.memo_stats(kotobase_protocols_worker.query.isolate_memo);
-var map__13349__$1 = cljs.core.__destructure_map(map__13349);
-var size = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13349__$1,new cljs.core.Keyword(null,"size","size",1098693007));
-var capacity = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13349__$1,new cljs.core.Keyword(null,"capacity","capacity",72689734));
-var hits = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13349__$1,new cljs.core.Keyword(null,"hits","hits",-2120002930));
-var misses = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13349__$1,new cljs.core.Keyword(null,"misses","misses",-1275188323));
+var map__10472 = kotobase.query.bridge.memo_stats(kotobase_protocols_worker.query.isolate_memo);
+var map__10472__$1 = cljs.core.__destructure_map(map__10472);
+var size = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10472__$1,new cljs.core.Keyword(null,"size","size",1098693007));
+var capacity = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10472__$1,new cljs.core.Keyword(null,"capacity","capacity",72689734));
+var hits = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10472__$1,new cljs.core.Keyword(null,"hits","hits",-2120002930));
+var misses = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10472__$1,new cljs.core.Keyword(null,"misses","misses",-1275188323));
 var total = (hits + misses);
 return new cljs.core.PersistentArrayMap(null, 5, ["size",size,"capacity",capacity,"hits",hits,"misses",misses,"hit_rate",(((total > (0)))?(Math.round((10000.0 * (hits / total))) / 10000.0):null)], null);
 });
@@ -168,8 +168,8 @@ return new cljs.core.Keyword(null,"docs","docs",-1974280502).cljs$core$IFn$_invo
  *   what `materialize` will read.
  */
 kotobase_protocols_worker.query.enrich = (function kotobase_protocols_worker$query$enrich(var_args){
-var G__13351 = arguments.length;
-switch (G__13351) {
+var G__10474 = arguments.length;
+switch (G__10474) {
 case 2:
 return kotobase_protocols_worker.query.enrich.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -190,11 +190,11 @@ return kotobase_protocols_worker.query.enrich.cljs$core$IFn$_invoke$arity$3(ctx,
 
 (kotobase_protocols_worker.query.enrich.cljs$core$IFn$_invoke$arity$3 = (function (ctx,state,surface){
 var colls = kotobase_protocols_worker.query.collections(state);
-var G__13352 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(ctx,new cljs.core.Keyword(null,"surfaces","surfaces",-2030326421),kotobase_protocols_worker.query.surfaces,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.Keyword(null,"path-surfaces","path-surfaces",-639241274),kotobase_protocols_worker.query.path_surfaces,new cljs.core.Keyword(null,"visible?","visible?",2129863715),kotobase_protocols_worker.query.visible_everything,new cljs.core.Keyword(null,"schema","schema",-1582001791),kotobase_protocols_worker.query.graphql_schema,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130),kotobase_protocols_worker.query.graphql_resolvers(colls),new cljs.core.Keyword(null,"coll-keys","coll-keys",-1263792070),colls,new cljs.core.Keyword(null,"vertex-colls","vertex-colls",-1707425754),colls], 0));
+var G__10475 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(ctx,new cljs.core.Keyword(null,"surfaces","surfaces",-2030326421),kotobase_protocols_worker.query.surfaces,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.Keyword(null,"path-surfaces","path-surfaces",-639241274),kotobase_protocols_worker.query.path_surfaces,new cljs.core.Keyword(null,"visible?","visible?",2129863715),kotobase_protocols_worker.query.visible_everything,new cljs.core.Keyword(null,"schema","schema",-1582001791),kotobase_protocols_worker.query.graphql_schema,new cljs.core.Keyword(null,"resolvers","resolvers",-1037942130),kotobase_protocols_worker.query.graphql_resolvers(colls),new cljs.core.Keyword(null,"coll-keys","coll-keys",-1263792070),colls,new cljs.core.Keyword(null,"vertex-colls","vertex-colls",-1707425754),colls], 0));
 if(kotobase_protocols_worker.query.queryable_QMARK_(surface)){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(G__13352,new cljs.core.Keyword(null,"query-memo","query-memo",-429356731),kotobase_protocols_worker.query.isolate_memo,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.Keyword(null,"query-version","query-version",-73824555),kotobase_protocols_worker.query.memo_version(state)], 0));
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(G__10475,new cljs.core.Keyword(null,"query-memo","query-memo",-429356731),kotobase_protocols_worker.query.isolate_memo,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.Keyword(null,"query-version","query-version",-73824555),kotobase_protocols_worker.query.memo_version(state)], 0));
 } else {
-return G__13352;
+return G__10475;
 }
 }));
 

@@ -6,8 +6,8 @@ kotobase.protocols.sparql.header = (function kotobase$protocols$sparql$header(re
 return cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),clojure.string.lower_case(k));
 });
 kotobase.protocols.sparql.response = (function kotobase$protocols$sparql$response(var_args){
-var G__13324 = arguments.length;
-switch (G__13324) {
+var G__10447 = arguments.length;
+switch (G__10447) {
 case 3:
 return kotobase.protocols.sparql.response.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 
@@ -65,16 +65,16 @@ return kotobase.protocols.sparql.decode_utf8_bytes(cljs.core.persistent_BANG_(by
 } else {
 var c = cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s__$1,i,(i + (1)));
 if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(c,"%")) && (((i + (3)) <= ((s__$1).length))))){
-var G__13338 = (i + (3));
-var G__13339 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(bytes,kotobase.protocols.sparql.hex__GT_int(cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s__$1,(i + (1)),(i + (3)))));
-i = G__13338;
-bytes = G__13339;
+var G__10461 = (i + (3));
+var G__10462 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(bytes,kotobase.protocols.sparql.hex__GT_int(cljs.core.subs.cljs$core$IFn$_invoke$arity$3(s__$1,(i + (1)),(i + (3)))));
+i = G__10461;
+bytes = G__10462;
 continue;
 } else {
-var G__13340 = (i + (1));
-var G__13341 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(bytes,kotobase.protocols.sparql.char__GT_byte(c));
-i = G__13340;
-bytes = G__13341;
+var G__10463 = (i + (1));
+var G__10464 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(bytes,kotobase.protocols.sparql.char__GT_byte(c));
+i = G__10463;
+bytes = G__10464;
 continue;
 }
 }
@@ -83,9 +83,9 @@ break;
 });
 kotobase.protocols.sparql.parse_form_urlencoded = (function kotobase$protocols$sparql$parse_form_urlencoded(body){
 return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (pair){
-var vec__13325 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(pair,/=/,(2));
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13325,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13325,(1),null);
+var vec__10448 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(pair,/=/,(2));
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10448,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10448,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [kotobase.protocols.sparql.percent_decode((function (){var or__5162__auto__ = k;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -126,11 +126,11 @@ return "";
 if(or__5162__auto__){
 return or__5162__auto__;
 } else {
-var types = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__13328_SHARP_){
-return clojure.string.trim(cljs.core.first(clojure.string.split.cljs$core$IFn$_invoke$arity$2(p1__13328_SHARP_,/;/)));
+var types = cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__10451_SHARP_){
+return clojure.string.trim(cljs.core.first(clojure.string.split.cljs$core$IFn$_invoke$arity$2(p1__10451_SHARP_,/;/)));
 }),clojure.string.split.cljs$core$IFn$_invoke$arity$2(accept,/,/));
-return cljs.core.boolean$(cljs.core.some((function (p1__13329_SHARP_){
-return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("*/*",p1__13329_SHARP_)) || (((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("application/sparql-results+json",p1__13329_SHARP_)) || (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("application/json",p1__13329_SHARP_)))));
+return cljs.core.boolean$(cljs.core.some((function (p1__10452_SHARP_){
+return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("*/*",p1__10452_SHARP_)) || (((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("application/sparql-results+json",p1__10452_SHARP_)) || (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("application/json",p1__10452_SHARP_)))));
 }),types));
 }
 });
@@ -139,9 +139,9 @@ return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("*/*",p1__13329_SHARP_)) |
  *   docstring for exactly which GET/POST shapes are read.
  */
 kotobase.protocols.sparql.extract_query = (function kotobase$protocols$sparql$extract_query(req){
-var G__13330 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
-var G__13330__$1 = (((G__13330 instanceof cljs.core.Keyword))?G__13330.fqn:null);
-switch (G__13330__$1) {
+var G__10453 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
+var G__10453__$1 = (((G__10453 instanceof cljs.core.Keyword))?G__10453.fqn:null);
+switch (G__10453__$1) {
 case "get":
 return kotobase.protocols.sparql.query_param(req,"query");
 
@@ -237,16 +237,16 @@ return kotobase.protocols.sparql.quads.algebra__GT_scan_patterns(new cljs.core.K
  *   `kotobase.query.bridge/materialize` itself documents; this handler adds
  *   no caching on top of it.
  */
-kotobase.protocols.sparql.handle = (function kotobase$protocols$sparql$handle(p__13331,req){
-var map__13332 = p__13331;
-var map__13332__$1 = cljs.core.__destructure_map(map__13332);
-var ctx = map__13332__$1;
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13332__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var coll_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13332__$1,new cljs.core.Keyword(null,"coll-keys","coll-keys",-1263792070));
-var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13332__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
-if(cljs.core.not((function (){var G__13334 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
-var fexpr__13333 = new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"get","get",1683182755),null,new cljs.core.Keyword(null,"post","post",269697687),null], null), null);
-return (fexpr__13333.cljs$core$IFn$_invoke$arity$1 ? fexpr__13333.cljs$core$IFn$_invoke$arity$1(G__13334) : fexpr__13333.call(null,G__13334));
+kotobase.protocols.sparql.handle = (function kotobase$protocols$sparql$handle(p__10454,req){
+var map__10455 = p__10454;
+var map__10455__$1 = cljs.core.__destructure_map(map__10455);
+var ctx = map__10455__$1;
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10455__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var coll_keys = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10455__$1,new cljs.core.Keyword(null,"coll-keys","coll-keys",-1263792070));
+var visible_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10455__$1,new cljs.core.Keyword(null,"visible?","visible?",2129863715));
+if(cljs.core.not((function (){var G__10457 = new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req);
+var fexpr__10456 = new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"get","get",1683182755),null,new cljs.core.Keyword(null,"post","post",269697687),null], null), null);
+return (fexpr__10456.cljs$core$IFn$_invoke$arity$1 ? fexpr__10456.cljs$core$IFn$_invoke$arity$1(G__10457) : fexpr__10456.call(null,G__10457));
 })())){
 return kotobase.protocols.sparql.error_response((405),"method not allowed: GET and POST only");
 } else {
@@ -264,7 +264,7 @@ return "";
 return kotobase.protocols.sparql.error_response((400),"missing 'query' -- GET ?query=..., POST application/sparql-query body, or POST application/x-www-form-urlencoded 'query' field");
 } else {
 var parsed = (function (){try{return kotobase.protocols.sparql.parser.parse(query_text);
-}catch (e13335){var e = e13335;
+}catch (e10458){var e = e10458;
 return e;
 }})();
 if((parsed instanceof Error)){
@@ -284,9 +284,9 @@ return kotobase.protocols.sparql.quads.source__GT_quads(source,kotobase.protocol
 return kotobase.protocols.sparql.quads.datoms__GT_quads(kotobase.query.bridge.db_for(ctx,store,coll_keys),visible_QMARK_);
 }
 })();
-var G__13336 = new cljs.core.Keyword(null,"form","form",-1624062471).cljs$core$IFn$_invoke$arity$1(parsed);
-var G__13336__$1 = (((G__13336 instanceof cljs.core.Keyword))?G__13336.fqn:null);
-switch (G__13336__$1) {
+var G__10459 = new cljs.core.Keyword(null,"form","form",-1624062471).cljs$core$IFn$_invoke$arity$1(parsed);
+var G__10459__$1 = (((G__10459 instanceof cljs.core.Keyword))?G__10459.fqn:null);
+switch (G__10459__$1) {
 case "select":
 return kotobase.protocols.sparql.json_response((200),kotobase.protocols.sparql.results.select__GT_json(new cljs.core.Keyword(null,"output-vars","output-vars",891537724).cljs$core$IFn$_invoke$arity$1(parsed),sparql.core.select(new cljs.core.Keyword(null,"algebra","algebra",-1451384007).cljs$core$IFn$_invoke$arity$1(parsed),quad_seq)));
 
@@ -308,7 +308,7 @@ return kotobase.protocols.sparql.ntriples_response(sparql.core.describe_solution
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__13336__$1))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10459__$1))));
 
 }
 

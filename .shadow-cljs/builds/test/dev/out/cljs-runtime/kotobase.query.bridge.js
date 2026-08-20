@@ -41,10 +41,10 @@ return k;
  */
 kotobase.query.bridge.doc__GT_datoms = (function kotobase$query$bridge$doc__GT_datoms(entity,doc){
 if(cljs.core.map_QMARK_(doc)){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.mapcat.cljs$core$IFn$_invoke$arity$1((function (p__12195){
-var vec__12196 = p__12195;
-var attr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12196,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12196,(1),null);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.mapcat.cljs$core$IFn$_invoke$arity$1((function (p__9708){
+var vec__9709 = p__9708;
+var attr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9709,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9709,(1),null);
 var attr__$1 = kotobase.query.bridge.__GT_attr(attr);
 if(((cljs.core.coll_QMARK_(v)) && ((!(cljs.core.map_QMARK_(v)))))){
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (el){
@@ -96,14 +96,14 @@ return cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(arrangement.core.assert_qu
  *   is tracked explicitly rather than by relying on map ordering, which neither
  *   host promises above a handful of entries.
  */
-kotobase.query.bridge.lru_put = (function kotobase$query$bridge$lru_put(p__12200,k,v,cap){
-var map__12201 = p__12200;
-var map__12201__$1 = cljs.core.__destructure_map(map__12201);
-var m = map__12201__$1;
-var entries = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12201__$1,new cljs.core.Keyword(null,"entries","entries",-86943161));
-var order = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12201__$1,new cljs.core.Keyword(null,"order","order",-1254677256));
-var order__$1 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(cljs.core.vec(cljs.core.remove.cljs$core$IFn$_invoke$arity$2((function (p1__12199_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(k,p1__12199_SHARP_);
+kotobase.query.bridge.lru_put = (function kotobase$query$bridge$lru_put(p__9713,k,v,cap){
+var map__9714 = p__9713;
+var map__9714__$1 = cljs.core.__destructure_map(map__9714);
+var m = map__9714__$1;
+var entries = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9714__$1,new cljs.core.Keyword(null,"entries","entries",-86943161));
+var order = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9714__$1,new cljs.core.Keyword(null,"order","order",-1254677256));
+var order__$1 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(cljs.core.vec(cljs.core.remove.cljs$core$IFn$_invoke$arity$2((function (p1__9712_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(k,p1__9712_SHARP_);
 }),order)),k);
 var entries__$1 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(entries,k,v);
 var excess = (cljs.core.count(order__$1) - cap);
@@ -124,8 +124,8 @@ kotobase.query.bridge.default_memo_capacity = (8);
  *   and a Worker can hold one per isolate without either reaching the other.
  */
 kotobase.query.bridge.memo = (function kotobase$query$bridge$memo(var_args){
-var G__12203 = arguments.length;
-switch (G__12203) {
+var G__9716 = arguments.length;
+switch (G__9716) {
 case 0:
 return kotobase.query.bridge.memo.cljs$core$IFn$_invoke$arity$0();
 
@@ -211,11 +211,11 @@ return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"si
  *   The caller supplying `:query-version` is asserting it changes whenever any
  *   document in `coll-keys` changes. See `materialize-memo`.
  */
-kotobase.query.bridge.db_for = (function kotobase$query$bridge$db_for(p__12204,store,coll_keys){
-var map__12205 = p__12204;
-var map__12205__$1 = cljs.core.__destructure_map(map__12205);
-var query_memo = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12205__$1,new cljs.core.Keyword(null,"query-memo","query-memo",-429356731));
-var query_version = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12205__$1,new cljs.core.Keyword(null,"query-version","query-version",-73824555));
+kotobase.query.bridge.db_for = (function kotobase$query$bridge$db_for(p__9717,store,coll_keys){
+var map__9718 = p__9717;
+var map__9718__$1 = cljs.core.__destructure_map(map__9718);
+var query_memo = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9718__$1,new cljs.core.Keyword(null,"query-memo","query-memo",-429356731));
+var query_version = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9718__$1,new cljs.core.Keyword(null,"query-version","query-version",-73824555));
 if(cljs.core.truth_((function (){var and__5160__auto__ = query_memo;
 if(cljs.core.truth_(and__5160__auto__)){
 return query_version;
@@ -250,8 +250,8 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"visible? is required 
  */
 kotobase.query.bridge.visible_objects = (function kotobase$query$bridge$visible_objects(visible_QMARK_,s,p,os){
 return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentHashSet.EMPTY,cljs.core.filter.cljs$core$IFn$_invoke$arity$1((function (o){
-var G__12206 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null);
-return (visible_QMARK_.cljs$core$IFn$_invoke$arity$1 ? visible_QMARK_.cljs$core$IFn$_invoke$arity$1(G__12206) : visible_QMARK_.call(null,G__12206));
+var G__9719 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null);
+return (visible_QMARK_.cljs$core$IFn$_invoke$arity$1 ? visible_QMARK_.cljs$core$IFn$_invoke$arity$1(G__9719) : visible_QMARK_.call(null,G__9719));
 })),os);
 });
 /**
@@ -259,8 +259,8 @@ return (visible_QMARK_.cljs$core$IFn$_invoke$arity$1 ? visible_QMARK_.cljs$core$
  */
 kotobase.query.bridge.visible_subjects = (function kotobase$query$bridge$visible_subjects(visible_QMARK_,p,o,ss){
 return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentHashSet.EMPTY,cljs.core.filter.cljs$core$IFn$_invoke$arity$1((function (s){
-var G__12207 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null);
-return (visible_QMARK_.cljs$core$IFn$_invoke$arity$1 ? visible_QMARK_.cljs$core$IFn$_invoke$arity$1(G__12207) : visible_QMARK_.call(null,G__12207));
+var G__9720 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null);
+return (visible_QMARK_.cljs$core$IFn$_invoke$arity$1 ? visible_QMARK_.cljs$core$IFn$_invoke$arity$1(G__9720) : visible_QMARK_.call(null,G__9720));
 })),ss);
 });
 /**
@@ -278,10 +278,10 @@ return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap
 kotobase.query.bridge.entity_attrs = (function kotobase$query$bridge$entity_attrs(db,s,visible_QMARK_){
 kotobase.query.bridge.check_visible_BANG_(visible_QMARK_);
 
-return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__12208){
-var vec__12209 = p__12208;
-var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12209,(0),null);
-var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12209,(1),null);
+return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__9721){
+var vec__9722 = p__9721;
+var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9722,(0),null);
+var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9722,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p,kotobase.query.bridge.visible_objects(visible_QMARK_,s,p,os)], null);
 })),arrangement.core.entity_attrs(db,s)));
 });
@@ -292,10 +292,10 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 kotobase.query.bridge.by_predicate = (function kotobase$query$bridge$by_predicate(db,p,visible_QMARK_){
 kotobase.query.bridge.check_visible_BANG_(visible_QMARK_);
 
-return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__12212){
-var vec__12213 = p__12212;
-var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12213,(0),null);
-var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12213,(1),null);
+return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__9725){
+var vec__9726 = p__9725;
+var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9726,(0),null);
+var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9726,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [s,kotobase.query.bridge.visible_objects(visible_QMARK_,s,p,os)], null);
 })),arrangement.core.by_predicate(db,p)));
 });
@@ -324,10 +324,10 @@ return kotobase.query.bridge.visible_subjects(visible_QMARK_,p,o,arrangement.cor
 kotobase.query.bridge.refs_to = (function kotobase$query$bridge$refs_to(db,o,visible_QMARK_){
 kotobase.query.bridge.check_visible_BANG_(visible_QMARK_);
 
-return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__12216){
-var vec__12217 = p__12216;
-var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12217,(0),null);
-var ss = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12217,(1),null);
+return kotobase.query.bridge.prune(cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__9729){
+var vec__9730 = p__9729;
+var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9730,(0),null);
+var ss = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9730,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p,kotobase.query.bridge.visible_subjects(visible_QMARK_,p,o,ss)], null);
 })),arrangement.core.refs_to(db,o)));
 });
@@ -353,49 +353,49 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 kotobase.query.bridge.datoms = (function kotobase$query$bridge$datoms(db,visible_QMARK_){
 kotobase.query.bridge.check_visible_BANG_(visible_QMARK_);
 
-return cljs.core.filter.cljs$core$IFn$_invoke$arity$2(visible_QMARK_,(function (){var iter__5649__auto__ = (function kotobase$query$bridge$datoms_$_iter__12220(s__12221){
+return cljs.core.filter.cljs$core$IFn$_invoke$arity$2(visible_QMARK_,(function (){var iter__5649__auto__ = (function kotobase$query$bridge$datoms_$_iter__9733(s__9734){
 return (new cljs.core.LazySeq(null,(function (){
-var s__12221__$1 = s__12221;
+var s__9734__$1 = s__9734;
 while(true){
-var temp__5825__auto__ = cljs.core.seq(s__12221__$1);
+var temp__5825__auto__ = cljs.core.seq(s__9734__$1);
 if(temp__5825__auto__){
 var xs__6385__auto__ = temp__5825__auto__;
-var vec__12228 = cljs.core.first(xs__6385__auto__);
-var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12228,(0),null);
-var pm = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12228,(1),null);
-var iterys__5645__auto__ = ((function (s__12221__$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__){
-return (function kotobase$query$bridge$datoms_$_iter__12220_$_iter__12222(s__12223){
-return (new cljs.core.LazySeq(null,((function (s__12221__$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__){
+var vec__9741 = cljs.core.first(xs__6385__auto__);
+var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9741,(0),null);
+var pm = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9741,(1),null);
+var iterys__5645__auto__ = ((function (s__9734__$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__){
+return (function kotobase$query$bridge$datoms_$_iter__9733_$_iter__9735(s__9736){
+return (new cljs.core.LazySeq(null,((function (s__9734__$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__){
 return (function (){
-var s__12223__$1 = s__12223;
+var s__9736__$1 = s__9736;
 while(true){
-var temp__5825__auto____$1 = cljs.core.seq(s__12223__$1);
+var temp__5825__auto____$1 = cljs.core.seq(s__9736__$1);
 if(temp__5825__auto____$1){
 var xs__6385__auto____$1 = temp__5825__auto____$1;
-var vec__12231 = cljs.core.first(xs__6385__auto____$1);
-var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12231,(0),null);
-var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12231,(1),null);
-var iterys__5645__auto__ = ((function (s__12223__$1,s__12221__$1,vec__12231,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__){
-return (function kotobase$query$bridge$datoms_$_iter__12220_$_iter__12222_$_iter__12224(s__12225){
-return (new cljs.core.LazySeq(null,((function (s__12223__$1,s__12221__$1,vec__12231,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__){
+var vec__9744 = cljs.core.first(xs__6385__auto____$1);
+var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9744,(0),null);
+var os = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9744,(1),null);
+var iterys__5645__auto__ = ((function (s__9736__$1,s__9734__$1,vec__9744,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__){
+return (function kotobase$query$bridge$datoms_$_iter__9733_$_iter__9735_$_iter__9737(s__9738){
+return (new cljs.core.LazySeq(null,((function (s__9736__$1,s__9734__$1,vec__9744,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__){
 return (function (){
-var s__12225__$1 = s__12225;
+var s__9738__$1 = s__9738;
 while(true){
-var temp__5825__auto____$2 = cljs.core.seq(s__12225__$1);
+var temp__5825__auto____$2 = cljs.core.seq(s__9738__$1);
 if(temp__5825__auto____$2){
-var s__12225__$2 = temp__5825__auto____$2;
-if(cljs.core.chunked_seq_QMARK_(s__12225__$2)){
-var c__5647__auto__ = cljs.core.chunk_first(s__12225__$2);
+var s__9738__$2 = temp__5825__auto____$2;
+if(cljs.core.chunked_seq_QMARK_(s__9738__$2)){
+var c__5647__auto__ = cljs.core.chunk_first(s__9738__$2);
 var size__5648__auto__ = cljs.core.count(c__5647__auto__);
-var b__12227 = cljs.core.chunk_buffer(size__5648__auto__);
-if((function (){var i__12226 = (0);
+var b__9740 = cljs.core.chunk_buffer(size__5648__auto__);
+if((function (){var i__9739 = (0);
 while(true){
-if((i__12226 < size__5648__auto__)){
-var o = cljs.core._nth(c__5647__auto__,i__12226);
-cljs.core.chunk_append(b__12227,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null));
+if((i__9739 < size__5648__auto__)){
+var o = cljs.core._nth(c__5647__auto__,i__9739);
+cljs.core.chunk_append(b__9740,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null));
 
-var G__12239 = (i__12226 + (1));
-i__12226 = G__12239;
+var G__9752 = (i__9739 + (1));
+i__9739 = G__9752;
 continue;
 } else {
 return true;
@@ -403,29 +403,29 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__12227),kotobase$query$bridge$datoms_$_iter__12220_$_iter__12222_$_iter__12224(cljs.core.chunk_rest(s__12225__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__9740),kotobase$query$bridge$datoms_$_iter__9733_$_iter__9735_$_iter__9737(cljs.core.chunk_rest(s__9738__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__12227),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__9740),null);
 }
 } else {
-var o = cljs.core.first(s__12225__$2);
-return cljs.core.cons(new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null),kotobase$query$bridge$datoms_$_iter__12220_$_iter__12222_$_iter__12224(cljs.core.rest(s__12225__$2)));
+var o = cljs.core.first(s__9738__$2);
+return cljs.core.cons(new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"s","s",1705939918),s,new cljs.core.Keyword(null,"p","p",151049309),p,new cljs.core.Keyword(null,"o","o",-1350007228),o], null),kotobase$query$bridge$datoms_$_iter__9733_$_iter__9735_$_iter__9737(cljs.core.rest(s__9738__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(s__12223__$1,s__12221__$1,vec__12231,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__))
+});})(s__9736__$1,s__9734__$1,vec__9744,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__))
 ,null,null));
-});})(s__12223__$1,s__12221__$1,vec__12231,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__))
+});})(s__9736__$1,s__9734__$1,vec__9744,p,os,xs__6385__auto____$1,temp__5825__auto____$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__))
 ;
 var fs__5646__auto__ = cljs.core.seq(iterys__5645__auto__(os));
 if(fs__5646__auto__){
-return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__5646__auto__,kotobase$query$bridge$datoms_$_iter__12220_$_iter__12222(cljs.core.rest(s__12223__$1)));
+return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__5646__auto__,kotobase$query$bridge$datoms_$_iter__9733_$_iter__9735(cljs.core.rest(s__9736__$1)));
 } else {
-var G__12240 = cljs.core.rest(s__12223__$1);
-s__12223__$1 = G__12240;
+var G__9753 = cljs.core.rest(s__9736__$1);
+s__9736__$1 = G__9753;
 continue;
 }
 } else {
@@ -433,16 +433,16 @@ return null;
 }
 break;
 }
-});})(s__12221__$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__))
+});})(s__9734__$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__))
 ,null,null));
-});})(s__12221__$1,vec__12228,s,pm,xs__6385__auto__,temp__5825__auto__))
+});})(s__9734__$1,vec__9741,s,pm,xs__6385__auto__,temp__5825__auto__))
 ;
 var fs__5646__auto__ = cljs.core.seq(iterys__5645__auto__(pm));
 if(fs__5646__auto__){
-return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__5646__auto__,kotobase$query$bridge$datoms_$_iter__12220(cljs.core.rest(s__12221__$1)));
+return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__5646__auto__,kotobase$query$bridge$datoms_$_iter__9733(cljs.core.rest(s__9734__$1)));
 } else {
-var G__12241 = cljs.core.rest(s__12221__$1);
-s__12221__$1 = G__12241;
+var G__9754 = cljs.core.rest(s__9734__$1);
+s__9734__$1 = G__9754;
 continue;
 }
 } else {
@@ -464,10 +464,25 @@ return iter__5649__auto__(new cljs.core.Keyword(null,"spo","spo",734923469).cljs
  * 
  *   A thin delegation to `arrangement.datalog/q` -- this bridge does not
  *   reimplement query evaluation.
+ * 
+ *   ## The vector form is refused here rather than answered wrongly
+ * 
+ *   `query` must be the MAP form. The engine takes only that, and handed the
+ *   vector form (`[:find ?t :where [?e "a/b" ?t]]` -- what a Datomic or
+ *   DataScript caller writes, and what `kotobase.query.agent` helps a model
+ *   produce) it does not throw: `(:find <vector>)` is nil, so it runs an empty
+ *   query and returns `#{[]}`. Measured 2026-08-18:
+ * 
+ *    map     {:find [?t] :where [[?e "company/ticker" ?t]]}  => #{["AAA"] ["BBB"]}
+ *    vector  [:find ?t :where [?e "company/ticker" ?t]]      => #{[]}
+ * 
+ *   One empty tuple is not distinguishable from a query that matched nothing,
+ *   so the caller reads a wrong answer as an answer. Convert with
+ *   `kotobase.query.agent/->engine-query` and pass the result.
  */
 kotobase.query.bridge.q = (function kotobase$query$bridge$q(var_args){
-var G__12235 = arguments.length;
-switch (G__12235) {
+var G__9748 = arguments.length;
+switch (G__9748) {
 case 3:
 return kotobase.query.bridge.q.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 
@@ -483,11 +498,20 @@ throw (new Error(["Invalid arity: ",arguments.length].join("")));
 });
 
 (kotobase.query.bridge.q.cljs$core$IFn$_invoke$arity$3 = (function (db,query,visible_QMARK_){
-return arrangement.datalog.q.cljs$core$IFn$_invoke$arity$3(db,query,visible_QMARK_);
+return kotobase.query.bridge.q.cljs$core$IFn$_invoke$arity$4(db,query,visible_QMARK_,null);
 }));
 
 (kotobase.query.bridge.q.cljs$core$IFn$_invoke$arity$4 = (function (db,query,visible_QMARK_,inputs){
+if(cljs.core.map_QMARK_(query)){
+} else {
+throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"kotobase.query.bridge/q takes the MAP form "+"{:find [...] :where [...]}. The vector form is not "+"rejected by the engine -- it silently returns #{[]}. "+"Convert with kotobase.query.agent/->engine-query."),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"got","got",-1674745710),((cljs.core.vector_QMARK_(query))?new cljs.core.Keyword(null,"vector-form","vector-form",73769969):cljs.core.type(query)),new cljs.core.Keyword(null,"query","query",-1288509510),query], null));
+}
+
+if((inputs == null)){
+return arrangement.datalog.q.cljs$core$IFn$_invoke$arity$3(db,query,visible_QMARK_);
+} else {
 return arrangement.datalog.q.cljs$core$IFn$_invoke$arity$4(db,query,visible_QMARK_,inputs);
+}
 }));
 
 (kotobase.query.bridge.q.cljs$lang$maxFixedArity = 4);
@@ -505,8 +529,8 @@ return arrangement.datalog.q.cljs$core$IFn$_invoke$arity$4(db,query,visible_QMAR
  *   concurrently).
  */
 kotobase.query.bridge.query = (function kotobase$query$bridge$query(var_args){
-var G__12237 = arguments.length;
-switch (G__12237) {
+var G__9750 = arguments.length;
+switch (G__9750) {
 case 4:
 return kotobase.query.bridge.query.cljs$core$IFn$_invoke$arity$4((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]));
 

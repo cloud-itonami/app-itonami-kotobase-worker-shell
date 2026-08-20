@@ -15,6 +15,42 @@ kotobase_protocols_worker.kotobase_r2.block_miss_QMARK_ = (function kotobase_pro
 return cljs.core.boolean$(new cljs.core.Keyword(null,"block-miss","block-miss",-736447246).cljs$core$IFn$_invoke$arity$1(cljs.core.ex_data(e)));
 });
 /**
+ * The block-miss payload carried by `e`, or nil — read from the CAUSE CHAIN.
+ * 
+ *   A runtime may WRAP the signal rather than rethrow it: nbb/SCI, when the throw
+ *   crosses an async continuation, produces its own error whose `ex-data` is
+ *   `{:type :sci/error …}` and puts the original under `:cause`. Reading one link
+ *   deep makes the miss invisible there, so the retry never happens and the read
+ *   fails as a generic error. On the JVM and under shadow-cljs the chain is one
+ *   link long, so this returns exactly what `(ex-data e)` returned before.
+ *   Root ADR-2608190100.
+ */
+kotobase_protocols_worker.kotobase_r2.miss_data = (function kotobase_protocols_worker$kotobase_r2$miss_data(e){
+var e__$1 = e;
+var n = (0);
+while(true){
+if((e__$1 == null)){
+return null;
+} else {
+if((n > (8))){
+return null;
+} else {
+if(cljs.core.truth_(new cljs.core.Keyword(null,"block-miss","block-miss",-736447246).cljs$core$IFn$_invoke$arity$1(cljs.core.ex_data(e__$1)))){
+return cljs.core.ex_data(e__$1);
+} else {
+var G__12138 = cljs.core.ex_cause(e__$1);
+var G__12139 = (n + (1));
+e__$1 = G__12138;
+n = G__12139;
+continue;
+
+}
+}
+}
+break;
+}
+});
+/**
  * Run `(f sync-get)` where `sync-get` reads from an in-memory cache, fetching
  *   absent blocks via `(fetch1 cid) -> Promise<bytes>` and retrying. Returns a
  *   Promise of `f`'s result. `f` must be pure/idempotent (it is re-run per miss).
@@ -35,11 +71,13 @@ throw kotobase_protocols_worker.kotobase_r2.missing_block(cid);
 }
 });
 var fetch_and_retry = (function kotobase_protocols_worker$kotobase_r2$with_blocks_$_fetch_and_retry(e){
-if(cljs.core.truth_(new cljs.core.Keyword(null,"block-miss","block-miss",-736447246).cljs$core$IFn$_invoke$arity$1(cljs.core.ex_data(e)))){
-return (function (){var G__14502 = new cljs.core.Keyword(null,"cid","cid",-1940591320).cljs$core$IFn$_invoke$arity$1(cljs.core.ex_data(e));
-return (fetch1.cljs$core$IFn$_invoke$arity$1 ? fetch1.cljs$core$IFn$_invoke$arity$1(G__14502) : fetch1.call(null,G__14502));
+var temp__5823__auto__ = kotobase_protocols_worker.kotobase_r2.miss_data(e);
+if(cljs.core.truth_(temp__5823__auto__)){
+var d = temp__5823__auto__;
+return (function (){var G__12135 = new cljs.core.Keyword(null,"cid","cid",-1940591320).cljs$core$IFn$_invoke$arity$1(d);
+return (fetch1.cljs$core$IFn$_invoke$arity$1 ? fetch1.cljs$core$IFn$_invoke$arity$1(G__12135) : fetch1.call(null,G__12135));
 })().then((function (bytes){
-cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(cache,cljs.core.assoc,new cljs.core.Keyword(null,"cid","cid",-1940591320).cljs$core$IFn$_invoke$arity$1(cljs.core.ex_data(e)),bytes);
+cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(cache,cljs.core.assoc,new cljs.core.Keyword(null,"cid","cid",-1940591320).cljs$core$IFn$_invoke$arity$1(d),bytes);
 
 return step();
 }));
@@ -48,8 +86,10 @@ return Promise.reject(e);
 }
 });
 var step = (function kotobase_protocols_worker$kotobase_r2$with_blocks_$_step(){
-try{return Promise.resolve((f.cljs$core$IFn$_invoke$arity$1 ? f.cljs$core$IFn$_invoke$arity$1(sync_get) : f.call(null,sync_get))).catch(fetch_and_retry);
-}catch (e14503){var e = e14503;
+try{return Promise.resolve((f.cljs$core$IFn$_invoke$arity$1 ? f.cljs$core$IFn$_invoke$arity$1(sync_get) : f.call(null,sync_get))).catch((function (e){
+return fetch_and_retry(e);
+}));
+}catch (e12136){var e = e12136;
 return fetch_and_retry(e);
 }});
 return step();
@@ -69,8 +109,8 @@ return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(prefix)+"ipns/"+cljs.core
 kotobase_protocols_worker.kotobase_r2.r2_get_bytes = (function kotobase_protocols_worker$kotobase_r2$r2_get_bytes(bucket,k){
 return bucket.get(k).then((function (obj){
 if(cljs.core.truth_(obj)){
-return obj.arrayBuffer().then((function (p1__14504_SHARP_){
-return (new Uint8Array(p1__14504_SHARP_));
+return obj.arrayBuffer().then((function (p1__12137_SHARP_){
+return (new Uint8Array(p1__12137_SHARP_));
 }));
 } else {
 return null;

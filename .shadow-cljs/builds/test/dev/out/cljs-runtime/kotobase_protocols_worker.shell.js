@@ -11,10 +11,10 @@ var i = (0);
 var s = "";
 while(true){
 if((i < n)){
-var G__14877 = (i + (32768));
-var G__14878 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(s)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(String.fromCharCode.apply(null,u8.subarray(i,cljs.core.min.cljs$core$IFn$_invoke$arity$2(n,(i + (32768)))))));
-i = G__14877;
-s = G__14878;
+var G__12506 = (i + (32768));
+var G__12507 = (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(s)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(String.fromCharCode.apply(null,u8.subarray(i,cljs.core.min.cljs$core$IFn$_invoke$arity$2(n,(i + (32768)))))));
+i = G__12506;
+s = G__12507;
 continue;
 } else {
 return btoa(s);
@@ -94,8 +94,8 @@ return and__5160__auto__;
 })())){
 return false;
 } else {
-return sigv4.verify.expected_signature(kotobase_protocols_worker.shell.signer_crypto,new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"secret-key","secret-key",129235534),secret,new cljs.core.Keyword(null,"parsed","parsed",-819589156),p,new cljs.core.Keyword(null,"amz-date","amz-date",113835954),cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),"x-amz-date"),new cljs.core.Keyword(null,"payload-hash","payload-hash",1436757062),payload_hash,new cljs.core.Keyword(null,"request","request",1772954723),req], null)).then((function (p1__14842_SHARP_){
-return sigv4.verify.constant_time_eq_QMARK_(new cljs.core.Keyword(null,"signature","signature",1463754794).cljs$core$IFn$_invoke$arity$1(p),p1__14842_SHARP_);
+return sigv4.verify.expected_signature(kotobase_protocols_worker.shell.signer_crypto,new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"secret-key","secret-key",129235534),secret,new cljs.core.Keyword(null,"parsed","parsed",-819589156),p,new cljs.core.Keyword(null,"amz-date","amz-date",113835954),cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),"x-amz-date"),new cljs.core.Keyword(null,"payload-hash","payload-hash",1436757062),payload_hash,new cljs.core.Keyword(null,"request","request",1772954723),req], null)).then((function (p1__12471_SHARP_){
+return sigv4.verify.constant_time_eq_QMARK_(new cljs.core.Keyword(null,"signature","signature",1463754794).cljs$core$IFn$_invoke$arity$1(p),p1__12471_SHARP_);
 }));
 }
 }));
@@ -114,15 +114,15 @@ return or__5162__auto__;
 return "{}";
 }
 })());
-}catch (e14843){var _ = e14843;
+}catch (e12472){var _ = e12472;
 return cljs.core.PersistentArrayMap.EMPTY;
 }})();
 var token = kotobase_protocols_worker.cacao.from_request(req,parsed);
-var issuer = (function (){var G__14844 = token;
-if((G__14844 == null)){
+var issuer = (function (){var G__12473 = token;
+if((G__12473 == null)){
 return null;
 } else {
-return kotobase_protocols_worker.cacao.verify_cacao(G__14844);
+return kotobase_protocols_worker.cacao.verify_cacao(G__12473);
 }
 })();
 return Promise.resolve(cljs.core.boolean$((function (){var and__5160__auto__ = issuer;
@@ -148,11 +148,11 @@ kotobase_protocols_worker.shell.credential_ok_QMARK_ = (function kotobase_protoc
 if(kotobase_protocols_worker.core.authorized_write_QMARK_(req,env.WRITE_TOKEN)){
 return Promise.resolve(true);
 } else {
-if(cljs.core.truth_((function (){var G__14845 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),"authorization");
-if((G__14845 == null)){
+if(cljs.core.truth_((function (){var G__12474 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"headers","headers",-835030129).cljs$core$IFn$_invoke$arity$1(req),"authorization");
+if((G__12474 == null)){
 return null;
 } else {
-return clojure.string.starts_with_QMARK_(G__14845,"AWS4-HMAC-SHA256 ");
+return clojure.string.starts_with_QMARK_(G__12474,"AWS4-HMAC-SHA256 ");
 }
 })())){
 return kotobase_protocols_worker.shell.sigv4_verify(env,req,body_ab);
@@ -171,13 +171,13 @@ kotobase_protocols_worker.shell.req__GT_ring = (function kotobase_protocols_work
 var url = (new URL(request.url));
 return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"method","method",55703592),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(clojure.string.lower_case(request.method)),new cljs.core.Keyword(null,"host","host",-1558485167),url.hostname,new cljs.core.Keyword(null,"path","path",-188191168),url.pathname,new cljs.core.Keyword(null,"query","query",-1288509510),kotobase_protocols_worker.shell.entries__GT_map(url.searchParams.entries()),new cljs.core.Keyword(null,"headers","headers",-835030129),kotobase_protocols_worker.core.normalize_headers(kotobase_protocols_worker.shell.entries__GT_map(request.headers.entries())),new cljs.core.Keyword(null,"body","body",-2049205669),((cljs.core.seq(body))?body:null)], null);
 });
-kotobase_protocols_worker.shell.ring__GT_response = (function kotobase_protocols_worker$shell$ring__GT_response(p__14846){
-var map__14847 = p__14846;
-var map__14847__$1 = cljs.core.__destructure_map(map__14847);
-var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14847__$1,new cljs.core.Keyword(null,"status","status",-1997798413));
-var headers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14847__$1,new cljs.core.Keyword(null,"headers","headers",-835030129));
-var body = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14847__$1,new cljs.core.Keyword(null,"body","body",-2049205669));
-var body_encoding = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14847__$1,new cljs.core.Keyword(null,"body-encoding","body-encoding",-1446963485));
+kotobase_protocols_worker.shell.ring__GT_response = (function kotobase_protocols_worker$shell$ring__GT_response(p__12475){
+var map__12476 = p__12475;
+var map__12476__$1 = cljs.core.__destructure_map(map__12476);
+var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12476__$1,new cljs.core.Keyword(null,"status","status",-1997798413));
+var headers = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12476__$1,new cljs.core.Keyword(null,"headers","headers",-835030129));
+var body = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12476__$1,new cljs.core.Keyword(null,"body","body",-2049205669));
+var body_encoding = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12476__$1,new cljs.core.Keyword(null,"body-encoding","body-encoding",-1446963485));
 return (new Response((((body == null))?undefined:((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"base64","base64",167760174),body_encoding))?kotobase_protocols_worker.shell.b64__GT_u8(body):body
 )),cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"status","status",-1997798413),status,new cljs.core.Keyword(null,"headers","headers",-835030129),(function (){var or__5162__auto__ = headers;
 if(cljs.core.truth_(or__5162__auto__)){
@@ -215,57 +215,57 @@ return (""+"kotobase-protocols-"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cry
  */
 kotobase_protocols_worker.shell.response_boundary = (function kotobase_protocols_worker$shell$response_boundary(request,response){
 var headers = (new Headers(response.headers));
-var seq__14848_14879 = cljs.core.seq(kotobase_protocols_worker.shell.security_response_headers);
-var chunk__14849_14880 = null;
-var count__14850_14881 = (0);
-var i__14851_14882 = (0);
+var seq__12477_12508 = cljs.core.seq(kotobase_protocols_worker.shell.security_response_headers);
+var chunk__12478_12509 = null;
+var count__12479_12510 = (0);
+var i__12480_12511 = (0);
 while(true){
-if((i__14851_14882 < count__14850_14881)){
-var vec__14858_14883 = chunk__14849_14880.cljs$core$IIndexed$_nth$arity$2(null,i__14851_14882);
-var k_14884 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14858_14883,(0),null);
-var v_14885 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14858_14883,(1),null);
-headers.set(k_14884,v_14885);
+if((i__12480_12511 < count__12479_12510)){
+var vec__12487_12512 = chunk__12478_12509.cljs$core$IIndexed$_nth$arity$2(null,i__12480_12511);
+var k_12513 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12487_12512,(0),null);
+var v_12514 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12487_12512,(1),null);
+headers.set(k_12513,v_12514);
 
 
-var G__14886 = seq__14848_14879;
-var G__14887 = chunk__14849_14880;
-var G__14888 = count__14850_14881;
-var G__14889 = (i__14851_14882 + (1));
-seq__14848_14879 = G__14886;
-chunk__14849_14880 = G__14887;
-count__14850_14881 = G__14888;
-i__14851_14882 = G__14889;
+var G__12515 = seq__12477_12508;
+var G__12516 = chunk__12478_12509;
+var G__12517 = count__12479_12510;
+var G__12518 = (i__12480_12511 + (1));
+seq__12477_12508 = G__12515;
+chunk__12478_12509 = G__12516;
+count__12479_12510 = G__12517;
+i__12480_12511 = G__12518;
 continue;
 } else {
-var temp__5825__auto___14890 = cljs.core.seq(seq__14848_14879);
-if(temp__5825__auto___14890){
-var seq__14848_14891__$1 = temp__5825__auto___14890;
-if(cljs.core.chunked_seq_QMARK_(seq__14848_14891__$1)){
-var c__5694__auto___14892 = cljs.core.chunk_first(seq__14848_14891__$1);
-var G__14893 = cljs.core.chunk_rest(seq__14848_14891__$1);
-var G__14894 = c__5694__auto___14892;
-var G__14895 = cljs.core.count(c__5694__auto___14892);
-var G__14896 = (0);
-seq__14848_14879 = G__14893;
-chunk__14849_14880 = G__14894;
-count__14850_14881 = G__14895;
-i__14851_14882 = G__14896;
+var temp__5825__auto___12519 = cljs.core.seq(seq__12477_12508);
+if(temp__5825__auto___12519){
+var seq__12477_12520__$1 = temp__5825__auto___12519;
+if(cljs.core.chunked_seq_QMARK_(seq__12477_12520__$1)){
+var c__5694__auto___12521 = cljs.core.chunk_first(seq__12477_12520__$1);
+var G__12522 = cljs.core.chunk_rest(seq__12477_12520__$1);
+var G__12523 = c__5694__auto___12521;
+var G__12524 = cljs.core.count(c__5694__auto___12521);
+var G__12525 = (0);
+seq__12477_12508 = G__12522;
+chunk__12478_12509 = G__12523;
+count__12479_12510 = G__12524;
+i__12480_12511 = G__12525;
 continue;
 } else {
-var vec__14861_14897 = cljs.core.first(seq__14848_14891__$1);
-var k_14898 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14861_14897,(0),null);
-var v_14899 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14861_14897,(1),null);
-headers.set(k_14898,v_14899);
+var vec__12490_12526 = cljs.core.first(seq__12477_12520__$1);
+var k_12527 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12490_12526,(0),null);
+var v_12528 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12490_12526,(1),null);
+headers.set(k_12527,v_12528);
 
 
-var G__14900 = cljs.core.next(seq__14848_14891__$1);
-var G__14901 = null;
-var G__14902 = (0);
-var G__14903 = (0);
-seq__14848_14879 = G__14900;
-chunk__14849_14880 = G__14901;
-count__14850_14881 = G__14902;
-i__14851_14882 = G__14903;
+var G__12529 = cljs.core.next(seq__12477_12520__$1);
+var G__12530 = null;
+var G__12531 = (0);
+var G__12532 = (0);
+seq__12477_12508 = G__12529;
+chunk__12478_12509 = G__12530;
+count__12479_12510 = G__12531;
+i__12480_12511 = G__12532;
 continue;
 }
 } else {
@@ -278,12 +278,12 @@ headers.set("x-kotobase-request-id",kotobase_protocols_worker.shell.safe_request
 
 return (new Response(response.body,({"status": response.status, "statusText": response.statusText, "headers": headers})));
 });
-kotobase_protocols_worker.shell.ipfs_post_response = (function kotobase_protocols_worker$shell$ipfs_post_response(store,p__14864){
-var map__14865 = p__14864;
-var map__14865__$1 = cljs.core.__destructure_map(map__14865);
-var cid = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14865__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
-var b64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14865__$1,new cljs.core.Keyword(null,"b64","b64",2079087092));
-var content_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14865__$1,new cljs.core.Keyword(null,"content-type","content-type",-508222634));
+kotobase_protocols_worker.shell.ipfs_post_response = (function kotobase_protocols_worker$shell$ipfs_post_response(store,p__12493){
+var map__12494 = p__12493;
+var map__12494__$1 = cljs.core.__destructure_map(map__12494);
+var cid = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12494__$1,new cljs.core.Keyword(null,"cid","cid",-1940591320));
+var b64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12494__$1,new cljs.core.Keyword(null,"b64","b64",2079087092));
+var content_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12494__$1,new cljs.core.Keyword(null,"content-type","content-type",-508222634));
 kotobase.protocols.blocks.put_block_BANG_(store,cid,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"bytes","bytes",1175866680),b64,new cljs.core.Keyword(null,"encoding","encoding",1728578272),"base64",new cljs.core.Keyword(null,"content-type","content-type",-508222634),content_type], null));
 
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"status","status",-1997798413),(201),new cljs.core.Keyword(null,"headers","headers",-835030129),new cljs.core.PersistentArrayMap(null, 2, ["content-type","application/json","location",(""+"/ipfs/"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cid))], null),new cljs.core.Keyword(null,"body","body",-2049205669),kotobase.protocols.json.encode(new cljs.core.PersistentArrayMap(null, 1, ["cid",cid], null))], null);
@@ -308,10 +308,10 @@ return or__5162__auto__;
 return "";
 }
 })(),kotobase_protocols_worker.graph.for_request(req),(function (seed,chain__$1){
-var map__14866 = kotobase_protocols_worker.core.make_store(seed);
-var map__14866__$1 = cljs.core.__destructure_map(map__14866);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14866__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14866__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
+var map__12495 = kotobase_protocols_worker.core.make_store(seed);
+var map__12495__$1 = cljs.core.__destructure_map(map__12495);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12495__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12495__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
 var apex = (function (){var or__5162__auto__ = env.APEX;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -335,11 +335,11 @@ return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"af
 });
 kotobase_protocols_worker.shell.with_retries = (function kotobase_protocols_worker$shell$with_retries(cfg,env,req,extra){
 var attempt = (function kotobase_protocols_worker$shell$with_retries_$_attempt(n){
-return kotobase_protocols_worker.shell.run_once(cfg,env,req,extra).then((function (p__14869){
-var map__14870 = p__14869;
-var map__14870__$1 = cljs.core.__destructure_map(map__14870);
-var response = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14870__$1,new cljs.core.Keyword(null,"response","response",-1068424192));
-var persisted = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14870__$1,new cljs.core.Keyword(null,"persisted","persisted",-900171345));
+return kotobase_protocols_worker.shell.run_once(cfg,env,req,extra).then((function (p__12498){
+var map__12499 = p__12498;
+var map__12499__$1 = cljs.core.__destructure_map(map__12499);
+var response = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12499__$1,new cljs.core.Keyword(null,"response","response",-1068424192));
+var persisted = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12499__$1,new cljs.core.Keyword(null,"persisted","persisted",-900171345));
 if(cljs.core.truth_(persisted)){
 return kotobase_protocols_worker.shell.ring__GT_response(response);
 } else {
@@ -362,6 +362,46 @@ return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null
 });
 kotobase_protocols_worker.shell.diag_query_memo_QMARK_ = (function kotobase_protocols_worker$shell$diag_query_memo_QMARK_(req){
 return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"get","get",1683182755),new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req))) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("/_diag/query-memo",new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req))));
+});
+/**
+ * GET /health, answered WITHOUT hydrating. Public for tests.
+ * 
+ *   `kotobase.protocols.router/handle` answers /health from four constants and
+ *   touches no store, but the hydrate in `run-once` is unconditional and sits
+ *   ABOVE the router: every request rebuilt the whole graph and then called a
+ *   branch that reads none of it.
+ * 
+ *   Measured 2026-08-17 on the combined deployment before the same fix landed
+ *   there: ~1,364 CPU-ms, 85 R2 GETs and 11.4 MB per call, to return a constant,
+ *   on the most polled route a service has. After that fix every host served by
+ *   the combined worker answered /health in 60-180 ms while cypher.kotobase.net
+ *   -- this shell -- still took 8.9 s. That is what a fix applied to a copy
+ *   rather than to the shared code looks like from outside.
+ * 
+ *   Takes the surfaces from `cfg` rather than from a constant, so a shell that
+ *   mounts a subset (ADR-2608051000: a shell cannot serve a capability it did
+ *   not ask for) declines /health for a host it does not carry, exactly as the
+ *   router would. Returns nil in that case so the fall-through keeps the old
+ *   path.
+ */
+kotobase_protocols_worker.shell.static_health = (function kotobase_protocols_worker$shell$static_health(cfg,env,req){
+if(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"get","get",1683182755),new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req))) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("/health",new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req))))){
+var apex = (function (){var or__5162__auto__ = env.APEX;
+if(cljs.core.truth_(or__5162__auto__)){
+return or__5162__auto__;
+} else {
+return "kotobase.net";
+}
+})();
+var ctx = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.select_keys(cfg,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"surfaces","surfaces",-2030326421),new cljs.core.Keyword(null,"path-surfaces","path-surfaces",-639241274)], null)),new cljs.core.Keyword(null,"apex","apex",328192413),apex);
+if(cljs.core.contains_QMARK_(kotobase.protocols.router.surfaces_for(ctx),kotobase.protocols.router.surface_of(new cljs.core.Keyword(null,"host","host",-1558485167).cljs$core$IFn$_invoke$arity$1(req),apex))){
+return kotobase_protocols_worker.shell.ring__GT_response(kotobase.protocols.router.handle(ctx,req));
+} else {
+return null;
+}
+} else {
+return null;
+}
 });
 kotobase_protocols_worker.shell.capabilities_QMARK_ = (function kotobase_protocols_worker$shell$capabilities_QMARK_(req){
 return ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"get","get",1683182755),new cljs.core.Keyword(null,"method","method",55703592).cljs$core$IFn$_invoke$arity$1(req))) && (cljs.core.contains_QMARK_(new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 2, ["/.well-known/kotobase-capabilities",null,"/capabilities",null], null), null),new cljs.core.Keyword(null,"path","path",-188191168).cljs$core$IFn$_invoke$arity$1(req))));
@@ -410,18 +450,23 @@ return or__5162__auto__;
 } else {
 return "";
 }
-})(),g).then((function (p__14871){
-var map__14872 = p__14871;
-var map__14872__$1 = cljs.core.__destructure_map(map__14872);
-var chain_present_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14872__$1,new cljs.core.Keyword(null,"chain-present?","chain-present?",-1908398428));
-var novelty_size = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14872__$1,new cljs.core.Keyword(null,"novelty-size","novelty-size",1317935361));
-var should_fold_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14872__$1,new cljs.core.Keyword(null,"should-fold?","should-fold?",-264664095));
+})(),g).then((function (p__12500){
+var map__12501 = p__12500;
+var map__12501__$1 = cljs.core.__destructure_map(map__12501);
+var chain_present_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12501__$1,new cljs.core.Keyword(null,"chain-present?","chain-present?",-1908398428));
+var novelty_size = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12501__$1,new cljs.core.Keyword(null,"novelty-size","novelty-size",1317935361));
+var should_fold_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12501__$1,new cljs.core.Keyword(null,"should-fold?","should-fold?",-264664095));
 return kotobase_protocols_worker.shell.ring__GT_response(new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"status","status",-1997798413),(200),new cljs.core.Keyword(null,"headers","headers",-835030129),new cljs.core.PersistentArrayMap(null, 2, ["content-type","application/json","cache-control","no-store"], null),new cljs.core.Keyword(null,"body","body",-2049205669),kotobase.protocols.json.encode(new cljs.core.PersistentArrayMap(null, 4, ["graph",g,"chain_present",chain_present_QMARK_,"novelty_size",novelty_size,"should_fold",should_fold_QMARK_], null))], null));
 })).catch((function (e){
 return kotobase_protocols_worker.shell.ring__GT_response(new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"status","status",-1997798413),(500),new cljs.core.Keyword(null,"headers","headers",-835030129),new cljs.core.PersistentArrayMap(null, 1, ["content-type","application/json"], null),new cljs.core.Keyword(null,"body","body",-2049205669),kotobase.protocols.json.encode(new cljs.core.PersistentArrayMap(null, 2, ["error","DiagnosticFailed","message",e.message], null))], null));
 }));
 });
 kotobase_protocols_worker.shell.handle_request = (function kotobase_protocols_worker$shell$handle_request(cfg,env,req,body_ab){
+var temp__5823__auto__ = kotobase_protocols_worker.shell.static_health(cfg,env,req);
+if(cljs.core.truth_(temp__5823__auto__)){
+var health = temp__5823__auto__;
+return health;
+} else {
 if(kotobase_protocols_worker.shell.capabilities_QMARK_(req)){
 return kotobase_protocols_worker.shell.capabilities_response(env,req);
 } else {
@@ -460,6 +505,7 @@ return kotobase_protocols_worker.shell.with_retries(cfg,env,req,null);
 }
 }
 }));
+}
 }
 }
 }
@@ -505,10 +551,10 @@ return or__5162__auto__;
 return "";
 }
 })(),kotobase_protocols_worker.graph.for_request(req),(function (seed,_chain){
-var map__14873 = kotobase_protocols_worker.core.make_store(seed);
-var map__14873__$1 = cljs.core.__destructure_map(map__14873);
-var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14873__$1,new cljs.core.Keyword(null,"store","store",1512230022));
-var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14873__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
+var map__12502 = kotobase_protocols_worker.core.make_store(seed);
+var map__12502__$1 = cljs.core.__destructure_map(map__12502);
+var store = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12502__$1,new cljs.core.Keyword(null,"store","store",1512230022));
+var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12502__$1,new cljs.core.Keyword(null,"state","state",-1988618099));
 var ctx = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"store","store",1512230022),store,new cljs.core.Keyword(null,"apex","apex",328192413),(function (){var or__5162__auto__ = env.APEX;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -517,10 +563,10 @@ return "kotobase.net";
 }
 })(),new cljs.core.Keyword(null,"now","now",-1650525531),(new Date()).toISOString()], null);
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"after-state","after-state",918332654),cljs.core.deref(state),new cljs.core.Keyword(null,"response","response",-1068424192),kotobase_protocols_worker.query.gremlin_message(ctx,seed,text)], null);
-})).then((function (p__14874){
-var map__14875 = p__14874;
-var map__14875__$1 = cljs.core.__destructure_map(map__14875);
-var response = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14875__$1,new cljs.core.Keyword(null,"response","response",-1068424192));
+})).then((function (p__12503){
+var map__12504 = p__12503;
+var map__12504__$1 = cljs.core.__destructure_map(map__12504);
+var response = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12504__$1,new cljs.core.Keyword(null,"response","response",-1068424192));
 return server.send(response);
 })).catch((function (e){
 return server.send(kotobase_protocols_worker.query.gremlin_error((""+"server error: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(e.message))));
@@ -563,8 +609,8 @@ var body = kotobase_protocols_worker.shell.text_decoder.decode(ab);
 return kotobase_protocols_worker.shell.handle_request(cfg,env,kotobase_protocols_worker.shell.req__GT_ring(request,body),ab);
 })).catch((function (e){
 return (new Response((""+"internal error: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(e.message)),({"status": (500)})));
-})).then((function (p1__14876_SHARP_){
-return kotobase_protocols_worker.shell.response_boundary(request,p1__14876_SHARP_);
+})).then((function (p1__12505_SHARP_){
+return kotobase_protocols_worker.shell.response_boundary(request,p1__12505_SHARP_);
 }));
 }
 })});

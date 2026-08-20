@@ -26,12 +26,12 @@ return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVect
  *   throws (`(:gremlin/code (ex-data e))` = `:gremlin/malformed-request`) for
  *   anything outside the v0.1 wire subset.
  */
-kotobase.gremlin.envelope.request_message__GT_bytecode = (function kotobase$gremlin$envelope$request_message__GT_bytecode(p__12400){
-var map__12401 = p__12400;
-var map__12401__$1 = cljs.core.__destructure_map(map__12401);
-var requestId = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12401__$1,"requestId");
-var op = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12401__$1,"op");
-var args = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12401__$1,"args");
+kotobase.gremlin.envelope.request_message__GT_bytecode = (function kotobase$gremlin$envelope$request_message__GT_bytecode(p__9913){
+var map__9914 = p__9913;
+var map__9914__$1 = cljs.core.__destructure_map(map__9914);
+var requestId = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9914__$1,"requestId");
+var op = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9914__$1,"op");
+var args = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9914__$1,"args");
 if(typeof requestId === 'string'){
 } else {
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("RequestMessage missing string \"requestId\"",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword("gremlin","code","gremlin/code",-1917770120),new cljs.core.Keyword("gremlin","malformed-request","gremlin/malformed-request",-1689278221)], null));
@@ -58,8 +58,8 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
  *   caller that needs a reproducible envelope must use the two-arity form.
  */
 kotobase.gremlin.envelope.encode_request = (function kotobase$gremlin$envelope$encode_request(var_args){
-var G__12403 = arguments.length;
-switch (G__12403) {
+var G__9916 = arguments.length;
+switch (G__9916) {
 case 1:
 return kotobase.gremlin.envelope.encode_request.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -79,13 +79,13 @@ return kotobase.gremlin.envelope.encode_request.cljs$core$IFn$_invoke$arity$2(by
 }));
 
 (kotobase.gremlin.envelope.encode_request.cljs$core$IFn$_invoke$arity$2 = (function (bytecode,request_id){
-return kotobase.gremlin.json.encode(new cljs.core.PersistentArrayMap(null, 4, ["requestId",request_id,"op","bytecode","processor","traversal","args",new cljs.core.PersistentArrayMap(null, 1, ["gremlin",cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__12404){
-var vec__12405 = p__12404;
-var seq__12406 = cljs.core.seq(vec__12405);
-var first__12407 = cljs.core.first(seq__12406);
-var seq__12406__$1 = cljs.core.next(seq__12406);
-var step = first__12407;
-var args = seq__12406__$1;
+return kotobase.gremlin.json.encode(new cljs.core.PersistentArrayMap(null, 4, ["requestId",request_id,"op","bytecode","processor","traversal","args",new cljs.core.PersistentArrayMap(null, 1, ["gremlin",cljs.core.mapv.cljs$core$IFn$_invoke$arity$2((function (p__9917){
+var vec__9918 = p__9917;
+var seq__9919 = cljs.core.seq(vec__9918);
+var first__9920 = cljs.core.first(seq__9919);
+var seq__9919__$1 = cljs.core.next(seq__9919);
+var step = first__9920;
+var args = seq__9919__$1;
 return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.name(step)], null),args);
 }),bytecode)], null)], null));
 }));
@@ -93,8 +93,8 @@ return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVect
 (kotobase.gremlin.envelope.encode_request.cljs$lang$maxFixedArity = 2);
 
 kotobase.gremlin.envelope.status_code__GT_message = (function kotobase$gremlin$envelope$status_code__GT_message(code){
-var G__12408 = code;
-switch (G__12408) {
+var G__9921 = code;
+switch (G__9921) {
 case (200):
 return "";
 
@@ -109,11 +109,11 @@ return "";
  *   on success (`code` 200); `error` -> `{:message "..."}` on failure (`code`
  *   597 or 598).
  */
-kotobase.gremlin.envelope.encode_response = (function kotobase$gremlin$envelope$encode_response(request_id,code,p__12409){
-var map__12410 = p__12409;
-var map__12410__$1 = cljs.core.__destructure_map(map__12410);
-var data = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12410__$1,new cljs.core.Keyword(null,"data","data",-232669377));
-var message = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12410__$1,new cljs.core.Keyword(null,"message","message",-406056002));
+kotobase.gremlin.envelope.encode_response = (function kotobase$gremlin$envelope$encode_response(request_id,code,p__9922){
+var map__9923 = p__9922;
+var map__9923__$1 = cljs.core.__destructure_map(map__9923);
+var data = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9923__$1,new cljs.core.Keyword(null,"data","data",-232669377));
+var message = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9923__$1,new cljs.core.Keyword(null,"message","message",-406056002));
 return kotobase.gremlin.json.encode(new cljs.core.PersistentArrayMap(null, 3, ["requestId",request_id,"status",new cljs.core.PersistentArrayMap(null, 3, ["code",code,"message",(function (){var or__5162__auto__ = message;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -127,11 +127,11 @@ return kotobase.gremlin.envelope.status_code__GT_message(code);
  *   `{:request-id :code :message :data}`.
  */
 kotobase.gremlin.envelope.decode_response = (function kotobase$gremlin$envelope$decode_response(s){
-var map__12411 = kotobase.gremlin.json.parse(s);
-var map__12411__$1 = cljs.core.__destructure_map(map__12411);
-var requestId = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12411__$1,"requestId");
-var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12411__$1,"status");
-var result = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__12411__$1,"result");
+var map__9924 = kotobase.gremlin.json.parse(s);
+var map__9924__$1 = cljs.core.__destructure_map(map__9924);
+var requestId = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9924__$1,"requestId");
+var status = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9924__$1,"status");
+var result = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__9924__$1,"result");
 return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"request-id","request-id",-985684093),requestId,new cljs.core.Keyword(null,"code","code",1586293142),cljs.core.get.cljs$core$IFn$_invoke$arity$2(status,"code"),new cljs.core.Keyword(null,"message","message",-406056002),cljs.core.get.cljs$core$IFn$_invoke$arity$2(status,"message"),new cljs.core.Keyword(null,"data","data",-232669377),cljs.core.get.cljs$core$IFn$_invoke$arity$2(result,"data")], null);
 });
 /**
@@ -148,19 +148,19 @@ return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"re
  */
 kotobase.gremlin.envelope.handle_request_text = (function kotobase$gremlin$envelope$handle_request_text(ctx,text){
 var parsed = (function (){try{return kotobase.gremlin.json.parse(text);
-}catch (e12412){var _ = e12412;
+}catch (e9925){var _ = e9925;
 return new cljs.core.Keyword("kotobase.gremlin.envelope","parse-error","kotobase.gremlin.envelope/parse-error",-1354599568);
 }})();
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(parsed,new cljs.core.Keyword("kotobase.gremlin.envelope","parse-error","kotobase.gremlin.envelope/parse-error",-1354599568))){
 return kotobase.gremlin.envelope.encode_response("",(598),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"message","message",-406056002),"malformed JSON request body"], null));
 } else {
 var request_id = cljs.core.get.cljs$core$IFn$_invoke$arity$3(parsed,"requestId","");
-try{var vec__12414 = kotobase.gremlin.envelope.request_message__GT_bytecode(parsed);
-var request_id__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12414,(0),null);
-var bytecode = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12414,(1),null);
+try{var vec__9927 = kotobase.gremlin.envelope.request_message__GT_bytecode(parsed);
+var request_id__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9927,(0),null);
+var bytecode = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__9927,(1),null);
 var data = kotobase.gremlin.traversal.execute(ctx,bytecode);
 return kotobase.gremlin.envelope.encode_response(request_id__$1,(200),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"data","data",-232669377),data], null));
-}catch (e12413){var e = e12413;
+}catch (e9926){var e = e9926;
 var ed = cljs.core.ex_data(e);
 var code = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword("gremlin","malformed-request","gremlin/malformed-request",-1689278221),new cljs.core.Keyword("gremlin","code","gremlin/code",-1917770120).cljs$core$IFn$_invoke$arity$1(ed)))?(598):(597));
 var msg = (function (){var or__5162__auto__ = new cljs.core.Keyword("gremlin","message","gremlin/message",-147861088).cljs$core$IFn$_invoke$arity$1(ed);

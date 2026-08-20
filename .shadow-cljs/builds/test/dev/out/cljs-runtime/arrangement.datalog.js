@@ -10,8 +10,8 @@ goog.provide('arrangement.datalog');
  *   clause grammar, the aggregate forms, and the `:clause-cardinality` hint.
  */
 arrangement.datalog.q = (function arrangement$datalog$q(var_args){
-var G__12193 = arguments.length;
-switch (G__12193) {
+var G__9706 = arguments.length;
+switch (G__9706) {
 case 3:
 return arrangement.datalog.q.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 

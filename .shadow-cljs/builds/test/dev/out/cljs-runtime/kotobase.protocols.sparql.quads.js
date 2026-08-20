@@ -193,11 +193,11 @@ return null;
 /**
  * A SPARQL triple pattern -> the `[s p o]` a source scans.
  */
-kotobase.protocols.sparql.quads.triple_pattern__GT_scan = (function kotobase$protocols$sparql$quads$triple_pattern__GT_scan(p__13112){
-var vec__13113 = p__13112;
-var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13113,(0),null);
-var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13113,(1),null);
-var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13113,(2),null);
+kotobase.protocols.sparql.quads.triple_pattern__GT_scan = (function kotobase$protocols$sparql$quads$triple_pattern__GT_scan(p__10353){
+var vec__10354 = p__10353;
+var s = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10354,(0),null);
+var p = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10354,(1),null);
+var o = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10354,(2),null);
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [kotobase.protocols.sparql.quads.term__GT_component(s),kotobase.protocols.sparql.quads.term__GT_component(p),kotobase.protocols.sparql.quads.term__GT_component(o)], null);
 });
 /**
@@ -256,12 +256,12 @@ if(cljs.core.ifn_QMARK_(visible_QMARK_)){
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("datoms->quads: visible? is required (no permissive default, ADR-2607050500)",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword("kotobase.protocols.sparql.quads","visible?-required","kotobase.protocols.sparql.quads/visible?-required",-643781059)], null));
 }
 
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__13116){
-var map__13117 = p__13116;
-var map__13117__$1 = cljs.core.__destructure_map(map__13117);
-var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13117__$1,new cljs.core.Keyword(null,"s","s",1705939918));
-var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13117__$1,new cljs.core.Keyword(null,"p","p",151049309));
-var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13117__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__10357){
+var map__10358 = p__10357;
+var map__10358__$1 = cljs.core.__destructure_map(map__10358);
+var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10358__$1,new cljs.core.Keyword(null,"s","s",1705939918));
+var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10358__$1,new cljs.core.Keyword(null,"p","p",151049309));
+var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10358__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"subject","subject",-1411880451),kotobase.protocols.sparql.quads.__GT_subject_term(s),new cljs.core.Keyword(null,"predicate","predicate",-1742501860),kotobase.protocols.sparql.quads.__GT_predicate_term(p),new cljs.core.Keyword(null,"object","object",1474613949),kotobase.protocols.sparql.quads.__GT_term(o)], null);
 })),kotobase.query.bridge.datoms(db,visible_QMARK_));
 });
@@ -289,12 +289,12 @@ if(cljs.core.ifn_QMARK_(visible_QMARK_)){
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("source->quads: visible? is required (no permissive default, ADR-2607050500)",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword("kotobase.protocols.sparql.quads","visible?-required","kotobase.protocols.sparql.quads/visible?-required",-643781059)], null));
 }
 
-return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.comp.cljs$core$IFn$_invoke$arity$2(cljs.core.filter.cljs$core$IFn$_invoke$arity$1(visible_QMARK_),cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__13118){
-var map__13119 = p__13118;
-var map__13119__$1 = cljs.core.__destructure_map(map__13119);
-var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13119__$1,new cljs.core.Keyword(null,"s","s",1705939918));
-var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13119__$1,new cljs.core.Keyword(null,"p","p",151049309));
-var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13119__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
+return cljs.core.into.cljs$core$IFn$_invoke$arity$3(cljs.core.PersistentVector.EMPTY,cljs.core.comp.cljs$core$IFn$_invoke$arity$2(cljs.core.filter.cljs$core$IFn$_invoke$arity$1(visible_QMARK_),cljs.core.map.cljs$core$IFn$_invoke$arity$1((function (p__10359){
+var map__10360 = p__10359;
+var map__10360__$1 = cljs.core.__destructure_map(map__10360);
+var s = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10360__$1,new cljs.core.Keyword(null,"s","s",1705939918));
+var p = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10360__$1,new cljs.core.Keyword(null,"p","p",151049309));
+var o = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10360__$1,new cljs.core.Keyword(null,"o","o",-1350007228));
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"subject","subject",-1411880451),kotobase.protocols.sparql.quads.__GT_subject_term(s),new cljs.core.Keyword(null,"predicate","predicate",-1742501860),kotobase.protocols.sparql.quads.__GT_predicate_term(p),new cljs.core.Keyword(null,"object","object",1474613949),kotobase.protocols.sparql.quads.__GT_term(o)], null);
 }))),cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (acc,pattern){
 return cljs.core.into.cljs$core$IFn$_invoke$arity$2(acc,datom.source.scan(source,pattern));

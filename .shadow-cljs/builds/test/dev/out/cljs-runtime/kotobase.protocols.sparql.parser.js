@@ -52,11 +52,11 @@ if((i >= cljs.core.count(s))){
 return cljs.core.persistent_BANG_(out);
 } else {
 var remaining = cljs.core.subs.cljs$core$IFn$_invoke$arity$2(s,i);
-var vec__13128 = cljs.core.some(((function (i,out,remaining){
-return (function (p__13131){
-var vec__13132 = p__13131;
-var type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13132,(0),null);
-var re = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13132,(1),null);
+var vec__10369 = cljs.core.some(((function (i,out,remaining){
+return (function (p__10372){
+var vec__10373 = p__10372;
+var type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10373,(0),null);
+var re = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10373,(1),null);
 var temp__5825__auto__ = cljs.core.re_find(re,remaining);
 if(cljs.core.truth_(temp__5825__auto__)){
 var m = temp__5825__auto__;
@@ -66,8 +66,8 @@ return null;
 }
 });})(i,out,remaining))
 ,kotobase.protocols.sparql.parser.token_specs);
-var type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13128,(0),null);
-var m = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13128,(1),null);
+var type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10369,(0),null);
+var m = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10369,(1),null);
 if(cljs.core.truth_(type)){
 } else {
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"SPARQL parse error: unexpected character at "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(i)),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword("kotobase.protocols.sparql.parser","tokenize-error","kotobase.protocols.sparql.parser/tokenize-error",2063101052),new cljs.core.Keyword(null,"index","index",-1531685915),i,new cljs.core.Keyword(null,"remaining","remaining",-138926777),cljs.core.subs.cljs$core$IFn$_invoke$arity$3(remaining,(0),cljs.core.min.cljs$core$IFn$_invoke$arity$2((20),((remaining).length)))], null));
@@ -75,64 +75,64 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2((""+"SPARQL parse error: u
 
 var len = cljs.core.count(m);
 var i_SINGLEQUOTE_ = (i + len);
-var G__13135 = type;
-var G__13135__$1 = (((G__13135 instanceof cljs.core.Keyword))?G__13135.fqn:null);
-switch (G__13135__$1) {
+var G__10376 = type;
+var G__10376__$1 = (((G__10376 instanceof cljs.core.Keyword))?G__10376.fqn:null);
+switch (G__10376__$1) {
 case "ws":
 case "comment":
-var G__13161 = i_SINGLEQUOTE_;
-var G__13162 = out;
-i = G__13161;
-out = G__13162;
+var G__10402 = i_SINGLEQUOTE_;
+var G__10403 = out;
+i = G__10402;
+out = G__10403;
 continue;
 
 break;
 case "var":
-var G__13163 = i_SINGLEQUOTE_;
-var G__13164 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"var","var",-769682797),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"name","name",1843675177),cljs.core.subs.cljs$core$IFn$_invoke$arity$2(m,(1))], null));
-i = G__13163;
-out = G__13164;
+var G__10404 = i_SINGLEQUOTE_;
+var G__10405 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"var","var",-769682797),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"name","name",1843675177),cljs.core.subs.cljs$core$IFn$_invoke$arity$2(m,(1))], null));
+i = G__10404;
+out = G__10405;
 continue;
 
 break;
 case "string":
-var G__13165 = i_SINGLEQUOTE_;
-var G__13166 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"string","string",-1989541586),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),kotobase.protocols.sparql.parser.string_token_value(m)], null));
-i = G__13165;
-out = G__13166;
+var G__10406 = i_SINGLEQUOTE_;
+var G__10407 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"string","string",-1989541586),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),kotobase.protocols.sparql.parser.string_token_value(m)], null));
+i = G__10406;
+out = G__10407;
 continue;
 
 break;
 case "number":
-var G__13167 = i_SINGLEQUOTE_;
-var G__13168 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"number","number",1570378438),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),kotobase.protocols.sparql.parser.parse_number_token(m)], null));
-i = G__13167;
-out = G__13168;
+var G__10408 = i_SINGLEQUOTE_;
+var G__10409 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"number","number",1570378438),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),kotobase.protocols.sparql.parser.parse_number_token(m)], null));
+i = G__10408;
+out = G__10409;
 continue;
 
 break;
 case "iriref":
-var G__13169 = i_SINGLEQUOTE_;
-var G__13170 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"iriref","iriref",-1698702518),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),cljs.core.subs.cljs$core$IFn$_invoke$arity$3(m,(1),(cljs.core.count(m) - (1)))], null));
-i = G__13169;
-out = G__13170;
+var G__10410 = i_SINGLEQUOTE_;
+var G__10411 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"iriref","iriref",-1698702518),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"value","value",305978217),cljs.core.subs.cljs$core$IFn$_invoke$arity$3(m,(1),(cljs.core.count(m) - (1)))], null));
+i = G__10410;
+out = G__10411;
 continue;
 
 break;
 case "pname":
 var ci = clojure.string.index_of.cljs$core$IFn$_invoke$arity$2(m,":");
-var G__13171 = i_SINGLEQUOTE_;
-var G__13172 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"pname","pname",175120060),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"prefix","prefix",-265908465),cljs.core.subs.cljs$core$IFn$_invoke$arity$3(m,(0),ci),new cljs.core.Keyword(null,"local","local",-1497766724),cljs.core.subs.cljs$core$IFn$_invoke$arity$2(m,(ci + (1)))], null));
-i = G__13171;
-out = G__13172;
+var G__10412 = i_SINGLEQUOTE_;
+var G__10413 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"pname","pname",175120060),new cljs.core.Keyword(null,"text","text",-1790561697),m,new cljs.core.Keyword(null,"prefix","prefix",-265908465),cljs.core.subs.cljs$core$IFn$_invoke$arity$3(m,(0),ci),new cljs.core.Keyword(null,"local","local",-1497766724),cljs.core.subs.cljs$core$IFn$_invoke$arity$2(m,(ci + (1)))], null));
+i = G__10412;
+out = G__10413;
 continue;
 
 break;
 default:
-var G__13173 = i_SINGLEQUOTE_;
-var G__13174 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"type","type",1174270348),type,new cljs.core.Keyword(null,"text","text",-1790561697),m], null));
-i = G__13173;
-out = G__13174;
+var G__10414 = i_SINGLEQUOTE_;
+var G__10415 = cljs.core.conj_BANG_.cljs$core$IFn$_invoke$arity$2(out,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"type","type",1174270348),type,new cljs.core.Keyword(null,"text","text",-1790561697),m], null));
+i = G__10414;
+out = G__10415;
 continue;
 
 }
@@ -208,11 +208,11 @@ kotobase.protocols.sparql.parser.fail_BANG_((""+"expected "+cljs.core.str.cljs$c
 
 return t;
 });
-kotobase.protocols.sparql.parser.resolve_pname = (function kotobase$protocols$sparql$parser$resolve_pname(prefixes,p__13136){
-var map__13137 = p__13136;
-var map__13137__$1 = cljs.core.__destructure_map(map__13137);
-var prefix = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13137__$1,new cljs.core.Keyword(null,"prefix","prefix",-265908465));
-var local = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13137__$1,new cljs.core.Keyword(null,"local","local",-1497766724));
+kotobase.protocols.sparql.parser.resolve_pname = (function kotobase$protocols$sparql$parser$resolve_pname(prefixes,p__10377){
+var map__10378 = p__10377;
+var map__10378__$1 = cljs.core.__destructure_map(map__10378);
+var prefix = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10378__$1,new cljs.core.Keyword(null,"prefix","prefix",-265908465));
+var local = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10378__$1,new cljs.core.Keyword(null,"local","local",-1497766724));
 var temp__5823__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(prefixes,prefix);
 if(cljs.core.truth_(temp__5823__auto__)){
 var base = temp__5823__auto__;
@@ -231,8 +231,8 @@ var pname_tok = kotobase.protocols.sparql.parser.advance_BANG_(state);
 var _ = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"pname","pname",175120060),new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(pname_tok)))?null:kotobase.protocols.sparql.parser.fail_BANG_("expected prefix:",pname_tok));
 var iri_tok = kotobase.protocols.sparql.parser.advance_BANG_(state);
 var ___$1 = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"iriref","iriref",-1698702518),new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(iri_tok)))?null:kotobase.protocols.sparql.parser.fail_BANG_("expected <iri> after PREFIX",iri_tok));
-var G__13175 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(prefixes,new cljs.core.Keyword(null,"prefix","prefix",-265908465).cljs$core$IFn$_invoke$arity$1(pname_tok),new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(iri_tok));
-prefixes = G__13175;
+var G__10416 = cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(prefixes,new cljs.core.Keyword(null,"prefix","prefix",-265908465).cljs$core$IFn$_invoke$arity$1(pname_tok),new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(iri_tok));
+prefixes = G__10416;
 continue;
 } else {
 return prefixes;
@@ -242,9 +242,9 @@ break;
 });
 kotobase.protocols.sparql.parser.parse_term_BANG_ = (function kotobase$protocols$sparql$parser$parse_term_BANG_(state,prefixes){
 var t = kotobase.protocols.sparql.parser.advance_BANG_(state);
-var G__13138 = new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(t);
-var G__13138__$1 = (((G__13138 instanceof cljs.core.Keyword))?G__13138.fqn:null);
-switch (G__13138__$1) {
+var G__10379 = new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(t);
+var G__10379__$1 = (((G__10379 instanceof cljs.core.Keyword))?G__10379.fqn:null);
+switch (G__10379__$1) {
 case "var":
 return cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(t))));
 
@@ -340,15 +340,15 @@ return and__5160__auto__;
 })())){
 return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(na,nb) : f.call(null,na,nb));
 } else {
-var G__13139 = cljs.core.compare((""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(a)),(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(b)));
-var G__13140 = (0);
-return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__13139,G__13140) : f.call(null,G__13139,G__13140));
+var G__10380 = cljs.core.compare((""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(a)),(""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(b)));
+var G__10381 = (0);
+return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__10380,G__10381) : f.call(null,G__10380,G__10381));
 }
 });
 kotobase.protocols.sparql.parser.compile_relational = (function kotobase$protocols$sparql$parser$compile_relational(op,left,right){
 var equality_QMARK_ = cljs.core.contains_QMARK_(new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 2, ["!=",null,"=",null], null), null),op);
-var f = (function (){var G__13141 = op;
-switch (G__13141) {
+var f = (function (){var G__10382 = op;
+switch (G__10382) {
 case "=":
 return cljs.core._EQ_;
 
@@ -374,12 +374,12 @@ return cljs.core._GT__EQ_;
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__13141))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10382))));
 
 }
 })();
-var num_f = (function (){var G__13142 = op;
-switch (G__13142) {
+var num_f = (function (){var G__10383 = op;
+switch (G__10383) {
 case "=":
 return cljs.core._EQ_;
 
@@ -405,7 +405,7 @@ return cljs.core._GT__EQ_;
 
 break;
 default:
-throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__13142))));
+throw (new Error((""+"No matching clause: "+cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10383))));
 
 }
 })();
@@ -426,7 +426,7 @@ if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_op_QMARK_(state,"&&"))
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
 var right = (kotobase.protocols.sparql.parser.parse_unary_expr_BANG_.cljs$core$IFn$_invoke$arity$2 ? kotobase.protocols.sparql.parser.parse_unary_expr_BANG_.cljs$core$IFn$_invoke$arity$2(state,prefixes) : kotobase.protocols.sparql.parser.parse_unary_expr_BANG_.call(null,state,prefixes));
-var G__13179 = ((function (left,right){
+var G__10420 = ((function (left,right){
 return (function (b){
 var and__5160__auto__ = (left.cljs$core$IFn$_invoke$arity$1 ? left.cljs$core$IFn$_invoke$arity$1(b) : left.call(null,b));
 if(cljs.core.truth_(and__5160__auto__)){
@@ -436,7 +436,7 @@ return and__5160__auto__;
 }
 });})(left,right))
 ;
-left = G__13179;
+left = G__10420;
 continue;
 } else {
 return left;
@@ -450,7 +450,7 @@ if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_op_QMARK_(state,"||"))
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
 var right = and_chain();
-var G__13180 = ((function (left,right){
+var G__10421 = ((function (left,right){
 return (function (b){
 var or__5162__auto__ = (left.cljs$core$IFn$_invoke$arity$1 ? left.cljs$core$IFn$_invoke$arity$1(b) : left.call(null,b));
 if(cljs.core.truth_(or__5162__auto__)){
@@ -460,7 +460,7 @@ return (right.cljs$core$IFn$_invoke$arity$1 ? right.cljs$core$IFn$_invoke$arity$
 }
 });})(left,right))
 ;
-left = G__13180;
+left = G__10421;
 continue;
 } else {
 kotobase.protocols.sparql.parser.expect_punct_BANG_(state,")");
@@ -552,8 +552,8 @@ while(true){
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"UNION"))){
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
-var G__13181 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"union","union",2142937499),new cljs.core.Keyword(null,"left","left",-399115937),combined,new cljs.core.Keyword(null,"right","right",-452581833),(kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2 ? kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2(state,prefixes) : kotobase.protocols.sparql.parser.parse_group_BANG_.call(null,state,prefixes))], null);
-combined = G__13181;
+var G__10422 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"union","union",2142937499),new cljs.core.Keyword(null,"left","left",-399115937),combined,new cljs.core.Keyword(null,"right","right",-452581833),(kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2 ? kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2(state,prefixes) : kotobase.protocols.sparql.parser.parse_group_BANG_.call(null,state,prefixes))], null);
+combined = G__10422;
 continue;
 } else {
 return combined;
@@ -590,19 +590,19 @@ if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"OPTIO
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
 var inner = (kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2 ? kotobase.protocols.sparql.parser.parse_group_BANG_.cljs$core$IFn$_invoke$arity$2(state,prefixes) : kotobase.protocols.sparql.parser.parse_group_BANG_.call(null,state,prefixes));
-var G__13182 = (cljs.core.truth_(acc)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"optional","optional",2053951509),new cljs.core.Keyword(null,"left","left",-399115937),acc,new cljs.core.Keyword(null,"right","right",-452581833),inner], null):inner);
-var G__13183 = filters;
-acc = G__13182;
-filters = G__13183;
+var G__10423 = (cljs.core.truth_(acc)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"optional","optional",2053951509),new cljs.core.Keyword(null,"left","left",-399115937),acc,new cljs.core.Keyword(null,"right","right",-452581833),inner], null):inner);
+var G__10424 = filters;
+acc = G__10423;
+filters = G__10424;
 continue;
 } else {
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"FILTER"))){
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
-var G__13184 = acc;
-var G__13185 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(filters,kotobase.protocols.sparql.parser.parse_filter_BANG_(state,prefixes));
-acc = G__13184;
-filters = G__13185;
+var G__10425 = acc;
+var G__10426 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(filters,kotobase.protocols.sparql.parser.parse_filter_BANG_(state,prefixes));
+acc = G__10425;
+filters = G__10426;
 continue;
 } else {
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_punct_QMARK_(state,"{"))){
@@ -612,16 +612,16 @@ kotobase.protocols.sparql.parser.advance_BANG_(state);
 } else {
 }
 
-var G__13186 = kotobase.protocols.sparql.parser.combine(acc,pattern);
-var G__13187 = filters;
-acc = G__13186;
-filters = G__13187;
+var G__10427 = kotobase.protocols.sparql.parser.combine(acc,pattern);
+var G__10428 = filters;
+acc = G__10427;
+filters = G__10428;
 continue;
 } else {
-var G__13188 = kotobase.protocols.sparql.parser.add_triple(acc,kotobase.protocols.sparql.parser.parse_triple_BANG_(state,prefixes));
-var G__13189 = filters;
-acc = G__13188;
-filters = G__13189;
+var G__10429 = kotobase.protocols.sparql.parser.add_triple(acc,kotobase.protocols.sparql.parser.parse_triple_BANG_(state,prefixes));
+var G__10430 = filters;
+acc = G__10429;
+filters = G__10430;
 continue;
 
 }
@@ -672,11 +672,11 @@ kotobase.protocols.sparql.parser.fail_BANG_("expected a variable after AS",out);
 
 kotobase.protocols.sparql.parser.expect_punct_BANG_(state,")");
 
-var G__13143 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"var","var",-769682797),cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(out)))),new cljs.core.Keyword(null,"fn","fn",-1175266204),f,new cljs.core.Keyword(null,"arg","arg",-1747261837),arg], null);
+var G__10384 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"var","var",-769682797),cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(out)))),new cljs.core.Keyword(null,"fn","fn",-1175266204),f,new cljs.core.Keyword(null,"arg","arg",-1747261837),arg], null);
 if(cljs.core.truth_(distinct_QMARK_)){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__13143,new cljs.core.Keyword(null,"distinct?","distinct?",970077810),true);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10384,new cljs.core.Keyword(null,"distinct?","distinct?",970077810),true);
 } else {
-return G__13143;
+return G__10384;
 }
 });
 /**
@@ -696,20 +696,20 @@ var vars = cljs.core.PersistentVector.EMPTY;
 var aggs = cljs.core.PersistentVector.EMPTY;
 while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"var","var",-769682797),new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.peek1(state)))){
-var G__13190 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
-var G__13191 = aggs;
-vars = G__13190;
-aggs = G__13191;
+var G__10431 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
+var G__10432 = aggs;
+vars = G__10431;
+aggs = G__10432;
 continue;
 } else {
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_punct_QMARK_(state,"("))){
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
 var agg = kotobase.protocols.sparql.parser.parse_aggregate_BANG_(state);
-var G__13192 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,new cljs.core.Keyword(null,"var","var",-769682797).cljs$core$IFn$_invoke$arity$1(agg));
-var G__13193 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(aggs,agg);
-vars = G__13192;
-aggs = G__13193;
+var G__10433 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,new cljs.core.Keyword(null,"var","var",-769682797).cljs$core$IFn$_invoke$arity$1(agg));
+var G__10434 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(aggs,agg);
+vars = G__10433;
+aggs = G__10434;
 continue;
 } else {
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [vars,aggs], null);
@@ -729,8 +729,8 @@ kotobase.protocols.sparql.parser.expect_kw_BANG_(state,"BY");
 var vars = cljs.core.PersistentVector.EMPTY;
 while(true){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"var","var",-769682797),new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.peek1(state)))){
-var G__13194 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
-vars = G__13194;
+var G__10435 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
+vars = G__10435;
 continue;
 } else {
 if(cljs.core.seq(vars)){
@@ -770,23 +770,23 @@ var v = kotobase.protocols.sparql.parser.advance_BANG_(state);
 var sym = cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(v))));
 kotobase.protocols.sparql.parser.expect_punct_BANG_(state,")");
 
-var G__13195 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,sym);
-var G__13196 = (function (){var G__13145 = desc;
+var G__10436 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,sym);
+var G__10437 = (function (){var G__10386 = desc;
 if(cljs.core.truth_(desc_QMARK_)){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__13145,sym);
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10386,sym);
 } else {
-return G__13145;
+return G__10386;
 }
 })();
-vars = G__13195;
-desc = G__13196;
+vars = G__10436;
+desc = G__10437;
 continue;
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"var","var",-769682797),new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.peek1(state)))){
-var G__13197 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
-var G__13198 = desc;
-vars = G__13197;
-desc = G__13198;
+var G__10438 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vars,cljs.core.symbol.cljs$core$IFn$_invoke$arity$1((""+"?"+cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state))))));
+var G__10439 = desc;
+vars = G__10438;
+desc = G__10439;
 continue;
 } else {
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [vars,desc], null);
@@ -806,19 +806,19 @@ while(true){
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"LIMIT"))){
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
-var G__13199 = new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state));
-var G__13200 = offset;
-limit = G__13199;
-offset = G__13200;
+var G__10440 = new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state));
+var G__10441 = offset;
+limit = G__10440;
+offset = G__10441;
 continue;
 } else {
 if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"OFFSET"))){
 kotobase.protocols.sparql.parser.advance_BANG_(state);
 
-var G__13201 = limit;
-var G__13202 = new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state));
-limit = G__13201;
-offset = G__13202;
+var G__10442 = limit;
+var G__10443 = new cljs.core.Keyword(null,"value","value",305978217).cljs$core$IFn$_invoke$arity$1(kotobase.protocols.sparql.parser.advance_BANG_(state));
+limit = G__10442;
+offset = G__10443;
 continue;
 } else {
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [limit,offset], null);
@@ -848,31 +848,31 @@ if(cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"SELEC
 var _ = kotobase.protocols.sparql.parser.advance_BANG_(state);
 var distinct_QMARK_ = kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"DISTINCT");
 var ___$1 = (cljs.core.truth_(distinct_QMARK_)?kotobase.protocols.sparql.parser.advance_BANG_(state):null);
-var vec__13146 = kotobase.protocols.sparql.parser.parse_var_list_BANG_(state);
-var output_vars = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13146,(0),null);
-var aggregates = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13146,(1),null);
+var vec__10387 = kotobase.protocols.sparql.parser.parse_var_list_BANG_(state);
+var output_vars = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10387,(0),null);
+var aggregates = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10387,(1),null);
 var ___$2 = (cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"WHERE"))?kotobase.protocols.sparql.parser.advance_BANG_(state):null);
 var pattern = kotobase.protocols.sparql.parser.parse_group_BANG_(state,prefixes);
 var group_by = kotobase.protocols.sparql.parser.parse_group_by_BANG_(state);
 var ___$3 = ((((cljs.core.seq(group_by)) && (cljs.core.empty_QMARK_(aggregates))))?kotobase.protocols.sparql.parser.fail_BANG_("GROUP BY without an aggregate in the select list",kotobase.protocols.sparql.parser.peek1(state)):null);
-var pattern__$1 = ((cljs.core.seq(aggregates))?(function (){var G__13155 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"group","group",582596132),new cljs.core.Keyword(null,"aggregates","aggregates",-1684250289),aggregates,new cljs.core.Keyword(null,"pattern","pattern",242135423),pattern], null);
+var pattern__$1 = ((cljs.core.seq(aggregates))?(function (){var G__10396 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"group","group",582596132),new cljs.core.Keyword(null,"aggregates","aggregates",-1684250289),aggregates,new cljs.core.Keyword(null,"pattern","pattern",242135423),pattern], null);
 if(cljs.core.seq(group_by)){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__13155,new cljs.core.Keyword(null,"by","by",30600856),group_by);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10396,new cljs.core.Keyword(null,"by","by",30600856),group_by);
 } else {
-return G__13155;
+return G__10396;
 }
 })():pattern);
-var vec__13149 = kotobase.protocols.sparql.parser.parse_order_by_BANG_(state);
-var order_vars = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13149,(0),null);
-var order_desc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13149,(1),null);
-var vec__13152 = kotobase.protocols.sparql.parser.parse_limit_offset_BANG_(state);
-var limit = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13152,(0),null);
-var offset = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13152,(1),null);
-var base = ((cljs.core.seq(order_vars))?(function (){var G__13156 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"order-by","order-by",1527318070),new cljs.core.Keyword(null,"vars","vars",-2046957217),order_vars,new cljs.core.Keyword(null,"pattern","pattern",242135423),pattern__$1], null);
+var vec__10390 = kotobase.protocols.sparql.parser.parse_order_by_BANG_(state);
+var order_vars = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10390,(0),null);
+var order_desc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10390,(1),null);
+var vec__10393 = kotobase.protocols.sparql.parser.parse_limit_offset_BANG_(state);
+var limit = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10393,(0),null);
+var offset = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10393,(1),null);
+var base = ((cljs.core.seq(order_vars))?(function (){var G__10397 = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"order-by","order-by",1527318070),new cljs.core.Keyword(null,"vars","vars",-2046957217),order_vars,new cljs.core.Keyword(null,"pattern","pattern",242135423),pattern__$1], null);
 if(cljs.core.seq(order_desc)){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__13156,new cljs.core.Keyword(null,"desc","desc",2093485764),order_desc);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(G__10397,new cljs.core.Keyword(null,"desc","desc",2093485764),order_desc);
 } else {
-return G__13156;
+return G__10397;
 }
 })():pattern__$1);
 var base__$1 = (cljs.core.truth_(output_vars)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword("sparql","op","sparql/op",1260997734),new cljs.core.Keyword(null,"project","project",1124394579),new cljs.core.Keyword(null,"vars","vars",-2046957217),output_vars,new cljs.core.Keyword(null,"pattern","pattern",242135423),base], null):base);
@@ -902,8 +902,8 @@ kotobase.protocols.sparql.parser.advance_BANG_(state);
 
 return ts;
 } else {
-var G__13203 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ts,kotobase.protocols.sparql.parser.parse_triple_BANG_(state,prefixes));
-ts = G__13203;
+var G__10444 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ts,kotobase.protocols.sparql.parser.parse_triple_BANG_(state,prefixes));
+ts = G__10444;
 continue;
 }
 break;
@@ -911,9 +911,9 @@ break;
 })();
 var ___$2 = (cljs.core.truth_(kotobase.protocols.sparql.parser.peek_kw_QMARK_(state,"WHERE"))?kotobase.protocols.sparql.parser.advance_BANG_(state):null);
 var pattern = kotobase.protocols.sparql.parser.parse_group_BANG_(state,prefixes);
-var vec__13157 = kotobase.protocols.sparql.parser.parse_limit_offset_BANG_(state);
-var limit = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13157,(0),null);
-var offset = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13157,(1),null);
+var vec__10398 = kotobase.protocols.sparql.parser.parse_limit_offset_BANG_(state);
+var limit = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10398,(0),null);
+var offset = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10398,(1),null);
 var base = (cljs.core.truth_((function (){var or__5162__auto__ = limit;
 if(cljs.core.truth_(or__5162__auto__)){
 return or__5162__auto__;
@@ -952,8 +952,8 @@ return kotobase.protocols.sparql.parser.peek_punct_QMARK_(state,"{");
 })())){
 return ts;
 } else {
-var G__13204 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ts,kotobase.protocols.sparql.parser.parse_term_BANG_(state,prefixes));
-ts = G__13204;
+var G__10445 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ts,kotobase.protocols.sparql.parser.parse_term_BANG_(state,prefixes));
+ts = G__10445;
 continue;
 }
 break;

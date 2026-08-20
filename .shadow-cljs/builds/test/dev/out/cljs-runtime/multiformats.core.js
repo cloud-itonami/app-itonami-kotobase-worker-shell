@@ -4,8 +4,8 @@ multiformats.core.b58_idx = cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.co
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [c,i], null);
 }),multiformats.core.b58_alphabet));
 multiformats.core.__GT_ints = (function multiformats$core$__GT_ints(data){
-return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11088_SHARP_){
-return ((p1__11088_SHARP_ | 0) & (255));
+return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6162_SHARP_){
+return ((p1__6162_SHARP_ | 0) & (255));
 }),cljs.core.seq(data));
 });
 /**
@@ -15,23 +15,23 @@ return ((p1__11088_SHARP_ | 0) & (255));
 multiformats.core.base58btc = (function multiformats$core$base58btc(data){
 var in$ = multiformats.core.__GT_ints(data);
 var digits = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (digits,b){
-var vec__11090 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__11093,d){
-var vec__11094 = p__11093;
-var ds = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11094,(0),null);
-var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11094,(1),null);
+var vec__6164 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__6167,d){
+var vec__6168 = p__6167;
+var ds = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6168,(0),null);
+var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6168,(1),null);
 var v = ((d * (256)) + carry);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ds,cljs.core.rem(v,(58))),cljs.core.quot(v,(58))], null);
 }),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.PersistentVector.EMPTY,b], null),digits);
-var digits__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11090,(0),null);
-var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11090,(1),null);
+var digits__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6164,(0),null);
+var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6164,(1),null);
 var digits__$2 = digits__$1;
 var carry__$1 = carry;
 while(true){
 if((carry__$1 > (0))){
-var G__11117 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(digits__$2,cljs.core.rem(carry__$1,(58)));
-var G__11118 = cljs.core.quot(carry__$1,(58));
-digits__$2 = G__11117;
-carry__$1 = G__11118;
+var G__6191 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(digits__$2,cljs.core.rem(carry__$1,(58)));
+var G__6192 = cljs.core.quot(carry__$1,(58));
+digits__$2 = G__6191;
+carry__$1 = G__6192;
 continue;
 } else {
 return digits__$2;
@@ -40,8 +40,8 @@ break;
 }
 }),cljs.core.PersistentVector.EMPTY,in$);
 var nzeros = cljs.core.count(cljs.core.take_while.cljs$core$IFn$_invoke$arity$2(cljs.core.zero_QMARK_,in$));
-return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(nzeros,"1")))+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11089_SHARP_){
-return cljs.core.nth.cljs$core$IFn$_invoke$arity$2(multiformats.core.b58_alphabet,p1__11089_SHARP_);
+return (""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(nzeros,"1")))+cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6163_SHARP_){
+return cljs.core.nth.cljs$core$IFn$_invoke$arity$2(multiformats.core.b58_alphabet,p1__6163_SHARP_);
 }),cljs.core.rseq(digits)))));
 });
 /**
@@ -58,23 +58,23 @@ return or__5162__auto__;
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("multiformats: invalid base58btc character",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"char","char",-641587586),c], null));
 }
 })();
-var vec__11098 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__11101,d){
-var vec__11102 = p__11101;
-var acc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11102,(0),null);
-var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11102,(1),null);
+var vec__6172 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (p__6175,d){
+var vec__6176 = p__6175;
+var acc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6176,(0),null);
+var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6176,(1),null);
 var v = ((d * (58)) + carry);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,cljs.core.rem(v,(256))),cljs.core.quot(v,(256))], null);
 }),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.PersistentVector.EMPTY,idx], null),bs);
-var bs__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11098,(0),null);
-var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11098,(1),null);
+var bs__$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6172,(0),null);
+var carry = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6172,(1),null);
 var bs__$2 = bs__$1;
 var carry__$1 = carry;
 while(true){
 if((carry__$1 > (0))){
-var G__11119 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(bs__$2,cljs.core.rem(carry__$1,(256)));
-var G__11120 = cljs.core.quot(carry__$1,(256));
-bs__$2 = G__11119;
-carry__$1 = G__11120;
+var G__6193 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(bs__$2,cljs.core.rem(carry__$1,(256)));
+var G__6194 = cljs.core.quot(carry__$1,(256));
+bs__$2 = G__6193;
+carry__$1 = G__6194;
 continue;
 } else {
 return bs__$2;
@@ -82,8 +82,8 @@ return bs__$2;
 break;
 }
 }),cljs.core.PersistentVector.EMPTY,cljs.core.seq(s));
-var nzeros = cljs.core.count(cljs.core.take_while.cljs$core$IFn$_invoke$arity$2((function (p1__11097_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("1",p1__11097_SHARP_);
+var nzeros = cljs.core.count(cljs.core.take_while.cljs$core$IFn$_invoke$arity$2((function (p1__6171_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2("1",p1__6171_SHARP_);
 }),s));
 var out = cljs.core.concat.cljs$core$IFn$_invoke$arity$2(cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(nzeros,(0)),cljs.core.rseq(bytes));
 return cljs.core.vec(out);
@@ -104,17 +104,51 @@ return shadow.js.shim.module$$noble$hashes$sha2.sha256(b);
 multiformats.core.sha384 = (function multiformats$core$sha384(b){
 return shadow.js.shim.module$$noble$hashes$sha2.sha384(b);
 });
+/**
+ * Largest integer both hosts represent exactly, 2^53-1.
+ * 
+ *   The same constant `proto.wire/max-exact` and `protobuf.wire/max-exact` name.
+ *   Three libraries in this workspace encode the same base-128 varint, and they
+ *   have to agree about which values exist -- when they did not, the same octets
+ *   meant different numbers depending on which one read them.
+ */
+multiformats.core.max_exact = (9007199254740991);
+/**
+ * Unsigned base-128 varint (LEB128).
+ * 
+ *   Arithmetic rather than shifts. Measured 2026-08-17, the ClojureScript branch
+ *   used `unsigned-bit-shift-right`, which operates on int32 there, so every
+ *   value at or above 2^32 produced DIFFERENT OCTETS from the JVM:
+ * 
+ *    2^32  ->  JVM [128 128 128 128 16]   CLJS [128 0]
+ *    2^35  ->  JVM [128 128 128 128 128 1] CLJS [128 0]
+ * 
+ *   Not an error either way. `[128 0]` is a well-formed varint that decodes to
+ *   zero, so a CID or multiaddr built in a Worker would have been accepted
+ *   everywhere and meant something else.
+ * 
+ *   Nothing reaches that today -- multicodec and multiaddr protocol codes are
+ *   all small -- so this was latent rather than live. It is fixed anyway, for the
+ *   reason `dev-protobuf` learned the hard way: its range note said the values it
+ *   encoded stayed far inside the exact range, and the example it gave was the
+ *   counterexample.
+ */
 multiformats.core.varint = (function multiformats$core$varint(n){
+if((((n < (0))) || ((n > multiformats.core.max_exact)))){
+throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("varint out of range",new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),n,new cljs.core.Keyword(null,"max-exact","max-exact",-1642260918),multiformats.core.max_exact], null));
+} else {
+}
+
 var v = n;
 var out = cljs.core.PersistentVector.EMPTY;
 while(true){
 if((v < (128))){
 return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(out,v);
 } else {
-var G__11121 = (v >>> (7));
-var G__11122 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(out,((v & (127)) | (128)));
-v = G__11121;
-out = G__11122;
+var G__6195 = cljs.core.quot(v,(128));
+var G__6196 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(out,((v & (127)) | (128)));
+v = G__6195;
+out = G__6196;
 continue;
 }
 break;
@@ -132,14 +166,14 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 multiformats.core.base64url = (function multiformats$core$base64url(bytes){
 return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.mapcat.cljs$core$IFn$_invoke$arity$variadic((function (chunk){
 var n = cljs.core.count(chunk);
-var vec__11106 = cljs.core.concat.cljs$core$IFn$_invoke$arity$2(chunk,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(((3) - n),(0)));
-var b0 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11106,(0),null);
-var b1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11106,(1),null);
-var b2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11106,(2),null);
+var vec__6180 = cljs.core.concat.cljs$core$IFn$_invoke$arity$2(chunk,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(((3) - n),(0)));
+var b0 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6180,(0),null);
+var b1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6180,(1),null);
+var b2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6180,(2),null);
 var v = (((b0 << (16)) | (b1 << (8))) | b2);
 var chars = new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [((v >> (18)) & (63)),((v >> (12)) & (63)),((v >> (6)) & (63)),(v & (63))], null);
-return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__11105_SHARP_){
-return cljs.core.nth.cljs$core$IFn$_invoke$arity$2(multiformats.core.b64url_alphabet,p1__11105_SHARP_);
+return cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__6179_SHARP_){
+return cljs.core.nth.cljs$core$IFn$_invoke$arity$2(multiformats.core.b64url_alphabet,p1__6179_SHARP_);
 }),cljs.core.take.cljs$core$IFn$_invoke$arity$2((n + (1)),chars));
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.partition.cljs$core$IFn$_invoke$arity$4((3),(3),null,multiformats.core.__GT_ints(bytes))], 0)));
 });
@@ -167,24 +201,24 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("multiformats: invalid bas
 var buffer__$1 = ((buffer << (6)) | idx);
 var bit_count__$1 = (bit_count + (6));
 if((bit_count__$1 >= (8))){
-var G__11123 = cljs.core.rest(chars);
-var G__11124 = buffer__$1;
-var G__11125 = (bit_count__$1 - (8));
-var G__11126 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,((buffer__$1 >>> (bit_count__$1 - (8))) & (255)));
-chars = G__11123;
-buffer = G__11124;
-bit_count = G__11125;
-acc = G__11126;
+var G__6197 = cljs.core.rest(chars);
+var G__6198 = buffer__$1;
+var G__6199 = (bit_count__$1 - (8));
+var G__6200 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(acc,((buffer__$1 >>> (bit_count__$1 - (8))) & (255)));
+chars = G__6197;
+buffer = G__6198;
+bit_count = G__6199;
+acc = G__6200;
 continue;
 } else {
-var G__11127 = cljs.core.rest(chars);
-var G__11128 = buffer__$1;
-var G__11129 = bit_count__$1;
-var G__11130 = acc;
-chars = G__11127;
-buffer = G__11128;
-bit_count = G__11129;
-acc = G__11130;
+var G__6201 = cljs.core.rest(chars);
+var G__6202 = buffer__$1;
+var G__6203 = bit_count__$1;
+var G__6204 = acc;
+chars = G__6201;
+buffer = G__6202;
+bit_count = G__6203;
+acc = G__6204;
 continue;
 }
 }
@@ -211,8 +245,8 @@ multiformats.core.codec_dag_cbor = (113);
  */
 multiformats.core.cidv1 = (function multiformats$core$cidv1(codec,multihash){
 var body = cljs.core.concat.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(multiformats.core.varint((1))),cljs.core.seq(multiformats.core.varint(codec)),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.seq(multihash)], 0));
-return (""+"b"+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var G__11109 = cljs.core.vec(body);
-return (multiformats.core.base32.cljs$core$IFn$_invoke$arity$1 ? multiformats.core.base32.cljs$core$IFn$_invoke$arity$1(G__11109) : multiformats.core.base32.call(null,G__11109));
+return (""+"b"+cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var G__6183 = cljs.core.vec(body);
+return (multiformats.core.base32.cljs$core$IFn$_invoke$arity$1 ? multiformats.core.base32.cljs$core$IFn$_invoke$arity$1(G__6183) : multiformats.core.base32.call(null,G__6183));
 })()));
 });
 /**
@@ -244,20 +278,20 @@ if(clojure.string.starts_with_QMARK_(cid,"b")){
 throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("expected base32 'b' multibase CID",new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cid","cid",-1940591320),cid], null));
 }
 
-var G__11110 = cljs.core.subs.cljs$core$IFn$_invoke$arity$2(cid,(1));
-return (multiformats.core.base32_decode.cljs$core$IFn$_invoke$arity$1 ? multiformats.core.base32_decode.cljs$core$IFn$_invoke$arity$1(G__11110) : multiformats.core.base32_decode.call(null,G__11110));
+var G__6184 = cljs.core.subs.cljs$core$IFn$_invoke$arity$2(cid,(1));
+return (multiformats.core.base32_decode.cljs$core$IFn$_invoke$arity$1 ? multiformats.core.base32_decode.cljs$core$IFn$_invoke$arity$1(G__6184) : multiformats.core.base32_decode.call(null,G__6184));
 });
 multiformats.core.single_block_limit = (262144);
 multiformats.core.cid_of_file = (function multiformats$core$cid_of_file(var_args){
 var args__5903__auto__ = [];
-var len__5897__auto___11131 = arguments.length;
-var i__5898__auto___11132 = (0);
+var len__5897__auto___6205 = arguments.length;
+var i__5898__auto___6206 = (0);
 while(true){
-if((i__5898__auto___11132 < len__5897__auto___11131)){
-args__5903__auto__.push((arguments[i__5898__auto___11132]));
+if((i__5898__auto___6206 < len__5897__auto___6205)){
+args__5903__auto__.push((arguments[i__5898__auto___6206]));
 
-var G__11133 = (i__5898__auto___11132 + (1));
-i__5898__auto___11132 = G__11133;
+var G__6207 = (i__5898__auto___6206 + (1));
+i__5898__auto___6206 = G__6207;
 continue;
 } else {
 }
@@ -275,9 +309,9 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("multiformats.core/cid-of-
 (multiformats.core.cid_of_file.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(multiformats.core.cid_of_file.cljs$lang$applyTo = (function (seq11111){
+(multiformats.core.cid_of_file.cljs$lang$applyTo = (function (seq6185){
 var self__5883__auto__ = this;
-return self__5883__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq11111));
+return self__5883__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq6185));
 }));
 
 multiformats.core.hexify = (function multiformats$core$hexify(b){
@@ -298,10 +332,10 @@ throw cljs.core.ex_info.cljs$core$IFn$_invoke$arity$2("unhex: odd-length hex str
 }
 
 var pairs = cljs.core.partition.cljs$core$IFn$_invoke$arity$2((2),s__$1);
-return cljs.core.vec(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__11113){
-var vec__11114 = p__11113;
-var a = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11114,(0),null);
-var b = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__11114,(1),null);
+return cljs.core.vec(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__6187){
+var vec__6188 = p__6187;
+var a = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6188,(0),null);
+var b = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6188,(1),null);
 return parseInt((""+cljs.core.str.cljs$core$IFn$_invoke$arity$1(a)+cljs.core.str.cljs$core$IFn$_invoke$arity$1(b)),(16));
 }),pairs));
 });
