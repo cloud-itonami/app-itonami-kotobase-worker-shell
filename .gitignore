@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# shadow-cljs build cache and compiled output
+.shadow-cljs/
+out/
+.cpcache/
+
+# macOS
+.DS_Store
