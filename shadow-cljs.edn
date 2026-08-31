@@ -31,12 +31,11 @@
   ;; `kotobase.biscuit-grant` is NOT copied here: it is the one implementation
   ;; authn mints through and the API gateway verifies through (ADR-2608262600
   ;; D4), and a copy would be a second answer to drift away from the first.
-  ;; The path reaches across to net-kotobase because that is where the shared
-  ;; namespace lives today; this library exists to serve those Workers, which
-  ;; is the direction `net-kotobase/cypher` already depends on. Extracting it
-  ;; to a kotoba-lang home would remove the reach -- recorded as follow-up
-  ;; rather than done here, because it moves three repos' pins.
-  "../../net-kotobase/control-plane/shared/src"
+  ;; It lives in kotoba-lang/grant, the capability decision plane. It used to be
+  ;; reached at ../../net-kotobase/control-plane/shared/src, which made this
+  ;; library unbuildable without a DEPLOYABLE repository's checkout -- a break
+  ;; invisible inside west, where both are always present.
+  "../grant/src"
   "../authority/src"
   "../org-biscuitsec/src"
   ;; biscuit/wire.cljc requires protobuf.wire.
