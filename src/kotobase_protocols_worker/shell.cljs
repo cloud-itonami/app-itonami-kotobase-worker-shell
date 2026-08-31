@@ -41,6 +41,7 @@
     6. responses flagged :body-encoding :base64 (seeded git objects /
        ipfs blocks) are decoded back to raw bytes."
   (:require [clojure.string :as str]
+            [kotobase-protocols-worker.biscuit :as biscuit]
             [kotobase-protocols-worker.cacao :as cacao]
             [kotobase-protocols-worker.core :as core]
             [kotobase-protocols-worker.graph :as graph]
@@ -144,19 +145,28 @@
 (defn- credential-ok?
   "The one authorization ladder, used by reads and writes alike:
   Bearer WRITE_TOKEN (full admin) → AWS SigV4 over the raw payload →
-  CACAO. Reads reuse it verbatim because every credential that may
-  write may obviously also read, and a second ladder would be a second
-  place to get it wrong."
-  [^js env req body-ab]
-  (cond
-    (core/authorized-write? req (.-WRITE_TOKEN env))
-    (js/Promise.resolve true)
+  an issued Biscuit → CACAO. Reads reuse it verbatim because every
+  credential that may write may obviously also read, and a second ladder
+  would be a second place to get it wrong.
 
-    (some-> (get (:headers req) "authorization")
-            (str/starts-with? "AWS4-HMAC-SHA256 "))
-    (sigv4-verify env req body-ab)
+  The Biscuit rung sits above CACAO so that a presented Biscuit is decided
+  as a Biscuit. Falling through to `cacao-authorized?` would parse the body
+  looking for a credential the caller already put in the header, and answer
+  false for the wrong reason."
+  ([env req body-ab] (credential-ok? env req body-ab :write))
+  ([^js env req body-ab op]
+   (cond
+     (core/authorized-write? req (.-WRITE_TOKEN env))
+     (js/Promise.resolve true)
 
-    :else (cacao-authorized? env req)))
+     (some-> (get (:headers req) "authorization")
+             (str/starts-with? "AWS4-HMAC-SHA256 "))
+     (sigv4-verify env req body-ab)
+
+     (some? (biscuit/presented req))
+     (js/Promise.resolve (:ok? (biscuit/attempt env req op)))
+
+     :else (cacao-authorized? env req))))
 
 ;; ------------------------------------------------------------- requests
 
@@ -406,7 +416,7 @@
           ;; core/public-read-surfaces for why each is deliberate.
           read-auth? (core/read-auth-required? req apex)]
       (-> (if (or write? read-auth?)
-            (credential-ok? env req body-ab)
+            (credential-ok? env req body-ab (if write? :write :read))
             (js/Promise.resolve true))
         (.then
          (fn [ok?]
@@ -414,7 +424,9 @@
              (not ok?)
              (ring->response
               (core/unauthorized-response (some? (.-WRITE_TOKEN env))
-                                          (if write? :write :read)))
+                                          (if write? :write :read)
+                                          (biscuit/refusal-detail
+                                           env req (if write? :write :read))))
 
              (ipfs-post? req)
              (-> (sha256 body-ab)
@@ -504,7 +516,7 @@
                     ;; every other operator-private query surface.  There is no
                     ;; request body on an RFC 6455 GET, so CACAO-in-body is not
                     ;; available here; Bearer and SigV4 headers remain usable.
-                    (-> (credential-ok? env req0 (js/ArrayBuffer. 0))
+                    (-> (credential-ok? env req0 (js/ArrayBuffer. 0) :read)
                         (.then
                          (fn [ok?]
                            (if ok?
@@ -513,7 +525,8 @@
                               request
                               (ring->response
                                (core/unauthorized-response
-                                (some? (.-WRITE_TOKEN env)) :read)))))))
+                                (some? (.-WRITE_TOKEN env)) :read
+                                (biscuit/refusal-detail env req0 :read))))))))
                     (-> (.arrayBuffer request)
                         (.then (fn [ab]
                                  (let [body (.decode text-decoder ab)]

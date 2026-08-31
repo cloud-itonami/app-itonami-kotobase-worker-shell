@@ -1,0 +1,189 @@
+(ns kotobase-protocols-worker.biscuit-test
+  "Do the query surfaces READ an issued Biscuit?
+
+  Measured 2026-08-31 on the live fleet: no. sparql/gremlin/graphql answered
+  `Bearer, AWS SigV4, or an operator CACAO` and the answer was byte-identical
+  with and without an `Authorization: Biscuit` header -- the surface did not
+  look at it (ADR-2608311600). ADR-2608261300 had made Biscuit the primary
+  API credential five days earlier.
+
+  The refusals below are most of the file, but they are NOT what
+  discriminates. The gateway's own biscuit suite recorded why: its first
+  verifier read parsed scope segments as URI strings, so every valid token
+  verified into a grant with no permissions, and all six refusal tests stayed
+  green. A suite of refusals passes perfectly against a door welded shut.
+  `a-valid-read-biscuit-is-admitted` is the test that can tell.
+
+  This copy drives the SHELL rather than protocols-worker, over the `cypher`
+  surface. That is not cosmetic: `cypher.kotobase.net` is served by
+  `net-kotobase/cypher`, a separate deployable built on this library, so it
+  was the one query surface the 2026-08-31 protocols-worker change could not
+  reach -- measured after that deploy, sparql/graphql/gremlin named Biscuit
+  and cypher still answered the old enumeration, byte-identical with and
+  without the header."
+  (:require [biscuit.wire :as wire]
+            [clojure.string :as str]
+            [clojure.test :refer [deftest is testing async]]
+            [kotobase-protocols-worker.biscuit :as biscuit]
+            [kotobase-protocols-worker.query :as query]
+            [kotobase-protocols-worker.shell :as shell]
+            ["@noble/curves/ed25519.js" :refer [ed25519]]))
+
+;; ── minting, the way authn mints ────────────────────────────────────────────
+
+(def root-seed (vec (range 32)))
+(def other-seed (vec (map #(+ 100 %) (range 32))))
+
+(defn- ->u8 [xs] (js/Uint8Array.from (clj->js (vec xs))))
+(defn- byte-vec [xs] (vec (js/Array.from xs)))
+(defn- public-of [seed] (byte-vec (.getPublicKey ed25519 (->u8 seed))))
+
+(defn- b64url [xs]
+  (-> (js/btoa (apply str (map #(js/String.fromCharCode %) xs)))
+      (str/replace "+" "-") (str/replace "/" "_") (str/replace #"=+$" "")))
+
+(defn mint [{:keys [seed scopes expiry]}]
+  (let [next-secret (vec (range 32 64))
+        facts (vec (concat (map (fn [s] ['scope s]) scopes)
+                           [['before expiry]
+                            ['holder "did:key:z6MkAgentUnderTest"]
+                            ['role "editor"]
+                            ['tenant_id "t_abcdefghijkl"]
+                            ['principal_type "service-account"]]))]
+    (b64url (wire/encode-authority-token
+             {:root-key-id 1
+              :facts facts
+              :root-private-key seed
+              :next-secret next-secret
+              :next-public-key (public-of next-secret)
+              :sign-fn (fn [s payload]
+                         (byte-vec (.sign ed25519 (->u8 payload) (->u8 s))))}))))
+
+(def far-future "2099-01-01T00:00:00.000Z")
+(def long-past "2000-01-01T00:00:00.000Z")
+
+(def read-scopes
+  ["kotoba://graph/g1"
+   "kotoba://tenant/did:web:kotobase.net:tenant:t_abcdefghijkl"
+   "kotoba://can/data:read"])
+
+(def write-scopes (conj read-scopes "kotoba://can/data:write"))
+
+;; ── fixtures ────────────────────────────────────────────────────────────────
+
+(def ^:private configured
+  "No STATE_BUCKET on purpose, exactly as `worker-test/no-r2`: an admitted
+  read must get PAST the credential check, and a binding-free env means an
+  admission that regresses into a 401 cannot quietly pass against a fake
+  bucket -- it explodes on a nil binding instead."
+  #js {:APEX "kotobase.net"
+       :CACAO_OPERATOR_DIDS ""
+       :BISCUIT_ROOT_PUBLIC_KEY_B64URL (b64url (public-of root-seed))})
+
+(def ^:private unconfigured
+  #js {:APEX "kotobase.net" :CACAO_OPERATOR_DIDS ""})
+
+(def ^:private handler
+  ;; Exactly what net-kotobase/cypher's ten-line shell constructs, so the
+  ;; ladder under test is the one that answers cypher.kotobase.net.
+  (shell/make-handler
+   {:surfaces (select-keys query/surfaces ["cypher"])
+    :path-surfaces {"/db/data/" "cypher"}}))
+
+(defn- req-with [authorization]
+  {:method :get :host "cypher.kotobase.net" :path "/db/data/"
+   :headers (if authorization {"authorization" authorization} {})})
+
+(defn- fetch-with [^js env authorization]
+  (.fetch handler
+          (js/Request. "https://cypher.kotobase.net/db/data/"
+                       (clj->js (cond-> {:method "GET"}
+                                  authorization
+                                  (assoc :headers {"authorization" authorization}))))
+          env #js {}))
+
+;; ── the door opens ──────────────────────────────────────────────────────────
+
+(deftest a-valid-read-biscuit-is-admitted
+  (async done
+    (let [t (mint {:seed root-seed :scopes read-scopes :expiry far-future})]
+      (-> (fetch-with configured (str "Biscuit " t))
+          (.then (fn [^js r]
+                   ;; Not "200": without a bucket the read cannot complete.
+                   ;; The claim is that it got past the credential.
+                   (is (not= 401 (.-status r))
+                       "a valid data:read Biscuit must not be refused")
+                   (done)))
+          (.catch (fn [e]
+                    ;; A throw past the gate is still past the gate — a nil
+                    ;; binding, not a refusal. Only a 401 would be the bug.
+                    (is (not (re-find #"401" (str e))) (str e))
+                    (done)))))))
+
+(deftest a-write-biscuit-may-also-read
+  (async done
+    (let [t (mint {:seed root-seed :scopes write-scopes :expiry far-future})]
+      (is (true? (:ok? (biscuit/attempt configured (req-with (str "Biscuit " t)) :read))))
+      (is (true? (:ok? (biscuit/attempt configured (req-with (str "Biscuit " t)) :write))))
+      (done))))
+
+;; ── the header changes the answer — the axis this file exists for ───────────
+
+(deftest the-surface-reads-the-header
+  (async done
+    (-> (js/Promise.all
+         #js [(fetch-with configured nil)
+              (fetch-with configured "Biscuit EnwAAA")])
+        (.then (fn [^js rs]
+                 (js/Promise.all
+                  #js [(.text (aget rs 0)) (.text (aget rs 1))])))
+        (.then (fn [^js bodies]
+                 (is (not= (aget bodies 0) (aget bodies 1))
+                     "anonymous and rejected-Biscuit answers must differ")
+                 (is (re-find #"presented Biscuit rejected" (aget bodies 1)))
+                 (is (not (re-find #"presented Biscuit rejected" (aget bodies 0))))
+                 (done)))
+        (.catch (fn [e] (is false (str e)) (done))))))
+
+(deftest the-refusal-enumerates-biscuit
+  (async done
+    (-> (fetch-with configured nil)
+        (.then (fn [^js r]
+                 (is (= 401 (.-status r)))
+                 (is (= "Biscuit, Bearer" (.get (.-headers r) "www-authenticate")))
+                 (.text r)))
+        (.then (fn [body]
+                 (is (re-find #"issued Biscuit" body)
+                     "a stranger must be able to learn that a Biscuit is accepted here")
+                 (done)))
+        (.catch (fn [e] (is false (str e)) (done))))))
+
+;; ── every refusal is NAMED, and the names differ ────────────────────────────
+
+(deftest refusals-say-which-repair
+  (testing "expired is not the same answer as forged"
+    (let [expired (mint {:seed root-seed :scopes read-scopes :expiry long-past})
+          forged (mint {:seed other-seed :scopes read-scopes :expiry far-future})
+          read-only (mint {:seed root-seed :scopes read-scopes :expiry far-future})]
+      (is (= "expired" (:reason (biscuit/attempt configured (req-with (str "Biscuit " expired)) :read))))
+      (is (= "bad-signature" (:reason (biscuit/attempt configured (req-with (str "Biscuit " forged)) :read))))
+      (is (= "malformed-token" (:reason (biscuit/attempt configured (req-with "Biscuit EnwAAA") :read))))
+      (is (= "token does not carry data:write"
+             (:reason (biscuit/attempt configured (req-with (str "Biscuit " read-only)) :write)))
+          "a read-only token used for a write is the wrong scope, not a broken token"))))
+
+(deftest an-unconfigured-verifier-does-not-blame-the-caller
+  ;; 401 would send the holder off to fix a token that is fine. The operator
+  ;; has configured no verification key, so this Worker cannot answer at all.
+  (let [t (mint {:seed root-seed :scopes read-scopes :expiry far-future})
+        a (biscuit/attempt unconfigured (req-with (str "Biscuit " t)) :read)]
+    (is (true? (:presented? a)))
+    (is (false? (:ok? a)))
+    (is (= "biscuit verification is not configured" (:reason a)))))
+
+(deftest nothing-presented-is-not-a-rejection
+  (let [a (biscuit/attempt configured (req-with nil) :read)]
+    (is (false? (:presented? a)))
+    (is (nil? (:reason a)))
+    (is (nil? (biscuit/refusal-detail configured (req-with nil) :read))
+        "a caller who presented nothing must not be told their Biscuit was rejected")))
