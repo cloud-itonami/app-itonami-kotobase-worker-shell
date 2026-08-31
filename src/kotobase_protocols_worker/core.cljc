@@ -166,18 +166,25 @@
   "401 for an unauthenticated request. `op` distinguishes the message
   only — the status and the fail-closed behaviour are the same for
   reads and writes."
-  ([token-configured?] (unauthorized-response token-configured? :write))
-  ([token-configured? op]
+  ([token-configured?] (unauthorized-response token-configured? :write nil))
+  ([token-configured? op] (unauthorized-response token-configured? op nil))
+  ([token-configured? op detail]
+   ;; `detail` says why a credential that WAS presented did not work. Without
+   ;; it the enumeration below is all a caller ever learns, and a rejected
+   ;; token reads exactly like no token at all -- measured 2026-08-31 as the
+   ;; reason a Biscuit holder could not tell a wrong key from an unwired
+   ;; surface (ADR-2608311600).
    {:status 401
     :headers {"content-type" "text/plain; charset=utf-8"
-              "www-authenticate" "Bearer"}
-    :body (cond
-            (= op :read)
-            "unauthorized: this surface's reads require a credential (Bearer, AWS SigV4, or an operator CACAO)"
-            token-configured?
-            "unauthorized: writes require a bearer token"
-            :else
-            "unauthorized: write token not configured (writes are disabled)")}))
+              "www-authenticate" "Biscuit, Bearer"}
+    :body (str (cond
+                 (= op :read)
+                 "unauthorized: this surface's reads require a credential (an issued Biscuit, Bearer, AWS SigV4, or an operator CACAO)"
+                 token-configured?
+                 "unauthorized: writes require an issued Biscuit or a bearer token"
+                 :else
+                 "unauthorized: write token not configured (writes are disabled)")
+               (when detail (str " — " detail)))}))
 
 (defn normalize-headers
   "Lower-case header names once at the boundary."

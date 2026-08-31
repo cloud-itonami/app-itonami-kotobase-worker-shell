@@ -27,6 +27,24 @@
   "../prolly-tree/src"
   "../chain/src"
   "../sigv4/src"
+  ;; The Biscuit rung of the credential ladder (ADR-2608291700 order 1).
+  ;; `kotobase.biscuit-grant` is NOT copied here: it is the one implementation
+  ;; authn mints through and the API gateway verifies through (ADR-2608262600
+  ;; D4), and a copy would be a second answer to drift away from the first.
+  ;; The path reaches across to net-kotobase because that is where the shared
+  ;; namespace lives today; this library exists to serve those Workers, which
+  ;; is the direction `net-kotobase/cypher` already depends on. Extracting it
+  ;; to a kotoba-lang home would remove the reach -- recorded as follow-up
+  ;; rather than done here, because it moves three repos' pins.
+  "../../net-kotobase/control-plane/shared/src"
+  "../authority/src"
+  "../org-biscuitsec/src"
+  ;; biscuit/wire.cljc requires protobuf.wire.
+  "../dev-protobuf/src"
+  ;; multiformats/core.cljc requires sha2.core. Unrelated to Biscuit: main
+  ;; could not be rebuilt against the current manifest pins without it, the
+  ;; same repair protocols-worker needed on 2026-08-31.
+  "../org-nist-sha2/src"
   "../io-ipld/src"
   "../io-multiformats/src"
   "../org-ietf-cbor/src"
@@ -43,4 +61,20 @@
  {:test {:target :node-test
          :output-to "out/node-tests.js"
          :ns-regexp "-test$"
-         :compiler-options {:parallel-build false}}}}
+         :compiler-options {:parallel-build false}}
+  ;; One namespace, because the full suite cannot be run to completion here.
+  ;; Measured 2026-08-31: `node out/node-tests.js` prints its ns headers, stops
+  ;; after `kotobase-store-test`, never reaches `shell-test` and never prints
+  ;; `Ran N tests` -- killed at a 900s cap. That predates the Biscuit rung (the
+  ;; same run without biscuit_test.cljs behaves identically), and this repo's
+  ;; main could not even be COMPILED against the current manifest pins until
+  ;; the org-nist-sha2 source path above was added, so nothing here had been
+  ;; built or run for some time.
+  ;;
+  ;; A suite that never finishes reports the same silence for a passing change
+  ;; and a broken one. This build exists so the Biscuit rung has a verdict of
+  ;; its own while the wider hang is diagnosed separately.
+  :biscuit-test {:target :node-test
+                 :output-to "out/biscuit-tests.js"
+                 :ns-regexp "biscuit-test$"
+                 :compiler-options {:parallel-build false}}}}
