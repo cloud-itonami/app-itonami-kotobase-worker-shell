@@ -62,18 +62,29 @@
          :output-to "out/node-tests.js"
          :ns-regexp "-test$"
          :compiler-options {:parallel-build false}}
-  ;; One namespace, because the full suite cannot be run to completion here.
-  ;; Measured 2026-08-31: `node out/node-tests.js` prints its ns headers, stops
-  ;; after `kotobase-store-test`, never reaches `shell-test` and never prints
-  ;; `Ran N tests` -- killed at a 900s cap. That predates the Biscuit rung (the
-  ;; same run without biscuit_test.cljs behaves identically), and this repo's
-  ;; main could not even be COMPILED against the current manifest pins until
-  ;; the org-nist-sha2 source path above was added, so nothing here had been
-  ;; built or run for some time.
+  ;; One namespace, for a fast verdict. The full suite DOES finish -- it takes
+  ;; about nine minutes on a loaded workstation, and the earlier claim in this
+  ;; comment that it "never completes" was wrong.
   ;;
-  ;; A suite that never finishes reports the same silence for a passing change
-  ;; and a broken one. This build exists so the Biscuit rung has a verdict of
-  ;; its own while the wider hang is diagnosed separately.
+  ;; The error is worth keeping, because it cost something. The suite was killed
+  ;; at a 900s cap three times and the silence was read as a hang; nobody looked
+  ;; at whether the process was burning CPU. It was: CPU time climbed 8s -> 28s
+  ;; -> 75s -> 89s across samples, which is a slow test, not a deadlock. Acting
+  ;; on the wrong reading, the Biscuit rung was merged and deployed without the
+  ;; suite ever having finished, and it had broken one assertion --
+  ;; `an-anonymous-gremlin-websocket-handshake-is-rejected` still expected
+  ;; www-authenticate "Bearer". A run to completion would have said so in nine
+  ;; minutes.
+  ;;
+  ;; So: NOT a substitute for the full suite. Use it for a quick answer on this
+  ;; one namespace and still run `compile test` before landing. What the wider
+  ;; suite needs is the treatment protocols-worker gives its own heavy work --
+  ;; the multi-thousand-commit tests moved to their own build, out of the
+  ;; default `-test$` set -- and that is not done here.
+  ;;
+  ;; Unrelated, also measured: this repo's main could not be COMPILED against
+  ;; the current manifest pins until the org-nist-sha2 source path above was
+  ;; added, so nothing here had been built for some time.
   :biscuit-test {:target :node-test
                  :output-to "out/biscuit-tests.js"
                  :ns-regexp "biscuit-test$"

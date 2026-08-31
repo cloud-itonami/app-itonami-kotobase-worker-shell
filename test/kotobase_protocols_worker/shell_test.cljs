@@ -275,7 +275,12 @@
       (-> (response-of no-r2 req)
           (.then (fn [response]
                    (is (= 401 (.-status response)))
-                   (is (= "Bearer" (.get (.-headers response) "www-authenticate")))
+                   ;; "Biscuit, Bearer" since the Biscuit rung landed
+                   ;; (ADR-2608311600, and here 8cd9edc): a challenge that omits
+                   ;; an accepted scheme tells the caller to present the wrong
+                   ;; thing. protocols-worker's worker_test carries the same
+                   ;; update for the same reason.
+                   (is (= "Biscuit, Bearer" (.get (.-headers response) "www-authenticate")))
                    (is (= "nosniff" (.get (.-headers response) "x-content-type-options")))
                    (.text response)))
           (.then (fn [body]
