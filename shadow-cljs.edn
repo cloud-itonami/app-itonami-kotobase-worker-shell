@@ -88,4 +88,15 @@
   :biscuit-test {:target :node-test
                  :output-to "out/biscuit-tests.js"
                  :ns-regexp "biscuit-test$"
-                 :compiler-options {:parallel-build false}}}}
+                 :compiler-options {:parallel-build false}}
+  ;; The two store scenarios measured in MINUTES, held out of the default
+  ;; `-test$` set. Measured 2026-08-31: kotobase-store-test alone ran 829s for
+  ;; 9 tests, essentially the whole cost of the suite. Same treatment
+  ;; protocols-worker gives fold-bench / hydrate-phase-bench / query-bench.
+  ;;
+  ;; Held out, NOT retired: run it before landing anything that touches the
+  ;; store. `npx shadow-cljs compile store-heavy && node out/store-heavy.js`.
+  :store-heavy {:target :node-test
+                :output-to "out/store-heavy.js"
+                :ns-regexp "kotobase-store-heavy$"
+                :compiler-options {:parallel-build false}}}}
