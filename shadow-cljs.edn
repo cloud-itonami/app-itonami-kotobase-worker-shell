@@ -94,7 +94,7 @@
   ;; protocols-worker gives fold-bench / hydrate-phase-bench / query-bench.
   ;;
   ;; Held out, NOT retired: run it before landing anything that touches the
-  ;; store. `npx shadow-cljs compile store-heavy && node out/store-heavy.js`.
+  ;; store. `amu compile --target wasm32-browser store-heavy && node out/store-heavy.js`.
   :store-heavy {:target :node-test
                 :output-to "out/store-heavy.js"
                 :ns-regexp "kotobase-store-heavy$"
