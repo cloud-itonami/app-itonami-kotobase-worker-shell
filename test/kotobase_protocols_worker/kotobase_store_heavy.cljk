@@ -16,7 +16,7 @@
 
   Same treatment protocols-worker gives its own heavy work (`fold-bench`,
   `hydrate-phase-bench`, `query-bench`): its own build, out of the default set.
-  Run it with `npx shadow-cljs compile store-heavy && node out/store-heavy.js`,
+  Run it with `amu compile --target wasm32-browser store-heavy && node out/store-heavy.js`,
   and run it before landing anything that touches the store."
   (:require [cljs.test :refer-macros [deftest testing async]]
             [clojure.edn :as edn]

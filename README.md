@@ -58,7 +58,7 @@ after the shells land.
 
 ```bash
 npm install
-npm test          # shadow-cljs compile test && node out/node-tests.js
+npm test          # amu compile --target wasm32-browser test && node out/node-tests.js
 ```
 
 44 tests / 163 assertions at the 2026-08-05 split, including the SigV4
