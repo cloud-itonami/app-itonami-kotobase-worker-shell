@@ -53,7 +53,15 @@
   (doseq [sp (source-paths config-path)
           f  (walk-cljk sp)]
     (let [rel (path/relative sp f)
-          out (path/join shim-root (str/replace rel #"\.cljk$" ".cljc"))]
+          ;; cljk-origin rule: a path that kept its platform extension in the name
+          ;; (x.clj.cljk / x.cljs.cljk / x.cljc.cljk) goes back to that extension;
+          ;; a plain x.cljk becomes x.cljc. org-signal's hkdf.clj.cljk +
+          ;; hkdf.cljs.cljk are the measured case (mail-worker, 2026-09-17).
+          out (path/join shim-root
+                         (cond (str/ends-with? rel ".clj.cljk")  (str/replace rel #"\.clj\.cljk$" ".clj")
+                               (str/ends-with? rel ".cljs.cljk") (str/replace rel #"\.cljs\.cljk$" ".cljs")
+                               (str/ends-with? rel ".cljc.cljk") (str/replace rel #"\.cljc\.cljk$" ".cljc")
+                               :else (str/replace rel #"\.cljk$" ".cljc")))]
       (when-not (contains? @wanted out)
         (swap! wanted assoc out f))))
   (let [mirrored (atom 0) unchanged (atom 0)]
@@ -69,7 +77,7 @@
           existing (letfn [(walk [d] (if-not (.existsSync fs d) []
                                        (mapcat (fn [e] (let [p (path/join d (.-name e))]
                                                          (cond (.isDirectory e) (walk p)
-                                                               (str/ends-with? (.-name e) ".cljc") [p]
+                                                               (re-find #"\.clj[cs]?$" (.-name e)) [p]
                                                                :else [])))
                                                (.readdirSync fs d #js {:withFileTypes true}))))]
                      (walk shim-root))]
