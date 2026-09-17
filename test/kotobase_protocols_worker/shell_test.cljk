@@ -9,7 +9,7 @@
   the worker to accept it — then require it to reject each way it should."
   (:require [cljs.test :refer [deftest is testing async]]
             [kotobase-protocols-worker.shell :as worker]
-            [kotobase-protocols-worker.query :as query]
+            [kotobase.query.surfaces :as query]
             [kotobase.protocols.atproto :as atproto]
             [kotobase.protocols.git :as git]
             [kotobase.protocols.ipfs :as ipfs]

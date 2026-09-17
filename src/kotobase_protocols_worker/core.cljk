@@ -62,7 +62,7 @@
   different heads. A query memo keyed on that head NEVER hit on Cypher —
   measured locally at 0 hits / 3 queries against SPARQL's 2 / 3. The memo now
   keys on `:docs` alone, which the append does not touch; see
-  `kotobase-protocols-worker.query/memo-version` and ADR-2607310900."
+  `kotobase.query.surfaces/memo-version` and ADR-2607310900."
   #{"sparql" "cypher" "gremlin" "graphql"})
 
 (defn write?
@@ -140,7 +140,7 @@
           (str/starts-with? path "/s3/")     "s3"
           (str/starts-with? path "/git/")    "git"
           (str/starts-with? path "/issues/") "issues"
-          ;; Same mounts kotobase-protocols-worker.query registers with the
+          ;; Same mounts kotobase.query.surfaces registers with the
           ;; router. Kept in step deliberately: an authorization decision made
           ;; against a different surface than the one that answers is the bug
           ;; class effective-surface exists to prevent.

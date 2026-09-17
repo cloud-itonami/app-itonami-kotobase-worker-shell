@@ -1,0 +1,8 @@
+;; kbb test runner (first-class runtime). `npm test` runs this with the sibling-checkout
+;; classpath from shadow-cljs.edn (west layout: orgs/kotoba-lang/<repo>). The former
+;; `amu compile --target wasm32-browser test` line could not run: amu takes a source file,
+;; not a shadow build id, and shadow-cljs does not compile .cljk -- so this suite had
+;; executed 0 tests since the 2026-09-11 rename. Measured 2026-09-17: 53 tests / 212 assertions.
+(ns run-tests (:require [cljs.test :as t] [kotobase-protocols-worker.graph-test] [kotobase-protocols-worker.biscuit-test] [kotobase-protocols-worker.cacao-test] [kotobase-protocols-worker.core-test] [kotobase-protocols-worker.kotobase-store-test] [kotobase-protocols-worker.shell-test]))
+(defmethod t/report [:cljs.test/default :end-run-tests] [m] (when-not (t/successful? m) (set! (.-exitCode js/process) 1)))
+(t/run-tests 'kotobase-protocols-worker.graph-test 'kotobase-protocols-worker.biscuit-test 'kotobase-protocols-worker.cacao-test 'kotobase-protocols-worker.core-test 'kotobase-protocols-worker.kotobase-store-test 'kotobase-protocols-worker.shell-test)
