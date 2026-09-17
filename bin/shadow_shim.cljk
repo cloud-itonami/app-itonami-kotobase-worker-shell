@@ -1,0 +1,82 @@
+;; bin/shadow_shim.cljk — mirror every .cljk on a shadow-cljs.edn's :source-paths
+;; into build/shadow-src/ as byte-identical .cljc, so shadow-cljs can build a
+;; Worker whose sources (and whose sibling libraries) are .cljk.
+;;
+;; Why: shadow-cljs probes .cljs/.cljc/.clj only, so after the 2026-09-11 rename
+;; (adr-2609111500) every .cljk Worker lost its bundle path -- `shadow-cljs release
+;; worker` answers "namespace not available", and the mechanical rewrite of
+;; package.json to `amu compile --target wasm32-browser worker` cannot run either
+;; (amu takes a source file, not a shadow build id). app-kotoba-cloud solved it for
+;; itself with scripts/sync-shadow-src.mjs; this is the same idea as one shared
+;; kbb tool for every Worker that already sits on this shell.
+;;
+;; The shim tree is a build artifact, never a second source of truth: every run
+;; re-copies from the .cljk, drops shims whose source is gone, and prints a
+;; MIRRORED<TAB>n line (n = 0 is refused: a build with nothing mirrored would be
+;; a build of nothing).
+;;
+;;   kbb --backend sci ../kotobase-worker-shell/bin/shadow_shim.cljk [shadow-cljs.edn] [build/shadow-src]
+;;
+;; Then list "build/shadow-src" FIRST in :source-paths (the .cljk originals stay
+;; listed for kbb/tools.deps; shadow ignores them, so nothing is defined twice).
+(ns shadow-shim
+  (:require [cljs.reader :as reader]
+            [clojure.string :as str]
+            ["fs" :as fs]
+            ["path" :as path]))
+
+(defn- walk-cljk [dir]
+  (if-not (.existsSync fs dir)
+    []
+    (mapcat (fn [entry]
+              (let [p (path/join dir (.-name entry))]
+                (cond (.isDirectory entry)
+                      (if (contains? #{"node_modules" ".git" "build" "out" ".cpcache" ".nbb"} (.-name entry)) [] (walk-cljk p))
+                      (str/ends-with? (.-name entry) ".cljk") [p]
+                      :else [])))
+            (.readdirSync fs dir #js {:withFileTypes true}))))
+
+(defn- source-paths [config-path]
+  (let [cfg (reader/read-string (.readFileSync fs config-path "utf8"))
+        sps (:source-paths cfg)]
+    (when-not (and (vector? sps) (seq sps))
+      (println "REFUSE\tshadow-cljs.edn has no :source-paths vector")
+      (js/process.exit 2))
+    (remove #(str/starts-with? % "build/") sps)))
+
+(let [[config-path shim-root] (drop 3 (js->clj (.-argv js/process)))
+      config-path (or config-path "shadow-cljs.edn")
+      shim-root   (or shim-root "build/shadow-src")
+      wanted (atom {})]
+  ;; later source paths do not override earlier ones: shadow itself takes the
+  ;; first classpath hit, and this keeps the shim tree's answer the same
+  (doseq [sp (source-paths config-path)
+          f  (walk-cljk sp)]
+    (let [rel (path/relative sp f)
+          out (path/join shim-root (str/replace rel #"\.cljk$" ".cljc"))]
+      (when-not (contains? @wanted out)
+        (swap! wanted assoc out f))))
+  (let [mirrored (atom 0) unchanged (atom 0)]
+    (doseq [[out src] @wanted]
+      (let [bytes (.readFileSync fs src)]
+        (if (and (.existsSync fs out) (.equals bytes (.readFileSync fs out)))
+          (swap! unchanged inc)
+          (do (.mkdirSync fs (path/dirname out) #js {:recursive true})
+              (.writeFileSync fs out bytes)
+              (swap! mirrored inc)))))
+    ;; drop shims whose .cljk is gone
+    (let [dropped (atom 0)
+          existing (letfn [(walk [d] (if-not (.existsSync fs d) []
+                                       (mapcat (fn [e] (let [p (path/join d (.-name e))]
+                                                         (cond (.isDirectory e) (walk p)
+                                                               (str/ends-with? (.-name e) ".cljc") [p]
+                                                               :else [])))
+                                               (.readdirSync fs d #js {:withFileTypes true}))))]
+                     (walk shim-root))]
+      (doseq [p existing]
+        (when-not (contains? @wanted p)
+          (.unlinkSync fs p) (swap! dropped inc)))
+      (println (str "MIRRORED\t" (count @wanted) "\tfresh=" @mirrored "\tunchanged=" @unchanged "\tdropped=" @dropped))
+      (when (zero? (count @wanted))
+        (println "REFUSE\tno .cljk found on any :source-paths -- nothing to build")
+        (js/process.exit 2)))))

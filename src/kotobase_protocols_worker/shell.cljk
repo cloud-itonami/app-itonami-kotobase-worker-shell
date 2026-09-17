@@ -431,8 +431,11 @@
              (ipfs-post? req)
              (-> (sha256 body-ab)
                  (.then (fn [digest]
+                          ;; 4-ary since the cfg split; this branch had kept the
+                          ;; 3-ary call and nothing could compile to say so
+                          ;; (shadow-cljs :fn-arity, first build on 2026-09-17)
                           (with-retries
-                            env req
+                            cfg env req
                             {:ipfs-post
                              {:cid (cid/cidv1-raw-sha256
                                     (vec (js/Array.from (js/Uint8Array. digest))))
