@@ -2,7 +2,7 @@
   (:require [clojure.test :refer [deftest is testing]]
             #?(:cljs [cljs.reader])
             [kotobase-protocols-worker.core :as core]
-            [kotobase-protocols-worker.query :as query]
+            [kotobase.query.surfaces :as query]
             [kotobase.query.bridge :as bridge]
             [kotobase.local :as local]
             [kotobase.store :as st]

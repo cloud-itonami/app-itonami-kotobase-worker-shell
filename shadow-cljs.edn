@@ -19,7 +19,14 @@
   "../kotobase-protocol-git/src"
   "../kotobase-protocol-pinning/src"
   "../kotobase-protocol-issues/src"
-  "../kotobase-query/src"
+  ;; The four query surfaces composed onto the router ctx: extracted to its own
+  ;; library on 2026-09-17 (root ADR-2609171500); this shell's copy had drifted
+  ;; behind the deployment's. ayatori ships both ayatori.query (what the library
+  ;; requires) and kotobase.query.bridge (what the surface repos require),
+  ;; byte-identical to kotobase-query's bridge -- so ayatori replaces
+  ;; kotobase-query here, or the two bridges collide on one classpath.
+  "../kotobase-query-surfaces/src"
+  "../ayatori/src"
   "../datom/src"
   "../datom-source/src"
   "../datalog/src"

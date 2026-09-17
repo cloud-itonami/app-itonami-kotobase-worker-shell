@@ -25,7 +25,7 @@
             [clojure.string :as str]
             [clojure.test :refer [deftest is testing async]]
             [kotobase-protocols-worker.biscuit :as biscuit]
-            [kotobase-protocols-worker.query :as query]
+            [kotobase.query.surfaces :as query]
             [kotobase-protocols-worker.shell :as shell]
             ["@noble/curves/ed25519.js" :refer [ed25519]]))
 

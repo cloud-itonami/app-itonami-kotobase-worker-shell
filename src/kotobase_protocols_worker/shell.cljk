@@ -46,7 +46,7 @@
             [kotobase-protocols-worker.core :as core]
             [kotobase-protocols-worker.graph :as graph]
             [kotobase-protocols-worker.kotobase-store :as ks]
-            [kotobase-protocols-worker.query :as query]
+            [kotobase.query.surfaces :as query]
             [kotobase.protocols.blocks :as blocks]
             [kotobase.protocols.cid :as cid]
             [kotobase.protocols.json :as json]
@@ -248,7 +248,7 @@
            apex (or (.-APEX env) "kotobase.net")
            ;; The query surfaces are composed in here rather than in
            ;; kotobase.protocols.router, which does not depend on them —
-           ;; see kotobase-protocols-worker.query. `seed` is the hydrated
+           ;; see kotobase.query.surfaces (kotoba-lang/kotobase-query-surfaces). `seed` is the hydrated
            ;; state, so :coll-keys/:vertex-colls describe what this graph
            ;; actually holds, and query/memo-version derives the memo key
            ;; from it — `chain` is deliberately NOT that key, see there.

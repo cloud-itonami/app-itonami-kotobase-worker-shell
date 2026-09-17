@@ -9,6 +9,6 @@
     "shadow-cljs": "^3.4.11"
   },
   "scripts": {
-    "test": "amu compile --target wasm32-browser test && node out/node-tests.js"
+    "test": "kbb --backend sci --classpath \"src:test:../kotobase/src:../kotobase-peer/src:../kotobase-block-codec/src:../org-ietf-deflate/src:../kotobase-projection/src:../kotobase-client/src:../kotobase-protocol-core/src:../kotobase-protocol-s3/src:../kotobase-protocol-ipfs/src:../kotobase-protocol-atproto/src:../kotobase-protocol-git/src:../kotobase-protocol-pinning/src:../kotobase-protocol-issues/src:../kotobase-query-surfaces/src:../ayatori/src:../datom/src:../datom-source/src:../datalog/src:../arrangement/src:../prolly-tree/src:../chain/src:../sigv4/src:../grant/src:../authority/src:../org-biscuitsec/src:../dev-protobuf/src:../org-nist-sha2/src:../io-ipld/src:../io-multiformats/src:../org-ietf-cbor/src:../graphql/src:../sparql/src:../org-w3-sparql-protocol/src:../org-opencypher-cypher/src:../org-apache-tinkerpop-gremlin/src:../org-graphql-http/src:../text/src\" bin/run_tests.cljk"
   }
 }
