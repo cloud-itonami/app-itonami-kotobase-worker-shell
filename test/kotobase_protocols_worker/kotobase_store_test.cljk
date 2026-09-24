@@ -9,7 +9,7 @@
   needs real @noble/hashes/@ipld/dag-cbor, same reason cacao-test avoids
   nbb (ADR-2607177500)."
   (:require [cljs.test :refer-macros [deftest testing async]]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [cljs.test :refer [is]]
             [cljs.test :as t]
             [kotobase-peer.core :as eng]

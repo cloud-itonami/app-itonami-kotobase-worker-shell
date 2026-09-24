@@ -38,7 +38,7 @@
           (and therefore re-counts) from the fresh head before
           recomputing, so retries never collide on seq the way a
           counter cached across attempts could."
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as edn]
             [ipld.core :as ipld]
             [kotobase-peer.core :as eng]
             [kotobase-protocols-worker.kotobase-crypto :as crypto]
