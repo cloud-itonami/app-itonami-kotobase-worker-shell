@@ -19,7 +19,7 @@
   Run it with `amu compile --target wasm32-browser store-heavy && node out/store-heavy.js`,
   and run it before landing anything that touches the store."
   (:require [cljs.test :refer-macros [deftest testing async]]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [cljs.test :refer [is]]
             [cljs.test :as t]
             [kotobase-peer.core :as eng]
