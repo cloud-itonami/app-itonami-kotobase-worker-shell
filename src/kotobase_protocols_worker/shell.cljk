@@ -40,7 +40,7 @@
        a fresh head read, ≤3 attempts
     6. responses flagged :body-encoding :base64 (seeded git objects /
        ipfs blocks) are decoded back to raw bytes."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [kotobase-protocols-worker.biscuit :as biscuit]
             [kotobase-protocols-worker.cacao :as cacao]
             [kotobase-protocols-worker.core :as core]
@@ -175,7 +175,7 @@
 
 (defn- req->ring [^js request body]
   (let [url (js/URL. (.-url request))]
-    {:method (keyword (str/lower-case (.-method request)))
+    {:method (keyword (str/lower (.-method request)))
      :host (.-hostname url)
      :path (.-pathname url)
      :query (entries->map (.entries (.-searchParams url)))
@@ -453,7 +453,7 @@
 ;; kotobase.gremlin.envelope (.cljc) for exactly this reason.
 
 (defn- gremlin-upgrade? [^js request req apex]
-  (and (= "websocket" (str/lower-case (or (.get (.-headers request) "upgrade") "")))
+  (and (= "websocket" (str/lower (or (.get (.-headers request) "upgrade") "")))
        (or (= "gremlin" (router/surface-of (:host req) apex))
            (str/starts-with? (or (:path req) "") "/gremlin"))))
 

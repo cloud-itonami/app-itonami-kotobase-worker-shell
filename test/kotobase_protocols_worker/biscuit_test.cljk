@@ -22,7 +22,7 @@
   and cypher still answered the old enumeration, byte-identical with and
   without the header."
   (:require [biscuit.wire :as wire]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is testing async]]
             [kotobase-protocols-worker.biscuit :as biscuit]
             [kotobase.query.surfaces :as query]

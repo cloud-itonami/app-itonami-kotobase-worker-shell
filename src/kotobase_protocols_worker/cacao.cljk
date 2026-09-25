@@ -21,7 +21,7 @@
   uses for its non-per-resource writes (fold). See the repo README for
   why per-resource DID scoping on those three surfaces is deliberately
   NOT invented here."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [kotobase.cacao :as cacao]
             [kotobase.cid :as cid]
             ["@ipld/dag-cbor" :as dag-cbor]
