@@ -7,7 +7,7 @@
   the block from R2 and retries — a block-miss trampoline. Correct for any tree
   shape; efficient once the read touches few blocks (prolly-tree prefix pruning,
   the #13 follow-up). Pure enough to test with a promise-returning fake `fetch1`."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn missing-block
   "Signal thrown by the sync get-fn on a cache miss; caught by with-blocks. The
